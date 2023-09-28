@@ -4,3 +4,33 @@ services:
     image: tubes-1:latest
     ports:
       - 8008:80
+    depends_on:
+      db:
+        condition: service_healthy
+    
+  db:
+    image: mysql:latest
+    ports:
+      - 6767:3306
+    healthcheck:
+      test: mysqladmin ping -h localhost -u${MYSQL_USER} -p{MYSQL_PASSWORD}
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    
+
+  
+
+  
