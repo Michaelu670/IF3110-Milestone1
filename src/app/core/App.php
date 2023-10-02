@@ -11,7 +11,7 @@ class App
     public function __construct()
     {
         // By default, controller yang digunakan adalah NotFoundController - menyatakan page tidak ditemukan
-        require_once __DIR__ . '/../controller/NotFoundController.php';
+        require_once __DIR__ . '/../controllers/NotFoundController.php';
         $this->controller = new NotFoundController();
         $this->method = 'index';
 
