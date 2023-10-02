@@ -26,27 +26,27 @@
 </head>
 
 <body>
-    <div class="white-body">
+    <div class="gradient-lightgreen-body">
         <div class="wrapper-small">
             <main class="pad-40">
                 <header class="login-header">
-                    <img src="<?= BASE_URL ?>/images/assets/logo-teks-color.svg" alt="Ikomers Logo">
-                    <p>To continue, log in to IKOMERS.</p>
+                    <img src="<?= BASE_URL ?>/images/assets/logo-text-color.svg" alt="Ikomers Logo">
+                    <p>To continue, log in to <span class="bold-text">IKOMERS</span>.</p>
                 </header>
                 <form class="login-form">
                     <div class="form-group">
-                        <label for="username">What's your username?</label>
+                        <label class="bold-text" for="username">What's your username?</label>
                         <input type="text" name="username" placeholder="Username" id="username">
                         <p id="username-alert" class="alert-hide">Please fill out your username first!</p>
                     </div>
                     <div class="form-group">
-                        <label for="password">Enter your password!</label>
+                        <label  class="bold-text" for="password">Enter your password!</label>
                         <input type="password" name="password" placeholder="Password" id="password" autocomplete="on">
                         <p id="password-alert" class="alert-hide">Please fill out your password first!</p>
                     </div>
                     <div class="form-button">
                         <p id="login-alert" class="alert-hide">Wrong username/password!</p>
-                        <button type="submit" class="button black-button">Log in</button>
+                        <button type="submit" class="button black-button bold-text">Log in</button>
                     </div>
                 </form>
                 <div class="form-hyperlink">

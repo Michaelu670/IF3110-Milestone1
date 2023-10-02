@@ -15,8 +15,10 @@
     gap: 0.5rem;
 }
 
-.form-group input{
-    padding: 0.5rem 1rem; 
+.form-group input {
+    padding: 0.5rem 1rem;
+    border-radius: 10px; /* Anda dapat menyesuaikan nilai ini sesuai dengan keinginan desain Anda */
+    border: 1px solid #ccc; /* Anda dapat menambahkan border untuk tampilan yang lebih terdefinisi */
 }
 
 .form-button{
@@ -25,6 +27,7 @@
 
 .form-button button{
     margin-top: 1rem;
+    border-radius: 10px; /* Anda dapat menyesuaikan nilai ini sesuai dengan keinginan desain Anda */
 }
 
 .form-hyperlink{
@@ -32,7 +35,7 @@
 }
 
 .form-hyperlink a{
-    color: var(--darkgreen);
+    color: var(--white);
 }
 
 .alert-show{

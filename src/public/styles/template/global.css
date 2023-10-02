@@ -7,10 +7,11 @@
     --white: #ffffff;
     --darkgreen: #1db954;
     --lightgreen: #1ed760;
+    --bluegreen: #00bfa7;
     --black-lighter: hsl(0, 0%, 20%);
     --pure-black: #000000;
     --disabled: #c2c2c2;
-    --red: #ff7575;
+    --red: #f10000;
 
     /* Font */
     --roboto: 'Roboto', sans-serif;
@@ -42,20 +43,25 @@ button {
     padding: 2.5rem;
 }
 
-.white-body, .black-body {
+.white-body, .black-body, .gradient-lightgreen-body {
     min-height: 100vh;
 }
 
 .white-body {
-    background: var(--white);
+    background: --var(white);
 }
+
+.gradient-lightgreen-body {
+    background: linear-gradient(to top, var(--bluegreen) 20%, white 100%);
+}
+
 
 .black-body {
     background: var(--black);
 }
 
 @media (min-width: 1024px) {
-    .white-body, .black-body {
+    .white-body, .black-body, .gradient-lightgreen-body {
         display: flex;
     }
 
@@ -67,6 +73,10 @@ button {
 
 p, label, a, button {
     letter-spacing: 0.05em;
+}
+
+.bold-text{
+    font-weight: 700;
 }
 
 .black-button {
@@ -84,6 +94,11 @@ p, label, a, button {
     color: var(--black);
 }
 
+.bluegreen-button {
+    background: var(--bluegreen);
+    color: var(--black);
+}
+
 .button {
     padding: 1rem 2rem;
     transition: all 0.3s linear;
@@ -91,8 +106,11 @@ p, label, a, button {
     font-size: 1rem;
 }
 
-.button:hover {
-    opacity: 0.8;
+.black-button:hover {
+    background-color: var(--white);
+    color: var(--black);
+    transform: scale(1.05);
+    opacity: 1;
 }
 
 .basic-nav {
