@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <div class="gradient-lightgreen-body">
+    <div class="gradient-bluegreen-body">
         <div class="wrapper-small">
             <main class="pad-40">
                 <header class="login-header">

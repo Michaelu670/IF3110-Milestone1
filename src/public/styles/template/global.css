@@ -8,6 +8,8 @@
     --darkgreen: #1db954;
     --lightgreen: #1ed760;
     --bluegreen: #00bfa7;
+    --scrollbluegreen: #00a08b;
+    --scrolldarkbluegreen: #007a6a;
     --black-lighter: hsl(0, 0%, 20%);
     --pure-black: #000000;
     --disabled: #c2c2c2;
@@ -43,7 +45,7 @@ button {
     padding: 2.5rem;
 }
 
-.white-body, .black-body, .gradient-lightgreen-body {
+.white-body, .black-body, .gradient-bluegreen-body {
     min-height: 100vh;
 }
 
@@ -51,7 +53,7 @@ button {
     background: --var(white);
 }
 
-.gradient-lightgreen-body {
+.gradient-bluegreen-body {
     background: linear-gradient(to top, var(--bluegreen) 20%, white 100%);
 }
 
@@ -61,7 +63,7 @@ button {
 }
 
 @media (min-width: 1024px) {
-    .white-body, .black-body, .gradient-lightgreen-body {
+    .white-body, .black-body, .gradient-bluegreen-body {
         display: flex;
     }
 
@@ -134,4 +136,24 @@ p, label, a, button {
 .alert-show {
     display: block;
     color: var(--red);
+}
+
+
+/* Ganti warna track scrollbar */
+::-webkit-scrollbar {
+    width: 12px; /* Lebar scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--white); /* Warna latar belakang track */
+}
+
+/* Ganti warna thumb (bagian yang dapat digeser) scrollbar */
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbluegreen); /* Warna thumb scrollbar */
+}
+
+/* Ganti warna thumb saat di-hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrolldarkbluegreen); /* Warna thumb saat hover */
 }

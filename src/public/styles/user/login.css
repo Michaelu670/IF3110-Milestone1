@@ -18,7 +18,7 @@
 .form-group input {
     padding: 0.5rem 1rem;
     border-radius: 10px; /* Anda dapat menyesuaikan nilai ini sesuai dengan keinginan desain Anda */
-    border: 1px solid #ccc; /* Anda dapat menambahkan border untuk tampilan yang lebih terdefinisi */
+    border: 1px solid; /* Anda dapat menambahkan border untuk tampilan yang lebih terdefinisi */
 }
 
 .form-button{

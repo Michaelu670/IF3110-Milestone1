@@ -26,41 +26,36 @@
 </head>
 
 <body>
-    <div class="white-body">
+    <div class="gradient-bluegreen-body">
         <div class="wrapper-small">
             <main class="pad-40">
                 <header class="registration-header">
                     <img src="<?= BASE_URL ?>/images/assets/logo-text-color.svg" alt="Ikomers Logo">
-                    <p>Sign up for free to start shopping.</p>
+                    <p>Sign up for free to <span class="bold-text">start shopping</span></p>
                 </header>
                 <form class="registration-form">
                     <div class="form-group">
-                        <label for="full-name">What's your full name?</label>
+                        <label class="bold-text" for="full-name">What's your full name?</label>
                         <input type="text" name="fullname" placeholder="Enter your fullname." id="fullname">
                         <p id="fullname-alert" class="alert-hide"></p>
                     </div>
                     <div class="form-group">
-                        <label for="username">What's your username?</label>
+                        <label class="bold-text" for="username">What's your username?</label>
                         <input type="text" name="username" placeholder="Enter your username." id="username">
                         <p id="username-alert" class="alert-hide"></p>
                     </div>
                     <div class="form-group">
-                        <label for="email">What's your email?</label>
-                        <input type="email" name="email" placeholder="Enter your email." id="email">
-                        <p id="email-alert" class="alert-hide"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Pick a password!</label>
+                        <label class="bold-text" for="password">Pick a password!</label>
                         <input type="password" name="password" placeholder="Enter your password." id="password" autocomplete="on">
                         <p id="password-alert" class="alert-hide"></p>
                     </div>
                     <div class="form-group">
-                        <label for="confirm-password">Confirm your password!</label>
+                        <label class="bold-text" for="confirm-password">Confirm your password!</label>
                         <input type="password" name="confirm-password" placeholder="Enter your password again." id="confirm-password" autocomplete="on">
                         <p id="confirm-password-alert" class="alert-hide"></p>
                     </div>
                     <div class="form-button">
-                        <button type="submit" class="button black-button">Sign up</button>
+                        <button type="submit" class="button black-button bold-text">Sign up</button>
                     </div>
                 </form>
                 <div class="form-hyperlink">
