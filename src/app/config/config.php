@@ -23,3 +23,6 @@ define('SESSION_REGENERATE_TIME', 30 * 60);
 
 // Debounce
 define('DEBOUNCE_TIMEOUT', 500);
+
+// Bcrypt
+define('BCRYPT_COST', 10);
