@@ -7,6 +7,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    env_file:
+      - .env
+    volumes:
+      - ./src:/var/www/html
+      - ./src/public/index.php:/var/www/html/index.php
     
   db:
     image: mysql:latest
