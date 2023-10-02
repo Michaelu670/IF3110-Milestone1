@@ -54,6 +54,11 @@
                         <input type="password" name="confirm-password" placeholder="Enter your password again." id="confirm-password" autocomplete="on">
                         <p id="confirm-password-alert" class="alert-hide"></p>
                     </div>
+                    <div class="form-group">
+                        <label class="bold-text" for="profile-picture">Upload your profile picture:</label>
+                        <input type="file" name="profile-picture" id="profile-picture" accept="image/*"> <!-- Tambahkan input file untuk unggah foto profil -->
+                        <p id="profile-picture-alert" class="alert-hide"></p>
+                    </div>
                     <div class="form-button">
                         <button type="submit" class="button black-button bold-text">Sign up</button>
                     </div>
