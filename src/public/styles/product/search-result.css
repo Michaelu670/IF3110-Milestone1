@@ -23,6 +23,7 @@ html {
     flex-direction: column;
     flex: 0 1 18%;
     height: auto;
+    max-width: 200px;
     padding: 5px;
     justify-content: baseline;
     margin-left: 10px;
@@ -33,6 +34,8 @@ html {
     width: 100%;
     height: auto;
     flex: 0 0.7 80%;
+    min-height: 0;
+    min-width: 0;
 }
 
 .product-card:hover {
@@ -43,6 +46,7 @@ html {
     .product-card{
         flex-direction: row;
         height: 20%;
+        max-width: 80%;
         flex: 0 1 80%;
         justify-content: flex-start;
     }
