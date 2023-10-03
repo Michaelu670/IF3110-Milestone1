@@ -1,12 +1,13 @@
 <?php
 
 function echoProductCard($data) {
+    $href = BASE_URL . '/product?id=' . $data['product_id'];
     $html = <<<"EOT"
-        <div class='product-card flex-container'>
+        <a class='product-card flex-container' href='$href'>
             <img src="{$data['thumbnail_url']}">
             <h2>{$data['name']}</h2>
             <h3>Rp.{$data['price']}</h3>
-        </div>
+        </a>
 
 EOT;
 
