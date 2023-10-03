@@ -13,7 +13,17 @@ class Database
 
     public function __construct()
     {
-        // masih belum fix database-nya
+        $dsn = 'mysql:host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->db_name;
+        $option = [
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ];
+
+        try {
+            $this->db_connection = new PDO($dsn, $this->user, $this->password, $option);
+        } catch (PDOException) {
+            throw new LoggedException('Bad Gateway', 502);
+        }
     }
 
     public function query($query)
