@@ -48,7 +48,7 @@ class CartModel {
                 $this->database->query($query);
                 $this->database->bind('cart_id', $activeCartID);
                 $this->database->bind('product_id', $productID);
-                $this->database->bind('quantity', $addQuantity);
+                $this->database->bind('quantity', $newQuantity);
                 $this->database->execute();
             }
             else {
