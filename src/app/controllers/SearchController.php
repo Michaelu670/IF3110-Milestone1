@@ -16,6 +16,7 @@ class SearchController extends Controller implements ControllerInterface
         $order = isset($_GET['order']) ? htmlspecialchars($_GET['order']) : 'asc';
         $page = isset($_GET['page']) ? htmlspecialchars($_GET['page']) : '1';
         $tags = isset($_GET['tags']) ? explode(',', htmlspecialchars($_GET['tags'])) : [];
+        
 
         // Validate parameters and give default value / throw exception
         if (strcmp($order, 'desc') !== 0) {
@@ -40,7 +41,6 @@ class SearchController extends Controller implements ControllerInterface
         // print_r($products);
         // echo '</pre>';
         // echo '<br>';
-        
         
 
         $resultView = $this->view('product', 'ProductSearchView', $products);

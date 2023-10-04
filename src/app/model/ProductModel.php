@@ -29,9 +29,11 @@ class ProductModel {
         else {
             $product = $productTag[0];
             unset($product['tag']);
-            $product['tags'] = [];
-            foreach($productTag as $index => $tempProduct) {
-                $product['tags'][$index] = $tempProduct['tag'];
+            if (isset($productTag[0]['tag'])) {
+                $product['tags'] = [];
+                foreach($productTag as $index => $tempProduct) {
+                    $product['tags'][$index] = $tempProduct['tag'];
+                }
             }
         }
 
@@ -49,21 +51,21 @@ class ProductModel {
     }
 
     public function getProductsInPage($page, $q, $sortVar, $order = 'asc', $tags = []) {
+        // sortVar and order must be sanitized & checked
         $query =
         '   SELECT product_id, name, description, price, stock, sold, thumbnail_url, create_date, last_modified_date, tag_name AS tag
             FROM product NATURAL LEFT OUTER JOIN product_tag NATURAL LEFT OUTER JOIN tag
             WHERE name like :q
-            ORDER BY :sortVar :order, product_id ASC
+            ORDER BY ' . $sortVar . ' ' . $order . ', product_id ASC;
         ';
 
         $this->database->query($query);
         $this->database->bind('q', $q, PDO::PARAM_STR);
-        $this->database->bind('sortVar', $sortVar);
-        $this->database->bind('order', $order);
         $productsWithTag = $this->database->fetchAll();
 
         // collapse [product + tag] to [product + [tags]]
         // asumsi seluruh produk dengan id sama bersebelahan {dari sort}
+
         $products = [];
         foreach ($productsWithTag as $index => $productWithTag) {
             if (isset($products[0]) && end($products)['product_id'] == $productWithTag['product_id']) {
@@ -77,6 +79,9 @@ class ProductModel {
                 if (isset($productWithTag['tag'])) {
                     $products[count($products)-1]['tags'][0] = $productWithTag['tag'];
                 }
+                else {
+                    $products[count($products)-1]['tags'] = [];
+                }
             }
         }
 
@@ -85,7 +90,7 @@ class ProductModel {
         foreach ($products as $product) {
             $containsAll = true;
             foreach ($tags as $tag) {
-                if (!in_array($tag, $product['tags'])) {
+                if (!empty($tag) && !in_array($tag, $product['tags'])) {
                     $containsAll = false;
                     break;
                 }
