@@ -6,14 +6,14 @@ function echoPagination($page_count, $page_pos, $page_displayed) {
     $next_page = 0;
     $fill = $page_pos;
 
-    $page_now = $_GET['page'];
+    $page_now = $_GET['page'] ?? 1;
     if ($page_pos == 0) {
         $fill = '<';
-        $next_page = max(1, $_GET['page'] - 1);
+        $next_page = max(1, $page_now - 1);
     } 
     else if ($page_pos == $page_displayed - 1 || $page_pos == $page_count + 1) {
         $fill = '>';
-        $next_page = min($page_count, $_GET['page'] + 1);
+        $next_page = min($page_count, $page_now + 1);
     }
     // angka
     else if ($page_pos > $page_count + 1) exit;
@@ -67,7 +67,7 @@ function echoPagination($page_count, $page_pos, $page_displayed) {
 
     $query = $_GET;
     $query['page'] = $next_page;
-    $link = $_SERVER['PHP_SELF'] . '?' . http_build_query($query);
+    $link = $_SERVER['REDIRECT_URL'] . '?' . http_build_query($query);
 
     $curClass = '';
     if ($page_now == $fill) $curClass = 'active';
