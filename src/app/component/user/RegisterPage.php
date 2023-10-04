@@ -37,27 +37,27 @@
                     <div class="form-group">
                         <label class="bold-text" for="full-name">What's your full name?</label>
                         <input type="text" name="fullname" placeholder="Enter your fullname." id="fullname">
-                        <p id="fullname-alert" class="alert-hide"></p>
+                        <p id="fullname-alert" class="alert-hide">Please fill out the fullname first!</p>
                     </div>
                     <div class="form-group">
                         <label class="bold-text" for="username">What's your username?</label>
                         <input type="text" name="username" placeholder="Enter your username." id="username">
-                        <p id="username-alert" class="alert-hide"></p>
+                        <p id="username-alert" class="alert-hide">Please fill out the username first!</p>
                     </div>
                     <div class="form-group">
                         <label class="bold-text" for="password">Pick a password!</label>
                         <input type="password" name="password" placeholder="Enter your password." id="password" autocomplete="on">
-                        <p id="password-alert" class="alert-hide"></p>
+                        <p id="password-alert" class="alert-hide">Please fill out the password first!</p>
                     </div>
                     <div class="form-group">
                         <label class="bold-text" for="confirm-password">Confirm your password!</label>
                         <input type="password" name="confirm-password" placeholder="Enter your password again." id="confirm-password" autocomplete="on">
-                        <p id="confirm-password-alert" class="alert-hide"></p>
+                        <p id="confirm-password-alert" class="alert-hide">Please fill out with the password first!</p>
                     </div>
                     <div class="form-group">
                         <label class="bold-text" for="profile-picture">Upload your profile picture:</label>
                         <input type="file" name="profile-picture" id="profile-picture" accept="image/png, image/jpeg"> <!-- Tambahkan input file untuk unggah foto profil -->
-                        <p id="profile-picture-alert" class="alert-hide"></p>
+                        <p class="alert-hide" id="profile-picture-alert">Please upload a valid profile picture first!</p>
                     </div>
                     <div class="form-button">
                         <button type="submit" class="button black-button bold-text">Sign up</button>

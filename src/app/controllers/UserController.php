@@ -15,6 +15,8 @@ class UserController extends Controller implements ControllerInterface
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
                     $tokenMiddleware->putToken();
 
+                    $userModel = $this->model('UserModel');
+
                     exit;
                 default:
                     throw new LoggedException('Method Not Allowed', 405);
@@ -43,7 +45,7 @@ class UserController extends Controller implements ControllerInterface
                     $authMiddleware->isAdmin();
 
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
+                    $tokenMiddleware->checkToken();
 
                     $userModel = $this->model('UserModel');
                     $res = $userModel->getUsers((int) $page);
@@ -77,7 +79,7 @@ class UserController extends Controller implements ControllerInterface
                     exit;
                 case 'POST':
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
+                    $tokenMiddleware->checkToken();
 
                     $userModel = $this->model('UserModel');
                     $userId = $userModel->login($_POST['username'], $_POST['password']);
@@ -105,7 +107,7 @@ class UserController extends Controller implements ControllerInterface
             {
                 case 'POST':
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
+                    $tokenMiddleware->checkToken();
 
                     unset($_SESSION['user_id']);
 
@@ -138,10 +140,13 @@ class UserController extends Controller implements ControllerInterface
                     exit;
                 case 'POST':
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
+                    $tokenMiddleware->checkToken();
+
+                    $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
+                    $uploadedImage = $storageAccessImage->saveImage($_FILES['profilePicture']['tmp_name']);
 
                     $userModel = $this->model('UserModel');
-                    $userModel->register($_POST['username'], $_POST['password'], $_POST['fullname']);
+                    $userModel->register($_POST['username'], $_POST['password'], $_POST['fullname'], $uploadedImage);
 
                     header('Content-Type: application/json');
                     http_response_code(201);
@@ -164,7 +169,7 @@ class UserController extends Controller implements ControllerInterface
             {
                 case 'GET':
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
+                    $tokenMiddleware->checkToken();
 
                     $userModel = $this->model('UserModel');
                     $user = $userModel->doesUsernameExist($_GET['username']);

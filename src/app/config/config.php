@@ -1,8 +1,8 @@
 <?php
 
 // URL
-define('BASE_URL', 'http://localhost:8080/public');
-define('STORAGE_URL', 'http://localhost:8080/storage');
+define('BASE_URL', '/public');
+define('STORAGE_URL', '/storage');
 
 // Database
 define('HOST', $_ENV['MYSQL_HOST']);

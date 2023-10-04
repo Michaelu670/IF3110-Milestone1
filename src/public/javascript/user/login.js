@@ -1,6 +1,6 @@
 const usernameInput = document.querySelector('#username');
 const passwordInput = document.querySelector('#password');
-const loginButton = document.querySelector('#login-button');
+const loginForm = document.querySelector('.login-form');
 const usernameAlert = document.querySelector('#username-alert');
 const passwordAlert = document.querySelector('#password-alert');
 
@@ -42,7 +42,7 @@ passwordInput && passwordInput.addEventListener('keyup',
     }, DEBOUNCE_TIMEOUT)
 );
 
-loginButton && loginButton.addEventListener('submit', async (e) => {
+loginForm && loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const username = usernameInput.value;
@@ -91,7 +91,7 @@ loginButton && loginButton.addEventListener('submit', async (e) => {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-    formData.append('csrfToken', CSRF_TOKEN);
+    formData.append('csrf_Token', CSRF_TOKEN);
 
     xhr.send(formData);
     xhr.onreadystatechange = function () {
