@@ -63,7 +63,36 @@ class ProductModel {
     }
 
     public function addMediaURL($productID, $url) {
+        // only add url to database; handle local storage using storage_access
+        // put media in last order
+        $query = 
+        '   SELECT MAX(ordering_id) last_id
+            FROM product_media
+            WHERE product_id = :product_id;
+        ';
+        $this->database->query($query);
+        $this->database->bind('product_id', $productID);
 
+        $maxID = $this->database->fetch();
+        $nextID = 0;
+
+        if (is_null($maxID['last_id'])){
+            $nextID = 1;
+        }
+        else {
+            $nextID = $maxID['last_id'] + 1;
+        }
+
+        $query = 
+        '   INSERT INTO product_media (product_id, ordering_id, media_url)
+            VALUES(:product_id, :ordering_id, :url);
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('product_id', $productID);
+        $this->database->bind('ordering_id', $nextID);
+        $this->database->bind('url', $url);
+        $this->database->execute();
     }
 
     public function getAllProducts() {
