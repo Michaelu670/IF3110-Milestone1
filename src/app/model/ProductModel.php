@@ -62,6 +62,10 @@ class ProductModel {
         return $media_urls;
     }
 
+    public function addMediaURL($productID, $url) {
+
+    }
+
     public function getAllProducts() {
         $query = 
         '   SELECT name, description, price, stock, sold, thumbnail_url, create_date, last_modified_date 
@@ -72,7 +76,7 @@ class ProductModel {
         return $products;
     }
 
-    public function getProductsInPage($page, $q, $sortVar, $order = 'asc', $tags = []) {
+    public function getProductsInPage($page, $q, $sortVar, $order = 'asc', $tags = [], $minPrice = null, $maxPrice = null) {
         // sortVar and order must be sanitized & checked
         $query =
         '   SELECT product_id, name, description, price, stock, sold, thumbnail_url, create_date, last_modified_date, tag_name AS tag
@@ -107,18 +111,28 @@ class ProductModel {
             }
         }
 
-        // filter with tags
+        // filter with tags and price range
         $productsFiltered = [];
         foreach ($products as $product) {
-            $containsAll = true;
+            $valid = true;
+
+            // filter tag: mode AND
             foreach ($tags as $tag) {
                 if (!empty($tag) && !in_array($tag, $product['tags'])) {
-                    $containsAll = false;
+                    $valid = false;
                     break;
                 }
             }
 
-            if ($containsAll) {
+            // filter price range
+            if (isset($minPrice) && $product['price'] < $minPrice) {
+                $valid = false;
+            }
+            if (isset($maxPrice) && $product['price'] > $maxPrice) {
+                $valid = false;
+            }
+
+            if ($valid) {
                 $productsFiltered = array_merge($productsFiltered, [$product]);
             }
         }
