@@ -33,6 +33,13 @@ services:
       - 8080:80
     depends_on:
       - db
+    env_file:
+      - .env
+    environment:
+      PMA_PORT: 3306
+      PMA_HOST: db
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
     
 
   
