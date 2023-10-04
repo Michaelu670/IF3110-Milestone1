@@ -4,7 +4,7 @@ class ProductModel {
     
     private $database;
     private const PRODUCT_PER_PAGE = 25;
-    private const DEFAULT_THUMBNAIL_URL = STORAGE_URL . '/images/product/thumbnail/default.jpg';
+    public const DEFAULT_THUMBNAIL_URL = STORAGE_URL . '/images/product/thumbnail/default.jpg';
 
     public function __construct() {
         $this->database = new Database();
@@ -29,8 +29,8 @@ class ProductModel {
         else {
             $product = $productTag[0];
             unset($product['tag']);
+            $product['tags'] = [];
             if (isset($productTag[0]['tag'])) {
-                $product['tags'] = [];
                 foreach($productTag as $index => $tempProduct) {
                     $product['tags'][$index] = $tempProduct['tag'];
                 }
@@ -38,6 +38,28 @@ class ProductModel {
         }
 
         return $product;
+    }
+
+    public function getProductMediaURLs($productID) {
+        $query = 
+        '   SELECT media_url
+            FROM (
+                SELECT ordering_id, media_url
+                FROM product_media
+                WHERE product_id = :product_id
+                ORDER BY ordering_id
+            ) p
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('product_id', $productID);
+        $media_urls = $this->database->fetchAll();
+
+        foreach ($media_urls as &$url) {
+            $url = $url['media_url'];
+        }
+
+        return $media_urls;
     }
 
     public function getAllProducts() {
