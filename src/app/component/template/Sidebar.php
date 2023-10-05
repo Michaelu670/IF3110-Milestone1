@@ -2,7 +2,7 @@
     <a href="/public/home">
         <img src="<?= BASE_URL ?>/images/assets/logo-color.svg" alt="Ikomers logo" class="sidebar-logo">
     </a>
-    <?php if (!$this->data['username'] || !$this->data['access_type']) : ?>
+    <?php if (!$this->data['username'] || $this->data['access_type'] === 0) : ?>
         <a href="/public/product" class="sidebar-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
