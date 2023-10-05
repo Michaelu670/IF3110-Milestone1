@@ -36,7 +36,11 @@ class ProductController extends Controller implements ControllerInterface {
                 
                 case 'POST':
                     // add item to cart
-                    // TODO
+                    $productID = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : 'a';
+                    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
+                    require_once __DIR__ . '/../model/CartModel.php';
+                    $cartModel = new CartModel();
+                    $cartModel->addToCart(1 /* Current user id */, $productID, $quantity);
                     
                     // redirect to page
                     header('Location: ' . $_SERVER['REQUEST_URI']);
