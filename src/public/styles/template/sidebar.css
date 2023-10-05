@@ -5,7 +5,7 @@
 @media (min-width: 1024px) {
     .sidebar-wrapper {
         display: block;
-        background: var(--scrollbluegreen);
+        background: var(--scrolldarkbluegreen);
         position: sticky;
         top: 0;
         width: 15rem;
