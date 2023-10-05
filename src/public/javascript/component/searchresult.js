@@ -45,6 +45,7 @@ const getSearchResult = (page = 1) => {
         if (xhr.status === 200 && xhr.readyState === 4) {
             document.getElementById('search-result').innerHTML = xhr.responseText;
             linkPage();
+            curPage = page;
         }
     };
     fullURL = "/public/search/resultproducts?" + params.toString();

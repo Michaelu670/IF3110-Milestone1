@@ -36,6 +36,40 @@ logOutButton &&
         };
     });
 
+const linkHomePage = () => {
+    const activePage = document.querySelectorAll('.active').length > 0 ? Number(document.querySelectorAll('.active')[0].textContent) : 1;
+    const page = document.querySelectorAll('.page');
+
+    page.forEach((element) => {
+        var targetPage = element.textContent;
+        if (targetPage === '>') {
+            targetPage = activePage + 1;
+        }
+        if (targetPage === '<') {
+            targetPage = activePage - 1;
+        }
+
+        element.addEventListener('click', () =>
+        getProduct(targetPage));
+    });
+}
+
+function getProduct($page = 1){
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.status === 200 && xhr.readyState === 4) {
+            document.getElementById('search-result').innerHTML = xhr.responseText;
+            linkHomePage();
+        }
+    };
+    fullURL = "/public/search/resultproducts?page=" + $page;
+    xhr.open("GET", fullURL, true);
+    xhr.send();
+}
+
+
+
+
 
 
 
