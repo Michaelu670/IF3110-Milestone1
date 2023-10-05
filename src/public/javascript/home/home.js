@@ -1,6 +1,6 @@
 const toggleButton = document.querySelector("#toggle");
 const navContainer = document.querySelector("#nav-container");
-const logOutButton = document.querySelector("#log-out");
+const logOutButton = document.querySelector(".log-out");
 let isToggled = false;
 
 toggleButton &&
@@ -22,7 +22,7 @@ logOutButton &&
 
         const xhr = new XMLHttpRequest();
 
-        xhr.open("POST", '/public/user/logout');
+        xhr.open('POST', '/public/user/logout');
 
         const formData = new FormData();
         formData.append("csrf_token", CSRF_TOKEN);
