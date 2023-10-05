@@ -23,7 +23,7 @@ class UserModel
 
     public function getUsers($page)
     {
-        $query = 'SELECT fullname, usernmae, is_admin FROM User LIMIT :limit OFFSET :offset';
+        $query = 'SELECT fullname, username, is_admin FROM User LIMIT :limit OFFSET :offset';
 
         $this->database->query($query);
         $this->database->bind('limit', ROWS_PER_PAGE);
@@ -57,19 +57,19 @@ class UserModel
         }
     }
 
-    public function register($email, $username, $password, $fullname)
+    public function register($username, $password, $fullname, $picture_url)
     {
-        $query = 'INSERT INTO user (email, username, fullname, password, is_admin) VALUES (:email, :username, :fullname, :password, :is_admin)';
+        $query = 'INSERT INTO user (username, fullname, password, access_type, picture_url) VALUES (:username, :fullname, :password, :access_type, :picture_url)';
         $options = [
             'cost' => BCRYPT_COST
         ];
 
         $this->database->query($query);
-        $this->database->bind('email', $email);
         $this->database->bind('username', $username);
         $this->database->bind('fullname', $fullname);
         $this->database->bind('password', password_hash($password, PASSWORD_BCRYPT, $options));
-        $this->database->bind('is_admin', false);
+        $this->database->bind('access_type', 0);
+        $this->database->bind('picture_url', $picture_url);
 
         $this->database->execute();
     }

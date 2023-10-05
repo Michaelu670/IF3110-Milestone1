@@ -33,14 +33,14 @@ class AuthenticationMiddleware
             throw new LoggedException('Unauthorized', 401);
         }
 
-        $query = 'SELECT is_admin FROM user WHERE user_id = :user_id LIMIT 1';
+        $query = 'SELECT access_type FROM user WHERE user_id = :user_id LIMIT 1';
 
         $this->database->query($query);
         $this->database->bind('user_id', $_SESSION['user_id']);
 
         $user = $this->database->fetch();
 
-        if (!$user || !$user->is_admin) {
+        if (!$user || !$user->access_type) {
             throw new LoggedException('Unauthorized', 401);
         }
     }

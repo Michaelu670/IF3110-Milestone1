@@ -15,6 +15,10 @@ class UserController extends Controller implements ControllerInterface
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
                     $tokenMiddleware->putToken();
 
+                    require_once __DIR__ . '/../model/UserModel.php';
+                    $userModel = new UserModel();
+                    $res = $userModel->getUserFromID(1);
+                    
                     exit;
                 default:
                     throw new LoggedException('Method Not Allowed', 405);
@@ -43,9 +47,10 @@ class UserController extends Controller implements ControllerInterface
                     $authMiddleware->isAdmin();
 
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
+                    $tokenMiddleware->checkToken();
 
-                    $userModel = $this->model('UserModel');
+                    require_once __DIR__ . '/../model/UserModel.php';
+                    $userModel = new UserModel();
                     $res = $userModel->getUsers((int) $page);
 
                     header('Content-Type: application/json');
@@ -68,24 +73,25 @@ class UserController extends Controller implements ControllerInterface
         {
             switch($_SERVER['REQUEST_METHOD'])
             {
-                case 'GET':
-                    $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
-
-                    $loginView = $this->view('user', 'LoginView');
-                    $loginView->render();
-                    exit;
                 case 'POST':
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
+                    $tokenMiddleware->checkToken();
 
-                    $userModel = $this->model('UserModel');
+                    require_once __DIR__ . '/../model/UserModel.php';
+                    $userModel = new UserModel();
                     $userId = $userModel->login($_POST['username'], $_POST['password']);
                     $_SESSION['user_id'] = $userId;
 
                     header('Content-Type: application/json');
                     http_response_code(201);
                     echo json_encode(["redirect_url" => BASE_URL . "/home"]);
+                    exit;
+                case 'GET':
+                    $tokenMiddleware = $this->middleware('TokenMiddleware');
+                    $tokenMiddleware->putToken();
+
+                    $loginView = $this->view('user', 'LoginView');
+                    $loginView->render();
                     exit;
                 default:
                     throw new LoggedException('Method Not Allowed', 405);
@@ -105,7 +111,7 @@ class UserController extends Controller implements ControllerInterface
             {
                 case 'POST':
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
+                    $tokenMiddleware->checkToken();
 
                     unset($_SESSION['user_id']);
 
@@ -127,34 +133,51 @@ class UserController extends Controller implements ControllerInterface
     {
         try
         {
-            switch($_SERVER['REQUEST_METHOD'])
+            switch ($_SERVER['REQUEST_METHOD'])
             {
-                case 'GET':
-                    $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
-
-                    $registerView = $this->view('user', 'RegisterView');
-                    $registerView->render();
-                    exit;
                 case 'POST':
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
-
-                    $userModel = $this->model('UserModel');
-                    $userModel->register($_POST['username'], $_POST['password'], $_POST['fullname']);
-
+                    $tokenMiddleware->checkToken();
+    
+                    // Form tidak lengkap
+                    if (!$_POST['username'] || !$_POST['password'] || !$_POST['fullname']) {
+                        throw new LoggedException('Bad Request', 400);
+                    }
+    
+                    // Handle file upload separately
+                    $uploadedImage = ''; // Initialize as an empty string
+    
+                    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+                        $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
+                        $uploadedImage = $storageAccessImage->saveImage($_FILES['profile_picture']['tmp_name']);
+                    }
+    
+                    require_once __DIR__ . '/../model/UserModel.php';
+                    $userModel = new UserModel();
+                    $userModel->register($_POST['username'], $_POST['password'], $_POST['fullname'], $uploadedImage);
+    
                     header('Content-Type: application/json');
                     http_response_code(201);
                     echo json_encode(["redirect_url" => BASE_URL . "/user/login"]);
                     exit;
+    
+                case 'GET':
+                    $tokenMiddleware = $this->middleware('TokenMiddleware');
+                    $tokenMiddleware->putToken();
+    
+                    $registerView = $this->view('user', 'RegisterView');
+                    $registerView->render();
+                    exit;
+    
                 default:
                     throw new LoggedException('Method Not Allowed', 405);
             }
-        } catch(Exception $e)
+        } catch (Exception $e)
         {
             http_response_code($e->getCode());
         }
     }
+    
 
     public function username()
     {
@@ -164,9 +187,10 @@ class UserController extends Controller implements ControllerInterface
             {
                 case 'GET':
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
-                    $tokenMiddleware->putToken();
+                    $tokenMiddleware->checkToken();
 
-                    $userModel = $this->model('UserModel');
+                    require_once __DIR__ . '/../model/UserModel.php';
+                    $userModel = new UserModel();
                     $user = $userModel->doesUsernameExist($_GET['username']);
 
                     if (!$user) {
