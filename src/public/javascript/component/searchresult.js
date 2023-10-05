@@ -8,10 +8,10 @@ var curPage = 1;
 
 const getSearchResult = (page = 1) => {
     let tags = "";
-    var tagsCheckbox = document.querySelectorAll("tags input:checked");
+    var tagsCheckbox = document.querySelectorAll("input:checked.tag-checkbox");
     tagsCheckbox.forEach(element => {
         tags += ",";
-        tags += element.value;
+        tags += element.id;
     });
 
     let minPrice = document.getElementById('minPrice').value.length === 0 ? '' : document.getElementById('minPrice').value;
@@ -68,3 +68,9 @@ minPriceInput && minPriceInput.addEventListener('keyup', () =>
 maxPriceInput && maxPriceInput.addEventListener('keyup', () =>
     debounce(getSearchResult(), DEBOUNCE_TIMEOUT) 
 );
+const tags = document.querySelectorAll('.tag-checkbox');
+
+tags.forEach((element) => {
+    element.addEventListener('change', () =>
+    debounce(getSearchResult(element.textContent), DEBOUNCE_TIMEOUT));
+});

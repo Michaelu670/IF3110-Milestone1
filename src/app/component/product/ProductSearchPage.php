@@ -52,6 +52,11 @@
             <input type='text' id='minPrice' value="<?php echo $this->data['minPrice'] ?>" />
             <label for='maxPrice'>maxPrice</label>
             <input type='text' id='maxPrice' value="<?php echo $this->data['maxPrice'] ?>" />
+            <br>
+
+            <label>Tags</label> <br>
+            <?php require_once 'TagCheckbox.php'?>
+            <?php foreach($this->data['all_tags'] as $tag) {echoTagCheckbox($tag['tag_name']);} ?>
         </div>
     </div>
     

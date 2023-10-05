@@ -44,6 +44,12 @@ class SearchController extends Controller implements ControllerInterface
             'minPrice' => $minPrice,
             'maxPrice' => $maxPrice,
         ];
+
+        // add all_tags for preview
+        require_once __DIR__ . '/../model/TagModel.php';
+        $tagModel = new TagModel();
+        $data['all_tags'] = $tagModel->getAllTags();
+
         $resultView = $this->view('product', 'ProductSearchTemplateView', $data);
         $resultView->render();
     }
