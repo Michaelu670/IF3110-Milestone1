@@ -144,18 +144,21 @@ class UserController extends Controller implements ControllerInterface
                         throw new LoggedException('Bad Request', 400);
                     }
     
-                    // Handle file upload separately
+                    // // Handle file upload separately
                     $uploadedImage = ''; // Initialize as an empty string
     
-                    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
-                        $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
-                        $uploadedImage = $storageAccessImage->saveImage($_FILES['profile_picture']['tmp_name']);
-                    }
-    
+                    // if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+                    //     $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
+                    //     $uploadedImage = $storageAccessImage->saveImage($_FILES['profile_picture']['tmp_name']);
+                    // }
+
+                    $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
+                    $uploadedImage = $storageAccessImage->saveImage($_FILES['picture_url']['tmp_name']);
+
                     require_once __DIR__ . '/../model/UserModel.php';
                     $userModel = new UserModel();
                     $userModel->register($_POST['username'], $_POST['password'], $_POST['fullname'], $uploadedImage);
-    
+
                     header('Content-Type: application/json');
                     http_response_code(201);
                     echo json_encode(["redirect_url" => BASE_URL . "/user/login"]);

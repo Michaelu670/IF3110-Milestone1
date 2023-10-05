@@ -55,9 +55,9 @@
                         <p id="confirm-password-alert" class="alert-hide">Please fill out with the password first!</p>
                     </div>
                     <div class="form-group">
-                        <label class="bold-text" for="profile-picture">Upload your profile picture:</label>
-                        <input type="file" name="profile-picture" id="profile-picture" accept="image/png, image/jpeg"> <!-- Tambahkan input file untuk unggah foto profil -->
-                        <p class="alert-hide" id="profile-picture-alert">Please upload a valid profile picture first!</p>
+                        <label class="bold-text" for="picture_url">Upload your profile picture:</label>
+                        <input type="file" name="picture_url" id="picture_url" accept="image/png, image/jpeg"> <!-- Tambahkan input file untuk unggah foto profil -->
+                        <p class="alert-hide" id="picture_url-alert">Please upload a valid profile picture first!</p>
                     </div>
                     <div class="form-button">
                         <p id="register-alert" class="alert-hide">Registration Failed!</p>

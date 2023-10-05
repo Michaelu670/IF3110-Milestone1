@@ -102,16 +102,6 @@ p, label, a, button {
     color: var(--white);
 }
 
-.green-button {
-    background: var(--lightgreen);
-    color: var(--black);
-}  
-
-.red-button {
-    background: var(--red);
-    color: var(--black);
-}
-
 .bluegreen-button {
     background: var(--bluegreen);
     color: var(--black);

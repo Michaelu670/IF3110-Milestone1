@@ -6,9 +6,9 @@ class StorageAccess
 
     public const IMAGE_PATH = 'images';
 
-    public function __construct($foldername)
+    public function __construct($filename)
     {
-        $this->storageDir = __DIR__ . '/../../storage/' . $foldername . '/';
+        $this->storageDir = __DIR__ . '/../../storage/' . $filename . '/';
     }
 
     private function doesFileExist($filename)

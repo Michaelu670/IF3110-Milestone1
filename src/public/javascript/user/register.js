@@ -2,7 +2,7 @@ const usernameInput = document.querySelector('#username');
 const passwordInput = document.querySelector('#password');
 const fullnameInput = document.querySelector('#fullname');
 const passwordConfirmInput = document.querySelector('#confirm-password');
-const profilePictureInput = document.querySelector('#profile-picture');
+const profilePictureInput = document.querySelector('#picture_url');
 const registrationForm = document.querySelector('.registration-form');
 const usernameAlert = document.querySelector('#username-alert');
 const passwordAlert = document.querySelector('#password-alert');
@@ -126,7 +126,7 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
     const username = usernameInput.value;
     const password = passwordInput.value;
     const fullname = fullnameInput.value;
-    const profilePicture = profilePictureInput.files;
+    const profilePicture = profilePictureInput.files[0];
 
     if(!usernameValid)
     {
@@ -177,14 +177,14 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
         passwordConfirmAlert.className = 'alert-hide';
     }
 
-    if(!profilePicture.length === 0)
+    if(profilePicture.length == 0)
     {
         e.preventDefault();
-        document.querySelector("#profile-picture-alert").className = "alert-show";
+        document.querySelector("#picture_url-alert").className = "alert-show";
         profilePictureValid = false;
     }else
     {
-        document.querySelector("#profile-picture-alert").className= "alert-hide";
+        document.querySelector("#picture_url-alert").className= "alert-hide";
         profilePictureValid = true;
     }
 
@@ -195,18 +195,19 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST','/public/user/register');
-
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
     formData.append('fullname', fullname);
     formData.append('picture_url', profilePicture);
     formData.append('csrf_token', CSRF_TOKEN);
-
+    console.log(formData);
     xhr.send(formData);
     xhr.onreadystatechange = function () {
         if(this.readyState === XMLHttpRequest.DONE)
         {
+            console.log('Response status:', this.status);
+            console.log('Response text:', this.responseText);
             if(this.status === 201)
             {
                 document.querySelector('#register-alert').className = 'alert-hide';

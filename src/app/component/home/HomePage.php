@@ -30,6 +30,7 @@
         <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
         <div class="wrapper">
             <?php include(dirname(__DIR__) . '/template/Navbar.php') ?>
+            
         </div>
     </div>
 </body>
