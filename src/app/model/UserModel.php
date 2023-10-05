@@ -57,9 +57,9 @@ class UserModel
         }
     }
 
-    public function register($username, $password, $fullname, $image_path)
+    public function register($username, $password, $fullname, $picture_url)
     {
-        $query = 'INSERT INTO user (username, fullname, password, is_admin, image_path) VALUES (-:username, :fullname, :password, :is_admin, :image_path)';
+        $query = 'INSERT INTO user (username, fullname, password, access_type, picture_url) VALUES (:username, :fullname, :password, :access_type, :picture_url)';
         $options = [
             'cost' => BCRYPT_COST
         ];
@@ -68,8 +68,8 @@ class UserModel
         $this->database->bind('username', $username);
         $this->database->bind('fullname', $fullname);
         $this->database->bind('password', password_hash($password, PASSWORD_BCRYPT, $options));
-        $this->database->bind('is_admin', false);
-        $this->database->bind('image_path', $image_path);
+        $this->database->bind('access_type', 0);
+        $this->database->bind('picture_url', $picture_url);
 
         $this->database->execute();
     }

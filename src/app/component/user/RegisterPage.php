@@ -60,6 +60,7 @@
                         <p class="alert-hide" id="profile-picture-alert">Please upload a valid profile picture first!</p>
                     </div>
                     <div class="form-button">
+                        <p id="register-alert" class="alert-hide">Registration Failed!</p>
                         <button type="submit" class="button black-button bold-text">Sign up</button>
                     </div>
                 </form>

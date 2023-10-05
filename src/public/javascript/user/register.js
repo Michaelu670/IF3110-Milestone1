@@ -184,26 +184,23 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
         profilePictureValid = false;
     }else
     {
-        document.querySelector("#cover-alert").className= "alert-hide";
+        document.querySelector("#profile-picture-alert").className= "alert-hide";
         profilePictureValid = true;
     }
 
-    if (!usernameValid || !passwordValid || !fullnameValid || !passwordConfirmValid)
+    if (!usernameValid || !passwordValid || !fullnameValid || !passwordConfirmValid || !profilePictureValid)
     {
         return;
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open(
-        'POST',
-        `/public/user/register`
-    );
+    xhr.open('POST','/public/user/register');
 
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
     formData.append('fullname', fullname);
-    formData.append('profilePicture', profilePicture);
+    formData.append('picture_url', profilePicture);
     formData.append('csrf_token', CSRF_TOKEN);
 
     xhr.send(formData);
@@ -212,11 +209,12 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
         {
             if(this.status === 201)
             {
+                document.querySelector('#register-alert').className = 'alert-hide';
                 const data = JSON.parse(this.responseText);
                 location.replace(data.redirect_url);
             }else
             {
-                alert('Something went wrong, please try again!');
+                document.querySelector('#register-alert').className = 'alert-show';
             }
         }
     };
