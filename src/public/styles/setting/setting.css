@@ -1,0 +1,160 @@
+
+.wrapper{
+    max-width: 1160px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* gap: 10px; */
+    /* border: 1px solid; */
+    padding: 10px;
+}
+
+.leftbar-container{
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-container{
+    border: 1px solid;
+    border-radius: 10px;
+    margin-right: 30px;
+    background-color: #ffffff;
+    box-shadow: 2px 3px 3px 3px #007a6a;
+    gap: 10px;
+    
+}
+
+.box-container{
+    /* margin-top: 10px;
+    margin-bottom: 10px; */
+    /* border-top: 1px solid;
+    border-bottom: 1px solid; */
+    padding: 30px;
+}
+
+.flex-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.wrapper-column{
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 2px 3px 3px 3px #007a6a;
+}
+
+.profile{
+    /* border: 1px solid;
+    border-radius: 10px; */
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items:center;
+    border-bottom: 1px solid;
+}
+
+.profile img{
+    margin-left: 2rem;
+    width: 20%;
+    border: 0px;
+    border-radius: 100%;
+}
+
+.form{
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    /* align-self: center; */
+    /* align-items: start; */
+    /* border: 1px solid; */
+    width: 100%;
+}
+
+
+.login-header{
+    /* position: relative;
+    left: -400px;
+    top: 15px; */
+    margin-bottom: 20px;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+}
+
+.login-header img {
+    margin-bottom: 1.5 rem;
+    width: 50%;
+    align-self: center;
+}
+
+.profile-form {
+    /* border: 1px solid; */
+    align-items: start;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    gap: 1rem;
+}
+
+.password-form {
+    /* border: 1px solid; */
+    align-items: start;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    gap: 1rem;
+}
+
+.form-group{
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    width: 90%;
+    gap: 0.5rem;
+}
+
+.form-group input {
+    padding: 0.5rem 1rem;
+    border-radius: 10px; /* Anda dapat menyesuaikan nilai ini sesuai dengan keinginan desain Anda */
+    border: 1px solid; /* Anda dapat menambahkan border untuk tampilan yang lebih terdefinisi */
+}
+
+.form-button{
+    align-self: center;
+    margin-top: 2rem;
+}
+
+.form-button button{
+    margin-top: 1rem;
+    border-radius: 10px; /* Anda dapat menyesuaikan nilai ini sesuai dengan keinginan desain Anda */
+    align-self: center;
+}
+
+.form-hyperlink{
+    margin-top: 16px;
+}
+
+.form-hyperlink a{
+    color: var(--white);
+}
+
+.alert-show{
+    display: block;
+    color: var(--red);
+}
+
+.alert-hide{
+    display: none;
+}
