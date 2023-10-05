@@ -67,15 +67,19 @@ function echoPagination($page_count, $page_pos, $page_displayed) {
         }
     }
 
-    $query = $_GET;
-    $query['page'] = $next_page;
-    $link = $_SERVER['REDIRECT_URL'] . '?' . http_build_query($query);
+    // $query = $_GET;
+    // $query['page'] = $next_page;
+    // $link = $_SERVER['REQUEST_URL'] . '?' . http_build_query($query);
 
-    $curClass = '';
-    if ($page_now == $fill) $curClass = 'active';
+    $curClass = 'page';
+    if ($page_now == $fill) $curClass = 'page active';
+
+    // if ($func !== '') {
+    //     $func = $func . '('. $next_page . ')';
+    // }
 
     $html = <<<"EOT"
-        <a href=$link class=$curClass>{$fill}</a>
+        <a class="$curClass">{$fill}</a>
 
 EOT;
     if ($page_pos < $page_count + 2)

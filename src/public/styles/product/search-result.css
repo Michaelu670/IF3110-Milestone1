@@ -78,16 +78,36 @@ html {
     background-color: #4CAF50;
     color: white;
     border: 1px solid #4CAF50;
-  }
+}
   
-  .pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {background-color: #ddd;}
   
-  .pagination a:first-child {
+.pagination a:first-child {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-  }
+}
   
-  .pagination a:last-child {
+.pagination a:last-child {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-  }
+}
+
+
+.gridbox {
+    display: grid;
+    column-gap: 20px;
+}
+
+.search-result {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.filter {
+    grid-column-start: 6;
+    grid-column-end: 7;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}

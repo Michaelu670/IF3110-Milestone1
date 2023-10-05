@@ -14,10 +14,10 @@ class ProductSearchView implements ViewInterface
     {
         if ($this->page_count == 0) {
             // TODO: empty page            
-            require_once __DIR__ . '/../../component/product/ProductSearchPage.php'; // Placeholder
+            require_once __DIR__ . '/../../component/product/ProductSearchResult.php'; // Placeholder
         }
         else {
-            require_once __DIR__ . '/../../component/product/ProductSearchPage.php';
+            require_once __DIR__ . '/../../component/product/ProductSearchResult.php';
         }
         
     }

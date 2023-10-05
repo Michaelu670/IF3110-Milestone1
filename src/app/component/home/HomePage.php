@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?= BASE_URL ?>/images/icon/favicon-16x16.png">
     <link rel="manifest" href="<?= BASE_URL ?>/images/icon/site.webmanifest">
     <!-- Global CSS -->
+    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/product/search-result.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/global.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/navbar.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/sidebar.css">
@@ -21,16 +22,18 @@
     </script>
     <!-- JavaScript DOM and AJAX -->
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/home/home.js" defer></script>
+    <!-- <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/searchpage.js" defer></script> -->
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/navbar.js" defer></script>
     <title>Home Page</title>
 </head>
 
-<body>
+<body onload="getProduct()">
     <div class="black-body">
         <!-- sidebar -->
         <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
         <div class="wrapper">
             <?php include(dirname(__DIR__) . '/template/Navbar.php') ?>
+            
         </div>
     </div>
 </body>
