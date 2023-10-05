@@ -30,7 +30,7 @@
         </div>
     </div>
     <?php
-    if (!$this->data['username'] || !$this->data['access_type']) : ?>
+    if (!$this->data['username'] || $this->data['access_type'] === 0) : ?>
         <div class="nav-container" id="nav-container">
             <form action="<?= BASE_URL ?>/song/search" METHOD="GET" class="container-search">
                 <div class="nav-search-input">

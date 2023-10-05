@@ -54,12 +54,12 @@ loginForm && loginForm.addEventListener('submit', async (e) => {
         usernameAlert.className = 'alert-show';
         usernameValid = false;
     }
-    // else if(!usernameRegex.test(username)) 
-    // {
-    //     usernameAlert.innerText = 'Username must be alphanumeric';
-    //     usernameAlert.className = 'alert-show';
-    //     usernameValid = false;
-    // }
+    else if(!usernameRegex.test(username)) 
+    {
+        usernameAlert.innerText = 'Username must be alphanumeric';
+        usernameAlert.className = 'alert-show';
+        usernameValid = false;
+    }
     else
     {
         usernameAlert.innerText = '';
@@ -73,12 +73,12 @@ loginForm && loginForm.addEventListener('submit', async (e) => {
         passwordAlert.className = 'alert-show';
         passwordValid = false;
     }
-    // else if(!passwordRegex.test(password))
-    // {
-    //     passwordAlert.innerText = 'Password must be alphanumeric or special characters';
-    //     passwordAlert.className = 'alert-show';
-    //     passwordValid = false;
-    // }
+    else if(!passwordRegex.test(password))
+    {
+        passwordAlert.innerText = 'Password must be alphanumeric or special characters';
+        passwordAlert.className = 'alert-show';
+        passwordValid = false;
+    }
     else
     {
         passwordAlert.innerText = '';

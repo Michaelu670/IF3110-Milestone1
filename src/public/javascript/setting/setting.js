@@ -1,13 +1,14 @@
 const usernameInput = document.querySelector('#username');
+const usernameInput2 = document.getElementById('username');
 const passwordInput = document.querySelector('#password');
 const fullnameInput = document.querySelector('#fullname');
-const passwordConfirmInput = document.querySelector('#confirm-password');
-const profilePictureInput = document.querySelector('#picture_url');
-const registrationForm = document.querySelector('.registration-form');
+const passwordConfirmInput = document.querySelector('#password-confirm');
+const profileForm = document.querySelector('#profile-form');
+const passwordForm = document.querySelector('#password-form');
 const usernameAlert = document.querySelector('#username-alert');
 const passwordAlert = document.querySelector('#password-alert');
 const fullnameAlert = document.querySelector('#fullname-alert');
-const passwordConfirmAlert = document.querySelector('#confirm-password-alert');
+const passwordConfirmAlert = document.querySelector('#password-confirm-alert');
 
 const usernameRegex = /^[a-zA-Z0-9]+$/;
 const passwordRegex = /^[a-zA-Z0-9!@#$%^&*]+$/;
@@ -17,7 +18,38 @@ let usernameValid = false;
 let passwordValid = false;
 let fullnameValid = false;
 let passwordConfirmValid = false;
-let profilePictureValid = false;
+
+function openTab(tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+    
+    // if(tabName=='Profile'){
+    //     if(document.getElementById("Profile").style.display != "flex"){
+    //         usernameInput.value = "";
+    //         fullnameInput.value = "";
+    //     }
+    // }
+    // if(tabName=='Pass'){
+    //     if(document.getElementById("Pass").style.display != "flex"){
+    //         passwordInput.value = "";
+    //         passwordConfirmInput.value = "";
+    //     }
+    // }
+
+    // Get all elements with class="tabcontent" and hide them
+    document.getElementById("Profile").style.display = "none";
+    // usernameInput.value = "";
+    // fullnameInput.value = "";
+    // passwordInput.value = "";
+    // passwordConfirmInput.value = "";
+
+
+    document.getElementById("Pass").style.display = "none";
+
+    document.getElementById(tabName).style.display = "flex";
+}
+
+document.getElementById("defaultOpen").click();
 
 usernameInput && usernameInput.addEventListener('keyup',
     debounce(() => {
@@ -87,7 +119,7 @@ passwordInput && passwordInput.addEventListener('keyup',
             passwordValid = true;
         } 
 
-        if(password !== passwordConfirm)
+        if(password != passwordConfirm)
         {
             passwordConfirmAlert.innerText = 'Password does not match';
             passwordConfirmAlert.className = 'alert-show';
@@ -106,7 +138,7 @@ passwordConfirmInput && passwordConfirmInput.addEventListener('keyup',
         const password = passwordInput.value;
         const passwordConfirm = passwordConfirmInput.value;
 
-        if(password !== passwordConfirm)
+        if(password != passwordConfirm)
         {
             passwordConfirmAlert.innerText = 'Password does not match';
             passwordConfirmAlert.className = 'alert-show';
@@ -120,13 +152,11 @@ passwordConfirmInput && passwordConfirmInput.addEventListener('keyup',
     }, DEBOUNCE_TIMEOUT)
 );
 
-registrationForm && registrationForm.addEventListener('submit', async (e) => {
+profileForm && profileForm.addEventListener('submit-profile', async (e) => {
     e.preventDefault();
 
     const username = usernameInput.value;
-    const password = passwordInput.value;
     const fullname = fullnameInput.value;
-    const profilePicture = profilePictureInput.files[0];
 
     if(!usernameValid)
     {
@@ -141,6 +171,55 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
         usernameAlert.className = 'alert-hide';
     }
 
+    if(!fullnameValid)
+    {
+        e.preventDefault();
+        fullnameAlert.innerText = 'Fullname is required';
+        fullnameAlert.className = 'alert-show';
+    }else
+    {
+        fullnameAlert.className = 'alert-hide';
+    }
+
+    if (!usernameValid || !fullnameValid)
+    {
+        return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open(
+        'POST',
+        `/public/user/register`
+    );
+
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('fullname', fullname);
+    formData.append('csrf_token', CSRF_TOKEN);
+
+    xhr.send(formData);
+    xhr.onreadystatechange = function () {
+        if(this.readyState === XMLHttpRequest.DONE)
+        {
+            if(this.status === 201)
+            {
+                const data = JSON.parse(this.responseText);
+                location.replace(data.redirect_url);
+            }else
+            {
+                alert('Something went wrong, please try again!');
+            }
+        }
+    };
+});
+
+
+
+passwordForm && passwordForm.addEventListener('submit-password', async (e) => {
+    e.preventDefault();
+
+    const password = passwordInput.value;
+
     if(!passwordValid)
     {
         e.preventDefault();
@@ -152,16 +231,6 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
     }else
     {
         passwordAlert.className = 'alert-hide';
-    }
-
-    if(!fullnameValid)
-    {
-        e.preventDefault();
-        fullnameAlert.innerText = 'Fullname is required';
-        fullnameAlert.className = 'alert-show';
-    }else
-    {
-        fullnameAlert.className = 'alert-hide';
     }
 
     if(!passwordConfirmValid)
@@ -177,45 +246,32 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
         passwordConfirmAlert.className = 'alert-hide';
     }
 
-    if(profilePicture.length == 0)
-    {
-        e.preventDefault();
-        document.querySelector("#picture_url-alert").className = "alert-show";
-        profilePictureValid = false;
-    }else
-    {
-        document.querySelector("#picture_url-alert").className= "alert-hide";
-        profilePictureValid = true;
-    }
-
-    if (!usernameValid || !passwordValid || !fullnameValid || !passwordConfirmValid || !profilePictureValid)
+    if (!passwordValid || !passwordConfirmValid)
     {
         return;
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST','/public/user/register');
+    xhr.open(
+        'POST',
+        `/public/user/register`
+    );
+
     const formData = new FormData();
-    formData.append('username', username);
     formData.append('password', password);
-    formData.append('fullname', fullname);
-    formData.append('picture_url', profilePicture);
     formData.append('csrf_token', CSRF_TOKEN);
-    console.log(formData);
+
     xhr.send(formData);
     xhr.onreadystatechange = function () {
         if(this.readyState === XMLHttpRequest.DONE)
         {
-            console.log('Response status:', this.status);
-            console.log('Response text:', this.responseText);
             if(this.status === 201)
             {
-                document.querySelector('#register-alert').className = 'alert-hide';
                 const data = JSON.parse(this.responseText);
                 location.replace(data.redirect_url);
             }else
             {
-                document.querySelector('#register-alert').className = 'alert-show';
+                alert('Something went wrong, please try again!');
             }
         }
     };

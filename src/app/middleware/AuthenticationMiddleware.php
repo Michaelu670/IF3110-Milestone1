@@ -15,7 +15,7 @@ class AuthenticationMiddleware
             throw new LoggedException('Unauthorized', 401);
         }
 
-        $query = "SELECT user_id FROM User WHERE user_id = :user_id LIMIT 1";
+        $query = "SELECT user_id FROM user WHERE user_id = :user_id LIMIT 1";
 
         $this->database->query($query);
         $this->database->bind('user_id', $_SESSION['user_id']);

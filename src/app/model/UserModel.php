@@ -11,7 +11,7 @@ class UserModel
 
     public function getUserFromID($user_id)
     {
-        $query = 'SELECT username, is_admin FROM User WHERE user_id = :user_id LIMIT 1';
+        $query = 'SELECT username, access_type FROM user WHERE user_id = :user_id LIMIT 1';
 
         $this->database->query($query);
         $this->database->bind('user_id', $user_id);
@@ -23,7 +23,7 @@ class UserModel
 
     public function getUsers($page)
     {
-        $query = 'SELECT fullname, username, is_admin FROM User LIMIT :limit OFFSET :offset';
+        $query = 'SELECT fullname, username, access_type FROM user LIMIT :limit OFFSET :offset';
 
         $this->database->query($query);
         $this->database->bind('limit', ROWS_PER_PAGE);
