@@ -1,6 +1,6 @@
 const usernameInput = document.querySelector('#username');
 const passwordInput = document.querySelector('#password');
-const loginButton = document.querySelector('#login-button');
+const loginForm = document.querySelector('.login-form');
 const usernameAlert = document.querySelector('#username-alert');
 const passwordAlert = document.querySelector('#password-alert');
 
@@ -42,7 +42,7 @@ passwordInput && passwordInput.addEventListener('keyup',
     }, DEBOUNCE_TIMEOUT)
 );
 
-loginButton && loginButton.addEventListener('submit', async (e) => {
+loginForm && loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const username = usernameInput.value;
@@ -53,12 +53,14 @@ loginButton && loginButton.addEventListener('submit', async (e) => {
         usernameAlert.innerText = 'Username is required';
         usernameAlert.className = 'alert-show';
         usernameValid = false;
-    }else if(!usernameRegex.test(username)) 
-    {
-        usernameAlert.innerText = 'Username must be alphanumeric';
-        usernameAlert.className = 'alert-show';
-        usernameValid = false;
-    }else
+    }
+    // else if(!usernameRegex.test(username)) 
+    // {
+    //     usernameAlert.innerText = 'Username must be alphanumeric';
+    //     usernameAlert.className = 'alert-show';
+    //     usernameValid = false;
+    // }
+    else
     {
         usernameAlert.innerText = '';
         usernameAlert.className = 'alert-hide';
@@ -70,12 +72,13 @@ loginButton && loginButton.addEventListener('submit', async (e) => {
         passwordAlert.innerText = 'Password is required';
         passwordAlert.className = 'alert-show';
         passwordValid = false;
-    }else if(!passwordRegex.test(password))
-    {
-        passwordAlert.innerText = 'Password must be alphanumeric or special characters';
-        passwordAlert.className = 'alert-show';
-        passwordValid = false;
     }
+    // else if(!passwordRegex.test(password))
+    // {
+    //     passwordAlert.innerText = 'Password must be alphanumeric or special characters';
+    //     passwordAlert.className = 'alert-show';
+    //     passwordValid = false;
+    // }
     else
     {
         passwordAlert.innerText = '';
@@ -91,12 +94,15 @@ loginButton && loginButton.addEventListener('submit', async (e) => {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-    formData.append('csrfToken', CSRF_TOKEN);
+    formData.append('csrf_token', CSRF_TOKEN);
 
     xhr.send(formData);
     xhr.onreadystatechange = function () {
         if(this.readyState === XMLHttpRequest.DONE)
         {
+            console.log('Response status:', this.status);
+            console.log('Response text:', this.responseText);
+
             if(this.status === 201)
             {
                 document.querySelector('#login-alert').className = 'alert-hide';

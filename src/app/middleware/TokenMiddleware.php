@@ -14,7 +14,7 @@ class TokenMiddleware
         $token = $_REQUEST['csrf_token'];
 
         if(!$token || $token !== $_SESSION['csrf_token']) {
-            throw new LoggedException('Invalid token', 400);
+            throw new LoggedException('Method Not Allowed', 405);
         }
     }
 }

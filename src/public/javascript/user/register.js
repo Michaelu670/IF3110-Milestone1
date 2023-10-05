@@ -1,12 +1,13 @@
 const usernameInput = document.querySelector('#username');
 const passwordInput = document.querySelector('#password');
 const fullnameInput = document.querySelector('#fullname');
-const passwordConfirmInput = document.querySelector('#password-confirm');
-const registrationForm = document.querySelector('#registration-form');
+const passwordConfirmInput = document.querySelector('#confirm-password');
+const profilePictureInput = document.querySelector('#profile-picture');
+const registrationForm = document.querySelector('.registration-form');
 const usernameAlert = document.querySelector('#username-alert');
 const passwordAlert = document.querySelector('#password-alert');
 const fullnameAlert = document.querySelector('#fullname-alert');
-const passwordConfirmAlert = document.querySelector('#password-confirm-alert');
+const passwordConfirmAlert = document.querySelector('#confirm-password-alert');
 
 const usernameRegex = /^[a-zA-Z0-9]+$/;
 const passwordRegex = /^[a-zA-Z0-9!@#$%^&*]+$/;
@@ -16,6 +17,7 @@ let usernameValid = false;
 let passwordValid = false;
 let fullnameValid = false;
 let passwordConfirmValid = false;
+let profilePictureValid = false;
 
 usernameInput && usernameInput.addEventListener('keyup',
     debounce(() => {
@@ -124,6 +126,7 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
     const username = usernameInput.value;
     const password = passwordInput.value;
     const fullname = fullnameInput.value;
+    const profilePicture = profilePictureInput.files;
 
     if(!usernameValid)
     {
@@ -174,21 +177,30 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
         passwordConfirmAlert.className = 'alert-hide';
     }
 
-    if (!usernameValid || !passwordValid || !fullnameValid || !passwordConfirmValid)
+    if(!profilePicture.length === 0)
+    {
+        e.preventDefault();
+        document.querySelector("#profile-picture-alert").className = "alert-show";
+        profilePictureValid = false;
+    }else
+    {
+        document.querySelector("#profile-picture-alert").className= "alert-hide";
+        profilePictureValid = true;
+    }
+
+    if (!usernameValid || !passwordValid || !fullnameValid || !passwordConfirmValid || !profilePictureValid)
     {
         return;
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open(
-        'POST',
-        `/public/user/register`
-    );
+    xhr.open('POST','/public/user/register');
 
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
     formData.append('fullname', fullname);
+    formData.append('picture_url', profilePicture);
     formData.append('csrf_token', CSRF_TOKEN);
 
     xhr.send(formData);
@@ -197,11 +209,12 @@ registrationForm && registrationForm.addEventListener('submit', async (e) => {
         {
             if(this.status === 201)
             {
+                document.querySelector('#register-alert').className = 'alert-hide';
                 const data = JSON.parse(this.responseText);
                 location.replace(data.redirect_url);
             }else
             {
-                alert('Something went wrong, please try again!');
+                document.querySelector('#register-alert').className = 'alert-show';
             }
         }
     };

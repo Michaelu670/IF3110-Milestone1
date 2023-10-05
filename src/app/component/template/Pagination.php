@@ -1,6 +1,8 @@
 <?php
 /**
- * $page_now: block order from left, 0 is leftmost.
+ * $page_cos: block order from left, 0 is leftmost.
+ * $page_count: total page in result
+ * $page_displayed: number of block in pagination, default = 9.
  */
 function echoPagination($page_count, $page_pos, $page_displayed) {
     $next_page = 0;

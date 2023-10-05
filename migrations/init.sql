@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: db
--- Generation Time: Oct 02, 2023 at 06:07 AM
+-- Host: db:3306
+-- Generation Time: Oct 04, 2023 at 10:18 AM
 -- Server version: 8.1.0
 -- PHP Version: 8.2.10
 
@@ -89,7 +89,42 @@ CREATE TABLE `product` (
   `thumbnail_url` varchar(2047) DEFAULT NULL,
   `create_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `last_modified_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`product_id`, `name`, `description`, `price`, `stock`, `sold`, `thumbnail_url`, `create_date`, `last_modified_date`) VALUES
+(1, 'yezi', 'sepatu zaman purba', 1099000, 3, 1, NULL, '2023-10-03 03:42:19', '2023-10-03 04:31:39'),
+(2, 'vitajimin', 'vitamin buat orang sakit', 68000, 10, 0, NULL, '2023-10-03 05:28:43', '2023-10-03 05:28:43'),
+(3, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:42:33', '2023-10-03 11:26:42'),
+(4, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:42:41', '2023-10-03 11:26:42'),
+(5, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:42:57', '2023-10-03 11:26:42'),
+(6, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:42:57', '2023-10-03 11:26:42'),
+(7, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:42:57', '2023-10-03 11:26:42'),
+(8, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:42:57', '2023-10-03 11:26:42'),
+(9, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:42:57', '2023-10-03 11:26:42'),
+(10, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(11, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(12, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(13, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(14, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(15, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(16, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(17, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(18, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(19, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:11', '2023-10-03 11:26:42'),
+(20, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(21, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(22, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(23, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(24, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(25, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(26, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(27, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(28, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(29, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42');
 
 -- --------------------------------------------------------
 
@@ -103,6 +138,14 @@ CREATE TABLE `product_media` (
   `media_url` varchar(2047) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `product_media`
+--
+
+INSERT INTO `product_media` (`product_id`, `ordering_id`, `media_url`) VALUES
+(1, 1, '/storage/images/product/media/Spongebob_sepatu_satu.png'),
+(1, 2, '/storage/images/product/media/Spongebob_sepatu_dua.png');
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +156,13 @@ CREATE TABLE `product_tag` (
   `product_id` int NOT NULL,
   `tag_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `product_tag`
+--
+
+INSERT INTO `product_tag` (`product_id`, `tag_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -125,6 +175,13 @@ CREATE TABLE `tag` (
   `tag_name` varchar(50) NOT NULL,
   `tag_description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`tag_id`, `tag_name`, `tag_description`) VALUES
+(1, 'sepatu', 'Alas kaki yang umumnya menutupi seluruh bagian mulai dari jari, punggung kaki hingga tumit.');
 
 -- --------------------------------------------------------
 
@@ -140,6 +197,13 @@ CREATE TABLE `user` (
   `picture_url` varchar(2047) NOT NULL,
   `access_type` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password`, `fullname`, `picture_url`, `access_type`) VALUES
+(1, 'yugtah', 'ini passwordnya belum di hash, tolong jangan ditiru', 'yug tah', '', 0);
 
 --
 -- Indexes for dumped tables
@@ -183,7 +247,7 @@ ALTER TABLE `product`
 -- Indexes for table `product_media`
 --
 ALTER TABLE `product_media`
-  ADD PRIMARY KEY (`product_id`);
+  ADD PRIMARY KEY (`product_id`,`ordering_id`);
 
 --
 -- Indexes for table `product_tag`
@@ -224,19 +288,19 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `tag_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `tag_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

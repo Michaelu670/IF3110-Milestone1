@@ -1,11 +1,11 @@
 const toggleButton = document.querySelector("#toggle");
 const navContainer = document.querySelector("#nav-container");
+const logOutButton = document.querySelector("#log-out");
 let isToggled = false;
 
 toggleButton &&
     toggleButton.addEventListener("click", () => {
         if (!isToggled) {
-            /* Show navbar! */
             isToggled = true;
             toggleButton.className = "toggle-rotate";
             navContainer.className = "nav-container show";
@@ -16,14 +16,13 @@ toggleButton &&
         }
     });
 
-const logOutButton = document.querySelector("#log-out");
-
 logOutButton &&
     logOutButton.addEventListener("click", async (e) => {
         e.preventDefault();
+
         const xhr = new XMLHttpRequest();
 
-        xhr.open("POST", `/public/user/logout`);
+        xhr.open("POST", '/public/user/logout');
 
         const formData = new FormData();
         formData.append("csrf_token", CSRF_TOKEN);
@@ -36,3 +35,27 @@ logOutButton &&
             }
         };
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

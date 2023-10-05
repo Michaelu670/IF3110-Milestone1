@@ -88,7 +88,7 @@ class Database
         try
         {
             $this->execute();
-            return $this->db_statement->fetch(PDO::FETCH_ASSOC);
+            return $this->db_statement->fetch(PDO::FETCH_OBJ);
         }
         catch (PDOException $e)
         {

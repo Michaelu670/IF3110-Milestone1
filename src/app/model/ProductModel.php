@@ -4,7 +4,7 @@ class ProductModel {
     
     private $database;
     private const PRODUCT_PER_PAGE = 25;
-    private const DEFAULT_THUMBNAIL_URL = STORAGE_URL . '/images/product/thumbnail/default.jpg';
+    public const DEFAULT_THUMBNAIL_URL = STORAGE_URL . '/images/product/thumbnail/default.jpg';
 
     public function __construct() {
         $this->database = new Database();
@@ -30,12 +30,69 @@ class ProductModel {
             $product = $productTag[0];
             unset($product['tag']);
             $product['tags'] = [];
-            foreach($productTag as $index => $tempProduct) {
-                $product['tags'][$index] = $tempProduct['tag'];
+            if (isset($productTag[0]['tag'])) {
+                foreach($productTag as $index => $tempProduct) {
+                    $product['tags'][$index] = $tempProduct['tag'];
+                }
             }
         }
 
         return $product;
+    }
+
+    public function getProductMediaURLs($productID) {
+        $query = 
+        '   SELECT media_url
+            FROM (
+                SELECT ordering_id, media_url
+                FROM product_media
+                WHERE product_id = :product_id
+                ORDER BY ordering_id
+            ) p
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('product_id', $productID);
+        $media_urls = $this->database->fetchAll();
+
+        foreach ($media_urls as &$url) {
+            $url = $url['media_url'];
+        }
+
+        return $media_urls;
+    }
+
+    public function addMediaURL($productID, $url) {
+        // only add url to database; handle local storage using storage_access
+        // put media in last order
+        $query = 
+        '   SELECT MAX(ordering_id) last_id
+            FROM product_media
+            WHERE product_id = :product_id;
+        ';
+        $this->database->query($query);
+        $this->database->bind('product_id', $productID);
+
+        $maxID = $this->database->fetch();
+        $nextID = 0;
+
+        if (is_null($maxID['last_id'])){
+            $nextID = 1;
+        }
+        else {
+            $nextID = $maxID['last_id'] + 1;
+        }
+
+        $query = 
+        '   INSERT INTO product_media (product_id, ordering_id, media_url)
+            VALUES(:product_id, :ordering_id, :url);
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('product_id', $productID);
+        $this->database->bind('ordering_id', $nextID);
+        $this->database->bind('url', $url);
+        $this->database->execute();
     }
 
     public function getAllProducts() {
@@ -48,22 +105,22 @@ class ProductModel {
         return $products;
     }
 
-    public function getProductsInPage($page, $q, $sortVar, $order = 'asc', $tags = []) {
+    public function getProductsInPage($page, $q, $sortVar, $order = 'asc', $tags = [], $minPrice = null, $maxPrice = null) {
+        // sortVar and order must be sanitized & checked
         $query =
         '   SELECT product_id, name, description, price, stock, sold, thumbnail_url, create_date, last_modified_date, tag_name AS tag
             FROM product NATURAL LEFT OUTER JOIN product_tag NATURAL LEFT OUTER JOIN tag
             WHERE name like :q
-            ORDER BY :sortVar :order, product_id ASC
+            ORDER BY ' . $sortVar . ' ' . $order . ', product_id ASC;
         ';
 
         $this->database->query($query);
         $this->database->bind('q', $q, PDO::PARAM_STR);
-        $this->database->bind('sortVar', $sortVar);
-        $this->database->bind('order', $order);
         $productsWithTag = $this->database->fetchAll();
 
         // collapse [product + tag] to [product + [tags]]
         // asumsi seluruh produk dengan id sama bersebelahan {dari sort}
+
         $products = [];
         foreach ($productsWithTag as $index => $productWithTag) {
             if (isset($products[0]) && end($products)['product_id'] == $productWithTag['product_id']) {
@@ -77,21 +134,34 @@ class ProductModel {
                 if (isset($productWithTag['tag'])) {
                     $products[count($products)-1]['tags'][0] = $productWithTag['tag'];
                 }
+                else {
+                    $products[count($products)-1]['tags'] = [];
+                }
             }
         }
 
-        // filter with tags
+        // filter with tags and price range
         $productsFiltered = [];
         foreach ($products as $product) {
-            $containsAll = true;
+            $valid = true;
+
+            // filter tag: mode AND
             foreach ($tags as $tag) {
-                if (!in_array($tag, $product['tags'])) {
-                    $containsAll = false;
+                if (!empty($tag) && !in_array($tag, $product['tags'])) {
+                    $valid = false;
                     break;
                 }
             }
 
-            if ($containsAll) {
+            // filter price range
+            if (isset($minPrice) && $product['price'] < $minPrice) {
+                $valid = false;
+            }
+            if (isset($maxPrice) && $product['price'] > $maxPrice) {
+                $valid = false;
+            }
+
+            if ($valid) {
                 $productsFiltered = array_merge($productsFiltered, [$product]);
             }
         }
