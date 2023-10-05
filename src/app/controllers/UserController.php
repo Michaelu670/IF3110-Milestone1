@@ -146,11 +146,6 @@ class UserController extends Controller implements ControllerInterface
     
                     // // Handle file upload separately
                     $uploadedImage = ''; // Initialize as an empty string
-    
-                    // if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
-                    //     $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
-                    //     $uploadedImage = $storageAccessImage->saveImage($_FILES['profile_picture']['tmp_name']);
-                    // }
 
                     $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
                     $uploadedImage = $storageAccessImage->saveImage($_FILES['picture_url']['tmp_name']);

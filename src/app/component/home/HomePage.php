@@ -21,6 +21,7 @@
     </script>
     <!-- JavaScript DOM and AJAX -->
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/home/home.js" defer></script>
+    <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/navbar.js" defer></script>
     <title>Home Page</title>
 </head>
 
@@ -30,7 +31,6 @@
         <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
         <div class="wrapper">
             <?php include(dirname(__DIR__) . '/template/Navbar.php') ?>
-            
         </div>
     </div>
 </body>

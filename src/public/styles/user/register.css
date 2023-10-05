@@ -1,5 +1,6 @@
 .registration-header img {
     margin-bottom: 1.5rem;
+    max-width: 100%;
 }
 
 .registration-form {

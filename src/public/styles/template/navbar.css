@@ -53,11 +53,12 @@
 
 .nav-container.show {
     transform: translateY(0);
+
 }
 
 .nav-search form {
     padding: 1rem 2.5rem;
-    background: var(--black-lighter);
+    background: var(--scrollbluegreen);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -73,7 +74,7 @@
 
 .nav-link {
     padding: 1rem 2.5rem;
-    background: var(--black-lighter);
+    background: var(--scrollbluegreen);
     color: var(--white);
     text-decoration: none;
     transition: all 0.3s linear;
@@ -93,7 +94,7 @@
     padding: 1rem 2.5rem;
     display: flex;
     align-items: stretch;
-    background: var(--black-lighter);
+    background: var(--scrollbluegreen);
 }
 
 .nav-search-input input {
@@ -137,8 +138,12 @@
 
 .nav-username img {
     background: var(--white) !important;
-    height: 1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 2px solid var(--bluegreen);
 }
+
 
 @media (min-width: 800px) {
     .nav-search-input {

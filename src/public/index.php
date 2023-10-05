@@ -26,8 +26,9 @@ if(session_status() == PHP_SESSION_NONE)
     session_set_cookie_params(COOKIES_LIFETIME);
     session_start();
 
-    $_SESSION['created_at'] = time();
-    $_SESSION['updated_at'] = time();
+    $current_time = time();
+    $_SESSION['created_at'] = $current_time;
+    $_SESSION['updated_at'] = $current_time;
 }
 
 $app = new App();

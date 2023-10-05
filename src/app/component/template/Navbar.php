@@ -6,7 +6,7 @@
                     <img src="<?= BASE_URL ?>/images/assets/logo-color.svg" alt="Ikomers Logo">
                 </a>
                 <div class="nav-top-search">
-                    <form action="<?= BASE_URL ?>/product/search" METHOD="GET">
+                    <form action="<?= BASE_URL ?>/search/result" METHOD="GET">
                         <div class="top-search-input">
                             <input type="text" placeholder="Search Product" name="q">
                             <button type="submit">
@@ -19,7 +19,7 @@
             <div class="nav-right-portion">
                 <?php if ($this->data['username']) : ?>
                     <div class="nav-username">
-                        <img src="<?= BASE_URL ?>/images/assets/user.svg" alt="profile icon" ?>
+                        <img src="<?= BASE_URL ?>/../storage/images/<?=$this->data['picture_url']?>" alt="profile icon" ?>
                         <p><?= $this->data['username'] ?></p>
                     </div>
                 <?php endif; ?>
@@ -30,9 +30,9 @@
         </div>
     </div>
     <?php
-    if (!$this->data['username'] || $this->data['access_type'] === 0) : ?>
+    if (!$this->data['username'] || $this->data['access_type'] == 0) : ?>
         <div class="nav-container" id="nav-container">
-            <form action="<?= BASE_URL ?>/song/search" METHOD="GET" class="container-search">
+            <form action="<?= BASE_URL ?>/search/result" METHOD="GET" class="container-search">
                 <div class="nav-search-input">
                     <input type="text" placeholder="Search Product" name="q">
                     <button type="submit">
@@ -43,8 +43,14 @@
             <a href="/public/product" class="nav-link">
                 Product list
             </a>
+            <a href="/public/cart" class="nav-link">
+                Cart
+            </a>
+            <a href="/public/checkout" class="nav-link">
+                Checkout
+            </a>
             <?php if ($this->data['username']) : ?>
-                <a href="#" id="log-out" class="nav-link">
+                <a href="#" id="log-out" class="nav-link log-out">
                     Log out
                 </a>
             <?php else : ?>
@@ -58,7 +64,7 @@
         </div>
     <?php else : ?>
         <div class="nav-container" id="nav-container">
-            <form action="<?= BASE_URL ?>/product/search" METHOD="GET" class="container-search">
+            <form action="<?= BASE_URL ?>/search/result" METHOD="GET" class="container-search">
                 <div class="nav-search-input">
                     <input type="text" placeholder="Search Product" name="q">
                     <button type="submit">
@@ -67,32 +73,17 @@
                 </div>
             </form>
             <a href="/public/product/add" class="nav-link">
-                Add song
+                Add product
             </a>
-            <a href="#" id="log-out" class="nav-link">
+            <a href="/public/transaction" class="nav-link">
+                Transaction
+            </a>
+            <a href="/public/product/" class="nav-link">
+                Product list
+            </a>
+            <a href="#" id="log-out" class="nav-link log-out">
                 Log out
             </a>
         </div>
     <?php endif; ?>
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

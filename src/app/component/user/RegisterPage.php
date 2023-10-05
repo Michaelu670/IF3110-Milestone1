@@ -30,7 +30,7 @@
         <div class="wrapper-small">
             <main class="pad-40">
                 <header class="registration-header">
-                    <img src="<?= BASE_URL ?>/images/assets/logo-text-color.svg" alt="Ikomers Logo">
+                    <img class="registration-image" src="<?= BASE_URL ?>/images/assets/logo-text-color.svg" alt="Ikomers Logo">
                     <p>Sign up for free to <span class="bold-text">start shopping</span></p>
                 </header>
                 <form class="registration-form">

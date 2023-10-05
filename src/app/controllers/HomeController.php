@@ -12,10 +12,10 @@ class HomeController extends Controller implements ControllerInterface
                         require_once __DIR__ . '/../model/UserModel.php';
                         $userModel = new UserModel();
                         $user = $userModel->getUserFromID($_SESSION['user_id']);
-                        $homeView = $this->view('home', 'MainView', ['username' => $user->username, 'access_type' => $user->access_type]);
+                        $homeView = $this->view('home', 'MainView', ['username' => $user->username, 'access_type' => $user->access_type, 'picture_url' => $user->picture_url]);
                     } else
                     {
-                        $homeView = $this->view('home', 'MainView', ['username' => null]);
+                        $homeView = $this->view('home', 'MainView', ['username' => null, 'picture_url' => 'user.svg']);
                     }
                     $homeView->render();
                     break;

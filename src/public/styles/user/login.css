@@ -1,5 +1,6 @@
 .login-header img {
     margin-bottom: 1.5 rem;
+    max-width: 100%;
 }
 
 .login-form {

@@ -1,6 +1,6 @@
 const toggleButton = document.querySelector("#toggle");
 const navContainer = document.querySelector("#nav-container");
-const logOutButton = document.querySelector(".log-out");
+const logOutButton = document.querySelector("log-out");
 let isToggled = false;
 
 toggleButton &&
@@ -19,7 +19,6 @@ toggleButton &&
 logOutButton &&
     logOutButton.addEventListener("click", async (e) => {
         e.preventDefault();
-
         const xhr = new XMLHttpRequest();
 
         xhr.open('POST', '/public/user/logout');

@@ -30,7 +30,7 @@
         <div class="wrapper-small">
             <main class="pad-40">
                 <header class="login-header">
-                    <img src="<?= BASE_URL ?>/images/assets/logo-text-color.svg" alt="Ikomers Logo">
+                    <img class="login-image" src="<?= BASE_URL ?>/images/assets/logo-text-color.svg" alt="Ikomers Logo">
                     <p>To continue, log in to <span class="bold-text">IKOMERS</span>.</p>
                 </header>
                 <form class="login-form">
