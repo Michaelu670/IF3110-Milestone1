@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?= BASE_URL ?>/images/icon/favicon-16x16.png">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/product/search-result.css">
+    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/product/searchPage.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/global.css">
     <!-- JavaScript Constant -->
     <script type="text/javascript" defer>
@@ -28,35 +29,35 @@
         
         </div>
         <div class="filter">
-            <label for='q'>Search</label><br>
-            <input type="search" id='q' value="<?php echo $this->data['q'] ?>" /><br>
-
-            <label for='sort'>Sorted by</label>
-            <select id='sort'>
-                <option value='name' <?php if($this->data['sortVar'] == 'name') {echo 'selected';} ?>>name</option>
-                <option value='price' <?php if($this->data['sortVar'] == 'price') {echo 'selected';} ?> >price</option>
-                <option value='stock' <?php if($this->data['sortVar'] == 'stock') {echo 'selected';} ?> >stock</option>
-                <option value='sold' <?php if($this->data['sortVar'] == 'sold') {echo 'selected';} ?> >sold</option>
-                <option value='create_date' <?php if($this->data['sortVar'] == 'create_date') {echo 'selected';} ?> >date created</option>
-                <option value='last_modified_date' <?php if($this->data['sortVar'] == 'last_modified_date') {echo 'selected';} ?> >date modified</option>
-            </select>
-            
-            <select id='order'>
-                <option value='asc' <?php if($this->data['order'] == 'asc') {echo 'selected';} ?>>ascending</option>
-                <option value='desc' <?php if($this->data['order'] == 'desc') {echo 'selected';} ?>>descending</option>
-            </select>
-            <br>
-
-            <label>Price range</label> <br>
-            <label for='minPrice'>minPrice</label>
-            <input type='text' id='minPrice' value="<?php echo $this->data['minPrice'] ?>" />
-            <label for='maxPrice'>maxPrice</label>
-            <input type='text' id='maxPrice' value="<?php echo $this->data['maxPrice'] ?>" />
-            <br>
-
-            <label>Tags</label> <br>
-            <?php require_once 'TagCheckbox.php'?>
-            <?php foreach($this->data['all_tags'] as $tag) {echoTagCheckbox($tag['tag_name']);} ?>
+            <div class="search-searchPage">
+                <label class="title" for='q'>Search</label>
+                <input type="search" id='q' value="<?php echo $this->data['q'] ?>" />
+            </div>
+            <div class="sort-searchPage">
+                <label class="title" for='sort'>Sorted by</label>
+                <select class="tag-sort-searchPage" id='sort'>
+                    <option value='name' <?php if($this->data['sortVar'] == 'name') {echo 'selected';} ?>>name</option>
+                    <option value='price' <?php if($this->data['sortVar'] == 'price') {echo 'selected';} ?> >price</option>
+                    <option value='stock' <?php if($this->data['sortVar'] == 'stock') {echo 'selected';} ?> >stock</option>
+                    <option value='sold' <?php if($this->data['sortVar'] == 'sold') {echo 'selected';} ?> >sold</option>
+                    <option value='create_date' <?php if($this->data['sortVar'] == 'create_date') {echo 'selected';} ?> >date created</option>
+                    <option value='last_modified_date' <?php if($this->data['sortVar'] == 'last_modified_date') {echo 'selected';} ?> >date modified</option>
+                </select>
+                <select id='order'>
+                    <option value='asc' <?php if($this->data['order'] == 'asc') {echo 'selected';} ?>>ascending</option>
+                    <option value='desc' <?php if($this->data['order'] == 'desc') {echo 'selected';} ?>>descending</option>
+                </select>
+            </div>
+            <div class="price-searchPage">
+                <label class="title" >Price range</label> <br>
+                <input class="min-price-searchPage" placeholder="Min Price" type='search' id='minPrice' value="<?php echo $this->data['minPrice'] ?>" />
+                <input placeholder="Max Price" type='search' id='maxPrice' value="<?php echo $this->data['maxPrice'] ?>" />
+            </div>
+            <div class="tag-searchPage">
+                <label class="title" >Tags</label> <br>
+                <span class="tagcheckbox-searchPage"><?php require_once 'TagCheckbox.php'?></span>
+                <span class="tagitem-searchPage"><?php foreach($this->data['all_tags'] as $tag) {echoTagCheckbox($tag['tag_name']);} ?></span>
+            </div>
         </div>
     </div>
     

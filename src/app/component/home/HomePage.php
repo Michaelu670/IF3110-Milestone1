@@ -34,7 +34,9 @@
         <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
         <div class="wrapper">
             <?php include(dirname(__DIR__) . '/template/Navbar.php') ?>
-            <div id="search-result" class="search-result"></div>
+            <div id="search-result" class="search-result">
+                
+            </div>
         </div>
     </div>
 </body>

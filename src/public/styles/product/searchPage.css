@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.search-searchPage, .sort-searchPage, .price-searchPage, .tag-searchPage{
+    margin-bottom: 5%;
+}
+
+.tag-sort-searchPage, .min-price-searchPage{
+    margin-bottom: 2%;
+}
+
+input[type="search"] {
+    border: 1px solid gray;
+    padding: .2em .4em;
+    border-radius: .2em;
+}
+
+input[type="search"].dark {
+    background: #222;
+    color: #fff;
+}
+
+input[type="search"].light {
+    background: #fff;
+    color: #222;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    border-radius: 50em;
+    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+    background-size: contain;
+    opacity: 0;
+    pointer-events: none;
+}
+
+input[type="search"], select  {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--bluegreen);
+    border-radius: 5px;
+    color: var(--black);
+    background-color: #fff;
+    outline: none;
+}
+
+input[type="search"]:focus, select:focus {
+    box-shadow: 0 0 5px var(--bluegreen);
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+    opacity: .3;
+    pointer-events: all;
+}
+
+input[type="search"].dark::-webkit-search-cancel-button {
+    filter: invert(1);
+}
+
+select::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background-color: transparent;
+    color: var(--bluegreen);
+    font-size: 12px;
+    border-left: 1px solid var(--bluegreen);
+    cursor: pointer;
+}
+
+.gridbox {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.search-result {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.filter {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    font-weight: bold;
+    font-size: larger;
+    color: var(--black);
+}
+
+input[type="search"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: var(--black);
+}
+
+.tag-checkbox,
+.tagitem-searchPage {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.tag-checkbox {
+    margin-right: 5px;
+}
+
+.tagcheckbox-searchPage{
+    margin-left: 2%;
+}
+
+.tag-checkbox::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--bluegreen);
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.container-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: large;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+.container-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.container-checkbox input:checked ~ .checkmark {
+    background-color: var(--bluegreen);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

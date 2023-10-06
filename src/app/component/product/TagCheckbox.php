@@ -2,8 +2,10 @@
 
 function echoTagCheckbox($data) {
     $html = <<<"EOT"
-        <input type="checkbox" id="$data" class="tag-checkbox" />
-        <label for="$data">$data</input>
+        <label class="container-checkbox" for="$data">$data
+            <input type="checkbox" id="$data" class="tag-checkbox">
+            <span class="checkmark"></span>
+        </label>
         <br>
 
 EOT;
