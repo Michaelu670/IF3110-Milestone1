@@ -27,13 +27,13 @@ class CartController extends Controller implements ControllerInterface {
             exit();
         }
 
+        $userID = $_SESSION['user_id']; 
+        $activeCart = $this->cartModel->getActiveCart($userID);
+
         $activeCart['username'] = $user->username;
         $activeCart['access_type'] = $user->access_type;
         $activeCart['picture_url'] = $user->picture_url;
 
-
-        $userID = $_SESSION['user_id']; 
-        $activeCart = $this->cartModel->getActiveCart($userID);
         
         foreach ($activeCart['products'] as &$product) {
             $product = array_merge($product, $this->productModel->getProductFromID($product['product_id']));
