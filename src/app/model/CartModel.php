@@ -20,6 +20,7 @@ class CartModel {
         $this->database->bind('cart_id', $activeCartID);
         $this->database->bind('product_id', $productID);
         $quantity = $this->database->fetch();
+
         if (!$quantity) {
             // if new product in cart, remove 
             $query = 
@@ -35,7 +36,7 @@ class CartModel {
         }
         else {
             // if product exists in cart, update quantity
-            $newQuantity = $quantity['quantity'] + $addQuantity;
+            $newQuantity = $quantity->quantity + $addQuantity;
             
             if ($newQuantity > 0) {
                 // if still exists, update quantity
@@ -71,7 +72,9 @@ class CartModel {
         // return that active cart
 
         // return format:
-        //  array with keys ([cart_id], [products_id] => [])
+        //  'cart_id' => cart id
+        //  'products' => array with keys ([cart_id], [products_id] => [])
+        //  'total_price' => total price
         $query = 
         '   SELECT cart_id
             FROM cart NATURAL LEFT OUTER JOIN order_details
@@ -79,10 +82,10 @@ class CartModel {
         ';
         $this->database->query($query);
         $this->database->bind('user_id', $userID);
-        $cartID = $this->database->fetch();
+        $cartID = $this->database->fetch()->cart_id;
         if (!$cartID) {
             $cartID = [];
-            $cartID['cart_id'] = $this->createCart($userID);
+            $cartID = $this->createCart($userID);
         }
 
         // add product id and quantity to cart
@@ -93,11 +96,21 @@ class CartModel {
             WHERE cart_id = :cart_id;
         ';
 
+        $cart['cart_id'] = $cartID;
         $this->database->query($query);
-        $this->database->bind('cart_id', $cartID['cart_id']);
-        $cartID['products'] = $this->database->fetchAll();
+        $this->database->bind('cart_id', $cartID, PDO::PARAM_INT);
+        $cart['products'] = $this->database->fetchAll();
 
-        return $cartID;
+        // add total price to cart
+        require_once __DIR__ . '/ProductModel.php';
+        $productModel = new ProductModel();
+        $total_price = 0;
+        foreach ($cart['products'] as $product) {
+            $total_price += $productModel->getProductFromID($product['product_id'])['price'] * $product['quantity'];
+        }
+        $cart['total_price'] = $total_price;
+
+        return $cart;
     }
 
     public function createCart($userID) {

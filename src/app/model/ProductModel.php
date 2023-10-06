@@ -37,6 +37,9 @@ class ProductModel {
             }
         }
 
+        // set default thumbnail
+        $this->setDefaultThumbnail($product);
+
         return $product;
     }
 

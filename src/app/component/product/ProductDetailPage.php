@@ -45,11 +45,11 @@
                 
                 <br><br>
 
-                <form action="" method="post">
+                <form method="POST">
                     <h3>Belanja</h3> <br>
                     <div class="form-group">
                         <label for="quantity">Quantity:</label>
-                        <input type="number" class="" id="quantity" min="1" max="<? echo $this->productData['stock'] ?>"></input> <br><br>
+                        <input type="number" class="" id="quantity" name="quantity" min="1" max="<? echo $this->productData['stock'] ?>" /> <br><br>
                     </div>
                     <button type="submit" class="green-button bold-text button">Add to cart</button>
                 </form>
