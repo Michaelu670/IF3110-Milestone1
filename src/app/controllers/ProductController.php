@@ -9,6 +9,21 @@ class ProductController extends Controller implements ControllerInterface {
                 case 'GET':
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
                     $tokenMiddleware->putToken();
+
+                    // get user info
+                    $userData['username'] = null;
+                    $userData['picture_url'] = 'user.svg';
+                    
+                    if (isset($_SESSION['user_id'])) {
+                        require_once __DIR__ . '/../model/UserModel.php';
+                        $userModel = new UserModel();
+                        $user = $userModel->getUserFromID($_SESSION['user_id']);
+
+                        $userData['username'] = $user->username;
+                        $userData['access_type'] = $user->access_type;
+                        $userData['picture_url'] = $user->picture_url;
+                    }
+                    
                     
                     $productID = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : 'a';
                     if (!is_numeric($productID)) {
@@ -30,7 +45,7 @@ class ProductController extends Controller implements ControllerInterface {
                     } 
                     $product['product_id'] = $productID;
 
-                    $productView = $this->view('product', 'ProductDetailView', $product);
+                    $productView = $this->view('product', 'ProductDetailView', [$userData, $product]);
                     $productView->render();
                     exit;
                 
