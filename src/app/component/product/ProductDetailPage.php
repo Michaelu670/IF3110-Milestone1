@@ -46,7 +46,7 @@
                             }
                             else {
                                 foreach($this->productData['tags'] as $tag) {
-                                    echo '<a href=/public/search/result?tags=' . $tag . '>' . $tag . '</a> ';
+                                    echo '<u><a href=/public/search/result?tags=' . $tag . '>' . $tag . '</a></u> ';
                                 }
                             }
                         ?></p>
