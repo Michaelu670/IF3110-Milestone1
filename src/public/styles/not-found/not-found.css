@@ -1,0 +1,18 @@
+.notFound {
+    text-align: center;
+}
+
+.notFound img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+}
+
+.main-text {
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.notFound p a {
+    color: var(--scrolldarkbluegreen)
+}

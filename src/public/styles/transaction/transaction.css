@@ -1,0 +1,98 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow: scroll;
+}
+
+.item-transaction{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 20%;
+}
+
+.transaction-order {
+    display: flex;
+    flex: row;
+    text-decoration: none;
+    border: 1px solid var(--scrolldarkbluegreen);
+    border-radius: 20px;
+    justify-content:flex-start;
+    padding: 1%;
+    margin-left: 1%;
+    margin-top: 1%;
+    margin-right: 1%;
+    width: 100%;
+}
+
+.order-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-right: 1%;
+}
+
+.gridview{
+    display: flex;
+    flex-direction: column;
+}
+
+.complete-button-toggle {
+    margin-top: auto;
+    align-self: center;
+    background-color: var(--bluegreen);
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.complete-button-toggle:hover {
+    background-color: var(--scrollbluegreen);
+    color: #fff;
+    scale: 1.02;
+}
+
+.complete-button-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.complete-button-toggle:active {
+    background-color: var(--scrolldarkbluegreen);
+    color: #fff;
+}
+
+@media screen and (max-width: 1140px) {
+    .gridview {
+        flex-direction: column;
+    }
+
+    .transaction-order {
+        flex-direction: column;
+        align-items: left;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .order-grid{
+        flex-direction: column;
+        margin-left: 1%;
+        margin-top: 1%;
+        margin-right: 1%;
+        padding-right: 2%;
+    }
+
+    .complete-button{
+        padding-top: 5px;
+        padding-bottom: 20px;
+    }
+}
