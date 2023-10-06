@@ -11,12 +11,17 @@
     <link rel="manifest" href="<?= BASE_URL ?>/images/icon/site.webmanifest">
     <!-- Global CSS -->
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/global.css">
+    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/sidebar.css">
     <!-- Page-specific CSS -->
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/setting/setting.css">
     <!-- JavaScript Constant and Variables -->
     <script type="text/javascript" defer>
         const CSRF_TOKEN = "<?= $_SESSION['csrf_token'] ?? '' ?>";
         const DEBOUNCE_TIMEOUT = "<?= DEBOUNCE_TIMEOUT ?>";
+    </script>
+    <!-- JavaScript Constant and Variables -->
+    <script type="text/javascript" defer>
+        const CSRF_TOKEN = "<?= $_SESSION['csrf_token'] ?? '' ?>";
     </script>
     <!-- JavaScript Library -->
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/lib/debounce.js" defer></script>
@@ -27,81 +32,84 @@
 
 <body>
     <div class="white-body">
+        <!-- sidebar -->
+        <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
+
         <div class="wrapper-small">
             <main class="pad-40">
-                <div class="wrapper">
-                    <div class="leftbar-container">
-                        <!-- <p>Leftbar</p> -->
-                        <div class="login-header">
-                            <img src="<?= BASE_URL ?>/images/assets/logo-text-color.svg" alt="Ikomers Logo">
-                            <!-- <p>To continue, log in to <span class="bold-text">IKOMERS</span>.</p> -->
-                        </div>
-
-                        <!-- Setting Tabs -->
-                        <div class="nav-container">
-                            <!-- <p>nav-container</p> -->
-                            <div class='box-container 1'>
-                                <button type="tab" class="button-tab" onclick="openTab('Profile');" id="defaultOpen">Profile</button>
-                                <!-- <p onclick="openTab(event, 'Profile')" id="defaultOpen">Profile</p> -->
-                            </div>
-                            <div class='box-container 2'>
-                                <!-- <p onclick="openTab(event, 'Password')">Password</p> -->
-                                <button type="tab" class="button-tab" onclick="openTab('Pass');">Password</button>
-                            </div>
-                        </div>
-
+                <div class="wrapper-main">
+                    <div class="profile">
+                        <?php if ($this->data['username']) : ?>
+                            <img src="<?= BASE_URL ?>/images/assets/user.svg" alt="profile icon" ?>
+                            <p><?= $this->data['username'] ?></p>
+                        <?php endif; ?>
                     </div>
 
-                    <div class="wrapper-column">
-                        <div class="profile">
-                            <img src="<?= BASE_URL ?>/images/icon/avatar-icon.png" alt="Profile picture">
-                            <p>Username</p>
+                    <div class="wrapper">
+                        <div class="leftbar-container">
+                            <!-- Setting Tabs -->
+                            <div class="nav-container">
+                                <!-- <p>nav-container</p> -->
+                                <div class='box-container 1'>
+                                    <button type="tab" class="button-tab" onclick="openTab('Profile');" id="defaultOpen">Profile</button>
+                                    <!-- <p onclick="openTab(event, 'Profile')" id="defaultOpen">Profile</p> -->
+                                </div>
+                                <div class='box-container 2'>
+                                    <!-- <p onclick="openTab(event, 'Password')">Password</p> -->
+                                    <button type="tab" class="button-tab" onclick="openTab('Pass');">Password</button>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <!-- Change profile Tab -->
-                        <div class="form" id="Profile">
-                            <form class="profile-form">
-                                <div class="form-group">
-                                    <label class="bold-text" for="full-name">Change fullname</label>
-                                    <input type="text" name="fullname" placeholder="New fullname" id="fullname">
-                                    <p id="fullname-alert" class="alert-hide"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="bold-text" for="username">Change username</label>
-                                    <input type="text" name="username" placeholder="New username" id="username">
-                                    <p id="username-alert" class="alert-hide"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="bold-text" for="profile-picture">Change profile picture</label>
-                                    <input type="file" name="profile-picture" id="profile-picture" accept="image/png, image/jpeg"> <!-- Tambahkan input file untuk unggah foto profil -->
-                                    <p id="profile-picture-alert" class="alert-hide"></p>
-                                </div>
-                                <div class="form-button">
-                                    <button type="submit-profile" class="button black-button bold-text">Save</button>
-                                </div>
-                            </form>
-                        </div>
+                        <!-- Setting Details -->
+                        <div class="wrapper-column">
+                            <!-- Change profile Tab -->
+                            <div class="form" id="Profile">
+                                <form class="profile-form">
+                                    <div class="form-group">
+                                        <label class="bold-text" for="full-name">Change fullname</label>
+                                        <input type="text" name="fullname" placeholder="New fullname" id="fullname">
+                                        <p id="fullname-alert" class="alert-hide"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="bold-text" for="username">Change username</label>
+                                        <input type="text" name="username" placeholder="New username" id="username">
+                                        <p id="username-alert" class="alert-hide"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="bold-text" for="profile-picture">Change profile picture</label>
+                                        <input type="file" name="profile-picture" id="profile-picture" accept="image/png, image/jpeg"> <!-- Tambahkan input file untuk unggah foto profil -->
+                                        <p id="profile-picture-alert" class="alert-hide"></p>
+                                    </div>
+                                    <div class="form-button">
+                                        <button type="submit-profile" class="button black-button bold-text">Save</button>
+                                    </div>
+                                </form>
+                            </div>
 
-                        <!-- Change password tab -->
-                        <div class="form" id="Pass">
-                            <form class="password-form">
-                                <div class="form-group">
-                                    <label class="bold-text" for="password">Pick a password!</label>
-                                    <input type="password" name="password" placeholder="Enter your password." id="password" autocomplete="on">
-                                    <p id="password-alert" class="alert-hide"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="bold-text" for="confirm-password">Confirm your password!</label>
-                                    <input type="password" name="confirm-password" placeholder="Enter your password again." id="confirm-password" autocomplete="on">
-                                    <p id="confirm-password-alert" class="alert-hide"></p>
-                                </div>
-                                <div class="form-button">
-                                    <button type="submit-password" class="button black-button bold-text">Save</button>
-                                </div>
-                            </form>
-                        </div>
+                            <!-- Change password tab -->
+                            <div class="form" id="Pass">
+                                <form class="password-form">
+                                    <div class="form-group">
+                                        <label class="bold-text" for="password">Pick a new password!</label>
+                                        <input type="password" name="password" placeholder="New password" id="password" autocomplete="on">
+                                        <p id="password-alert" class="alert-hide"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="bold-text" for="confirm-password">Confirm your new password!</label>
+                                        <input type="password" name="confirm-password" placeholder="Enter your new password again." id="confirm-password" autocomplete="on">
+                                        <p id="confirm-password-alert" class="alert-hide"></p>
+                                    </div>
+                                    <div class="form-button">
+                                        <button type="submit-password" class="button black-button bold-text">Save</button>
+                                    </div>
+                                </form>
+                            </div>
 
+                        </div>
                     </div>
+
                 </div>
                 <div class="f"></div>
             </main>

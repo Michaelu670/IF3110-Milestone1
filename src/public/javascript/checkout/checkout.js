@@ -20,37 +20,19 @@ let fullnameValid = false;
 let passwordConfirmValid = false;
 let profilePictureValid = false;
 
-function openTab(tabName) {
-    // Declare all variables
-    var i, tabcontent, tablinks;
-    
-    // if(tabName=='Profile'){
-    //     if(document.getElementById("Profile").style.display != "flex"){
-    //         usernameInput.value = "";
-    //         fullnameInput.value = "";
-    //     }
-    // }
-    // if(tabName=='Pass'){
-    //     if(document.getElementById("Pass").style.display != "flex"){
-    //         passwordInput.value = "";
-    //         passwordConfirmInput.value = "";
-    //     }
-    // }
-
+function openSection(option) {
     // Get all elements with class="tabcontent" and hide them
-    document.getElementById("Profile").style.display = "none";
-    // usernameInput.value = "";
-    // fullnameInput.value = "";
-    // passwordInput.value = "";
-    // passwordConfirmInput.value = "";
+    document.getElementById("ewallet-detail").style.display = "none";
+    document.getElementById("card-detail").style.display = "none";
+    document.getElementById("cod-detail").style.display = "none";
 
-
-    document.getElementById("Pass").style.display = "none";
-
-    document.getElementById(tabName).style.display = "flex";
+    document.getElementById(option).style.display = "flex";
 }
 
-document.getElementById("defaultOpen").click();
+// document.getElementById("cod").click();
+document.getElementById("ewallet-detail").style.display = "none";
+document.getElementById("card-detail").style.display = "none";
+document.getElementById("cod-detail").style.display = "none";
 
 usernameInput && usernameInput.addEventListener('keyup',
     debounce(() => {
