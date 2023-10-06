@@ -15,6 +15,7 @@ const linkPage = () => {
         }
 
         element.addEventListener('click', () =>
+        // debounce(getSearchResult(element.textContent), DEBOUNCE_TIMEOUT));
         getSearchResult(targetPage));
     });
 }

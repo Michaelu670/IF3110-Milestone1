@@ -9,7 +9,7 @@
                     <form action="<?= BASE_URL ?>/search/result" METHOD="GET">
                         <div class="top-search-input">
                             <input type="text" placeholder="Search Product" name="q">
-                            <button type="submit">
+                            <button>
                                 <img src="<?= BASE_URL ?>/images/assets/search.svg" alt="Search icon">
                             </button>
                         </div>
@@ -35,12 +35,12 @@
             <form action="<?= BASE_URL ?>/search/result" METHOD="GET" class="container-search">
                 <div class="nav-search-input">
                     <input type="text" placeholder="Search Product" name="q">
-                    <button type="submit">
+                    <button>
                         <img src="<?= BASE_URL ?>/images/assets/search.svg" alt="Search icon">
                     </button>
                 </div>
             </form>
-            <a href="/public/product" class="nav-link">
+            <a href="/public/home" class="nav-link">
                 Product list
             </a>
             <a href="/public/cart" class="nav-link">
@@ -50,7 +50,7 @@
                 Checkout
             </a>
             <?php if ($this->data['username']) : ?>
-                <a href="#" id="log-out" class="nav-link log-out">
+                <a href="/public/user/login" id="log-out" class="nav-link log-out">
                     Log out
                 </a>
             <?php else : ?>
@@ -78,7 +78,7 @@
             <a href="/public/transaction" class="nav-link">
                 Transaction
             </a>
-            <a href="/public/product/" class="nav-link">
+            <a href="/public/home" class="nav-link">
                 Product list
             </a>
             <a href="#" id="log-out" class="nav-link log-out">

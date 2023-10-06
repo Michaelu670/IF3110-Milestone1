@@ -74,6 +74,7 @@ class UserController extends Controller implements ControllerInterface
             switch($_SERVER['REQUEST_METHOD'])
             {
                 case 'POST':
+
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
                     $tokenMiddleware->checkToken();
 
@@ -87,6 +88,10 @@ class UserController extends Controller implements ControllerInterface
                     echo json_encode(["redirect_url" => BASE_URL . "/home"]);
                     exit;
                 case 'GET':
+                    if(isset($_SESSION['user_id'])){
+                        unset($_SESSION['user_id']);
+                    }
+
                     $tokenMiddleware = $this->middleware('TokenMiddleware');
                     $tokenMiddleware->putToken();
 
