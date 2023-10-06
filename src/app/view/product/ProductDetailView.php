@@ -2,8 +2,10 @@
 
 class ProductDetailView implements ViewInterface {
     public $productData;
-    function __construct($productData) {
-        $this->productData = $productData;
+    public $data;
+    function __construct($allData) {
+        $this->data = $allData[0];
+        $this->productData = $allData[1];
     }
 
     function render() {
