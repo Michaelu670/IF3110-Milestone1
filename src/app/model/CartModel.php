@@ -123,10 +123,13 @@ class CartModel {
         ';
         $this->database->query($query);
         $this->database->bind('user_id', $userID);
-        $cartID = $this->database->fetch()->cart_id;
+        $cartID = $this->database->fetch();
         if (!$cartID) {
             $cartID = [];
             $cartID = $this->createCart($userID);
+        }
+        else {
+            $cartID = $cartID->cart_id;
         }
 
         // add product id and quantity to cart
