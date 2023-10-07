@@ -38,8 +38,6 @@ const getSearchResult = (page = 1) => {
         params.delete(key);
     });
 
-    console.log(params.toString());
-
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
         if (xhr.status === 200 && xhr.readyState === 4) {

@@ -47,6 +47,9 @@ const linkHomePage = () => {
         if (targetPage === '<') {
             targetPage = activePage - 1;
         }
+        if (targetPage === '...') {
+            targetPage = activePage;
+        }
 
         element.addEventListener('click', () =>
         getProduct(targetPage));
