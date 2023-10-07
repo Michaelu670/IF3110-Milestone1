@@ -30,12 +30,22 @@
                     <div class="order-grid">
                         <?php echoTransactionItem($order); ?>
                         <?php if (!empty($order)) { ?>
-                            <form method="POST" class="complete-button">
-                                <input type="hidden" name="cart_id" value="<?= $order['cart_id'] ?>">
-                                <button type="submit" class="complete-button-toggle bold-text button">
-                                    COMPLETE
-                                </button>
-                            </form>
+                            <div class="button-transaction">
+                                <form method="POST" class="complete-button">
+                                    <input type="hidden" name="action" value="complete">
+                                    <input type="hidden" name="cart_id" value="<?= $order['cart_id'] ?>">
+                                    <button type="submit" class="complete-button-toggle bold-text button">
+                                        COMPLETE
+                                    </button>
+                                </form>
+                                <form method="POST" class="delete-button">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="cart_id" value="<?= $order['cart_id'] ?>">
+                                    <button type="submit" class="delete-button-toggle bold-text button">
+                                        DELETE
+                                    </button>
+                                </form>
+                            </div>
                         <?php } ?>
                     </div>
                 <?php } ?>

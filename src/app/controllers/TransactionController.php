@@ -43,7 +43,12 @@ class TransactionController extends Controller implements ControllerInterface {
 
                     require_once __DIR__ . '/../model/TransactionModel.php';
                     $transactionModel = new TransactionModel();
-                    $transactionModel->updateOrderReceiveDate($_POST['cart_id'], $currentDateTime);
+
+                    if ($_POST['action'] === 'complete') {
+                        $transactionModel->updateOrderReceiveDate($_POST['cart_id'], $currentDateTime);
+                    } elseif ($_POST['action'] === 'delete') {
+                        $transactionModel->deleteOrderReceiveDate($_POST['cart_id']);
+                    }
 
                     $transactionModel1 = new TransactionModel();
                     $data['orders'] = $transactionModel1->getAllOrder();

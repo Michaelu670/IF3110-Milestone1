@@ -61,4 +61,13 @@ class TransactionModel {
 
         $this->updateOrder($orderID, 'receive_date', $newValue);
     }
+
+    public function deleteOrderReceiveDate($orderID){
+        $query = 'DELETE FROM order_details WHERE cart_id = :orderID';
+    
+        $this->database->query($query);
+        $this->database->bind(':orderID', $orderID);
+
+        return $this->database->execute();
+    }
 } 

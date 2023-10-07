@@ -14,6 +14,8 @@
     --pure-black: #000000;
     --disabled: #c2c2c2;
     --red: #f10000;
+    --lowred: #f73a3a;
+    --olderred: #ad0000;
 
     /* Font */
     --roboto: 'Roboto', sans-serif;
