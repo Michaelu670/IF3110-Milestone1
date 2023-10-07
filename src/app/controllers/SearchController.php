@@ -18,6 +18,20 @@ class SearchController extends Controller implements ControllerInterface
         $tags = isset($_GET['tags']) ? explode(',', htmlspecialchars($_GET['tags'])) : [];
         $minPrice = isset($_GET['minPrice']) ? htmlspecialchars($_GET['minPrice']) : null;
         $maxPrice = isset($_GET['maxPrice']) ? htmlspecialchars($_GET['maxPrice']) : null;
+
+        // get user info
+        $userData['username'] = null;
+        $userData['picture_url'] = 'user.svg';
+        
+        if (isset($_SESSION['user_id'])) {
+            require_once __DIR__ . '/../model/UserModel.php';
+            $userModel = new UserModel();
+            $user = $userModel->getUserFromID($_SESSION['user_id']);
+
+            $userData['username'] = $user->username;
+            $userData['access_type'] = $user->access_type;
+            $userData['picture_url'] = $user->picture_url;
+        }
         
 
         // Validate parameters and give default value / throw exception
@@ -49,6 +63,9 @@ class SearchController extends Controller implements ControllerInterface
         require_once __DIR__ . '/../model/TagModel.php';
         $tagModel = new TagModel();
         $data['all_tags'] = $tagModel->getAllTags();
+
+        // add userdata to data
+        $data = array_merge($data, $userData);
 
         $resultView = $this->view('product', 'ProductSearchTemplateView', $data);
         $resultView->render();
