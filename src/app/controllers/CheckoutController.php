@@ -10,9 +10,18 @@ class CheckoutController extends Controller implements ControllerInterface
                     if(isset($_SESSION['user_id']))
                     {
                         require_once __DIR__ . '/../model/UserModel.php';
+                        require_once __DIR__ . '/../model/CartModel.php';
+                        require_once __DIR__ . '/../model/ProductModel.php';
                         $userModel = new UserModel();
+                        $cartModel = new CartModel();
+                        $productModel = new ProductModel();
+                        $cart = $cartModel->getActiveCart($_SESSION['user_id']);
                         $user = $userModel->getUserFromID($_SESSION['user_id']);
-                        $checkoutView = $this->view('checkout', 'CheckoutView', ['username' => $user->username, 'access_type' => $user->access_type]);
+
+                        foreach ($cart['products'] as &$product) {
+                            $product = array_merge($product, $productModel->getProductFromID($product['product_id']));
+                        }
+                        $checkoutView = $this->view('checkout', 'CheckoutView', ['username' => $user->username, 'access_type' => $user->access_type, 'products' => $cart]);
                     } else
                     {
                         $checkoutView = $this->view('checkout', 'CheckoutView', ['username' => null]);

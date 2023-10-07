@@ -163,15 +163,13 @@
                                 <p class="bold-text">Cart Summary</p>
                             </div>
 
-                            <div class="cart-content">
-                                <p>Cart content 1</p>
-                            </div>
-                            <div class="cart-content">
-                                <p>Cart content 2</p>
-                            </div>
-                            <div class="cart-content">
-                                <p>Cart content 3</p>
-                            </div>
+                            <?php require_once __DIR__ . '/CartSummary.php'?>
+                            <?php foreach($this->data['products']['products'] as $product) {echoCartItem($product);}?>
+                            <label class="bold-text">Total price: Rp.<?php echo $this->data['products']['total_price']; ?></label>
+                        </div>
+                        
+                        <div class="button-wrapper">
+                            <input class="buy-button bluegreen-button bold-text" type="button" value="Checkout" />
                         </div>
                     </div>
                 </div>
