@@ -81,6 +81,28 @@ select::-webkit-calendar-picker-indicator {
     padding: 20px;
 }
 
+@media (max-width: 800px) {
+    .gridbox {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .search-result {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+    
+    .filter {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
+   
+}
+
 .search-result {
     background-color: #fff;
     padding: 20px;
