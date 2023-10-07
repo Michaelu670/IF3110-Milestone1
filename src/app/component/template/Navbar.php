@@ -78,6 +78,9 @@
             <a href="/public/transaction" class="nav-link">
                 Transaction
             </a>
+            <a href="/public/history" class="nav-link">
+                History
+            </a>
             <a href="/public/home" class="nav-link">
                 Product list
             </a>
