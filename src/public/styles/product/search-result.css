@@ -111,3 +111,11 @@ html {
     grid-row-start: 1;
     grid-row-end: 2;
 }
+
+.container-search > * {
+    visibility: hidden; 
+}
+
+.nav-top-search > * {
+    visibility: hidden;
+}
