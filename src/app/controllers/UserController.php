@@ -180,6 +180,50 @@ class UserController extends Controller implements ControllerInterface
             http_response_code($e->getCode());
         }
     }
+
+    public function setting()
+    {
+        try
+        {
+            switch ($_SERVER['REQUEST_METHOD'])
+            {
+                case 'POST':
+                    $tokenMiddleware = $this->middleware('TokenMiddleware');
+                    $tokenMiddleware->checkToken();
+    
+                    // // Handle file upload separately
+                    $uploadedImage = ''; // Initialize as an empty string
+
+                    $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
+                    $uploadedImage = $storageAccessImage->saveImage($_FILES['picture_url']['tmp_name']);
+
+                    require_once __DIR__ . '/../model/UserModel.php';
+                    $userModel = new UserModel();
+                    $userModel->updateProfile($_SESSION['user_id'],$_POST['username'], $_POST['fullname'], $uploadedImage);
+
+                    header('Content-Type: application/json');
+                    http_response_code(201);
+                    echo json_encode(["redirect_url" => BASE_URL . "/user/setting"]);
+                    exit;
+                case 'GET':
+                    $tokenMiddleware = $this->middleware('TokenMiddleware');
+                    $tokenMiddleware->putToken();
+                    
+                    require_once __DIR__ . '/../model/UserModel.php';
+                    $userModel = new UserModel();
+                    $user = $userModel->getUserFromID($_SESSION['user_id']); 
+                    $settingView = $this->view('user', 'SettingView', ['username' => $user->username, 'access_type' => $user->access_type, 'picture_url' => $user->picture_url]);
+                    $settingView->render();               
+                    exit;
+    
+                default:
+                    throw new LoggedException('Method Not Allowed', 405);
+            }
+        } catch (Exception $e)
+        {
+            http_response_code($e->getCode());
+        }
+    }
     
 
     public function username()

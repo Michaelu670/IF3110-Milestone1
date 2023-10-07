@@ -1,15 +1,16 @@
 const usernameInput = document.querySelector('#username');
-const usernameInput2 = document.getElementById('username');
+// const usernameInput2 = document.getElementById('username');
 const passwordInput = document.querySelector('#password');
 const fullnameInput = document.querySelector('#fullname');
 const passwordConfirmInput = document.querySelector('#password-confirm');
-const profileForm = document.querySelector('#profile-form');
-const passwordForm = document.querySelector('#password-form');
+// const profileForm = document.getElementsByClassName('profile-form');
+const profileForm = document.querySelector('.profile-form');
+// const passwordForm = document.querySelector('#password-form');
 const usernameAlert = document.querySelector('#username-alert');
 const passwordAlert = document.querySelector('#password-alert');
 const fullnameAlert = document.querySelector('#fullname-alert');
 const passwordConfirmAlert = document.querySelector('#password-confirm-alert');
-
+const profilePictureInput = document.querySelector('#picture_url');
 const usernameRegex = /^[a-zA-Z0-9]+$/;
 const passwordRegex = /^[a-zA-Z0-9!@#$%^&*]+$/;
 const fullnameRegex = /^[a-zA-Z ]+$/;
@@ -153,12 +154,88 @@ passwordConfirmInput && passwordConfirmInput.addEventListener('keyup',
     }, DEBOUNCE_TIMEOUT)
 );
 
-profileForm && profileForm.addEventListener('submit-profile', async (e) => {
+// function pls() {
+//     const username = usernameInput.value;
+//     const fullname = fullnameInput.value;
+//     const profilePicture = profilePictureInput.files[0];
+
+//     if(!usernameValid)
+//     {
+//         e.preventDefault();
+//         usernameAlert.innerText = 'Username is required';
+//         usernameAlert.className = 'alert-show';
+//     }else if(!usernameValid)
+//     {
+//         usernameAlert.className = 'alert-show';
+//     }else
+//     {
+//         usernameAlert.className = 'alert-hide';
+//     }
+
+//     if(!fullnameValid)
+//     {
+//         e.preventDefault();
+//         fullnameAlert.innerText = 'Fullname is required';
+//         fullnameAlert.className = 'alert-show';
+//     }else
+//     {
+//         fullnameAlert.className = 'alert-hide';
+//     }
+
+//     if(!profilePicture.length === 0)
+//     {
+//         e.preventDefault();
+//         document.querySelector("#profile-picture-alert").className = "alert-show";
+//         profilePictureValid = false;
+//     }else
+//     {
+//         document.querySelector("#profile-picture-alert").className= "alert-hide";
+//         profilePictureValid = true;
+//     }
+
+//     if (!usernameValid || !fullnameValid || !profilePictureValid)
+//     {
+//         return;
+//     }
+
+
+//     const xhr = new XMLHttpRequest();
+//     xhr.open(
+//         'POST',
+//         `/public/user/setting`
+//     );
+
+
+//     const formData = new FormData();
+//     formData.append('username', username);
+//     formData.append('fullname', fullname);
+//     formData.append('picture_url', profilePicture);
+//     formData.append('csrf_token', CSRF_TOKEN);
+    
+    
+//     xhr.send(formData);
+//     xhr.onreadystatechange = function () {
+//         if(this.readyState === XMLHttpRequest.DONE)
+//         {
+//             if(this.status === 201)
+//             {
+                
+//                 const data = JSON.parse(this.responseText);
+//                 location.replace(data.redirect_url);
+//             }else
+//             {
+//                 alert('Something went wrong, please try again!');
+//             }
+//         }
+//     };
+// }
+
+profileForm && profileForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const username = usernameInput.value;
     const fullname = fullnameInput.value;
-    const profilePicture = profilePictureInput.files;
+    const profilePicture = profilePictureInput.files[0];
 
     if(!usernameValid)
     {
@@ -183,7 +260,7 @@ profileForm && profileForm.addEventListener('submit-profile', async (e) => {
         fullnameAlert.className = 'alert-hide';
     }
 
-    if(!profilePicture.length === 0)
+    if(profilePicture.length == 0)
     {
         e.preventDefault();
         document.querySelector("#profile-picture-alert").className = "alert-show";
@@ -199,88 +276,30 @@ profileForm && profileForm.addEventListener('submit-profile', async (e) => {
         return;
     }
 
+
     const xhr = new XMLHttpRequest();
     xhr.open(
-        'PUT',
-        `/public/Setting/changeProfile`
+        'POST',
+        `/public/user/setting`
     );
+
 
     const formData = new FormData();
     formData.append('username', username);
     formData.append('fullname', fullname);
     formData.append('picture_url', profilePicture);
     formData.append('csrf_token', CSRF_TOKEN);
-
+    
+    
     xhr.send(formData);
     xhr.onreadystatechange = function () {
         if(this.readyState === XMLHttpRequest.DONE)
         {
+            console.log('Response status:', this.status);
+            console.log('Response text:', this.responseText);
             if(this.status === 201)
             {
-                const data = JSON.parse(this.responseText);
-                location.replace(data.redirect_url);
-            }else
-            {
-                alert('Something went wrong, please try again!');
-            }
-        }
-    };
-});
-
-
-
-passwordForm && passwordForm.addEventListener('submit-password', async (e) => {
-    e.preventDefault();
-
-    const password = passwordInput.value;
-
-    if(!passwordValid)
-    {
-        e.preventDefault();
-        passwordAlert.innerText = 'Password is required';
-        passwordAlert.className = 'alert-show';
-    }else if(!passwordValid)
-    {
-        passwordAlert.className = 'alert-show';
-    }else
-    {
-        passwordAlert.className = 'alert-hide';
-    }
-
-    if(!passwordConfirmValid)
-    {
-        e.preventDefault();
-        passwordConfirmAlert.innerText = 'Password confirmation is required';
-        passwordConfirmAlert.className = 'alert-show';
-    }else if (!passwordConfirmValid)
-    {
-        passwordConfirmAlert.className = 'alert-show';
-    }else
-    {
-        passwordConfirmAlert.className = 'alert-hide';
-    }
-
-    if (!passwordValid || !passwordConfirmValid)
-    {
-        return;
-    }
-
-    const xhr = new XMLHttpRequest();
-    xhr.open(
-        'POST',
-        `/public/user/register`
-    );
-
-    const formData = new FormData();
-    formData.append('password', password);
-    formData.append('csrf_token', CSRF_TOKEN);
-
-    xhr.send(formData);
-    xhr.onreadystatechange = function () {
-        if(this.readyState === XMLHttpRequest.DONE)
-        {
-            if(this.status === 201)
-            {
+                
                 const data = JSON.parse(this.responseText);
                 location.replace(data.redirect_url);
             }else

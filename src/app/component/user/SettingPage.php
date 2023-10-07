@@ -78,12 +78,12 @@
                                         <p id="username-alert" class="alert-hide"></p>
                                     </div>
                                     <div class="form-group">
-                                        <label class="bold-text" for="profile-picture">Change profile picture</label>
-                                        <input type="file" name="profile-picture" id="profile-picture" accept="image/png, image/jpeg"> <!-- Tambahkan input file untuk unggah foto profil -->
+                                        <label class="bold-text" for="picture_url">Change profile picture</label>
+                                        <input type="file" name="picture_url" id="picture_url" accept="image/png, image/jpeg"> <!-- Tambahkan input file untuk unggah foto profil -->
                                         <p id="profile-picture-alert" class="alert-hide"></p>
                                     </div>
                                     <div class="form-button">
-                                        <button type="submit-profile" class="button black-button bold-text">Save</button>
+                                        <button type="submit" class="button black-button bold-text">Save</button>
                                     </div>
                                 </form>
                             </div>

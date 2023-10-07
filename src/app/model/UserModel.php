@@ -74,6 +74,23 @@ class UserModel
         $this->database->execute();
     }
 
+    public function updateProfile($userID, $username, $fullname, $picture_url) {
+        $query = 
+        '   UPDATE user
+            SET username = :username, fullname = :fullname, picture_url = :picture_url
+            WHERE user_id = :user_id;
+        ';
+
+  
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $userID);
+        $this->database->bind('username', $username);
+        $this->database->bind('fullname', $fullname);
+        $this->database->bind('picture_url', $picture_url);
+        $this->database->execute();
+    }
+
     public function doesUsernameExist($username)
     {
         $query = 'SELECT username FROM user WHERE username = :username LIMIT 1';
