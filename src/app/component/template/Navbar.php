@@ -19,8 +19,8 @@
             <div class="nav-right-portion">
                 <?php if ($this->data['username']) : ?>
                     <div class="nav-username">
-                        <img src="<?= BASE_URL ?>/../storage/images/<?=$this->data['picture_url']?>" alt="profile icon" ?>
-                        <p><?= $this->data['username'] ?></p>
+                        <img class="profilePictureNavbar" src="<?= BASE_URL ?>/../storage/images/<?=$this->data['picture_url']?>" alt="profile icon" ?>
+                        <p class="usernameNavbar"><?= $this->data['username'] ?></p>
                     </div>
                 <?php endif; ?>
                 <button class="toggle" id="toggle">

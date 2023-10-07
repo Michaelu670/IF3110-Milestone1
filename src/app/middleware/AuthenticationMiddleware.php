@@ -40,7 +40,7 @@ class AuthenticationMiddleware
 
         $user = $this->database->fetch();
 
-        if (!$user || !$user->access_type) {
+        if (!$user || $user->access_type == 0) {
             throw new LoggedException('Unauthorized', 401);
         }
     }

@@ -23,7 +23,7 @@
     
     <title>Search results for <?php $searchStr = isset($_GET['q']) ? $_GET['q'] : ' '; echo $searchStr; ?></title>
 </head>
-<body onload="getSearchResult()">
+<body onload="getSearchResult(<?php if (isset($_GET['page'])) {echo $_GET['page'];} ?>)">
     <div class="gridbox">
         <div class="search-result" id="search-result">
         

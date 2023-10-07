@@ -95,6 +95,19 @@ class Database
             throw new LoggedException('Internal Server Error', 500);
         }
     }
+    
+    public function fetchAssoc()
+    {
+        try
+        {
+            $this->execute();
+            return $this->db_statement->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $e)
+        {
+            throw new LoggedException('Internal Server Error', 500);
+        }
+    }
 
     public function fetchAll()
     {

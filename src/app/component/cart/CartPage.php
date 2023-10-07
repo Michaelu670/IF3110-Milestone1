@@ -8,10 +8,13 @@
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/cart/cart.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/navbar.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/sidebar.css">
+    <!-- JavaScript DOM and AJAX -->
+    <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/navbar.js" defer></script>
     <!-- JavaScript Constant and Variables -->
     <script type="text/javascript" defer>
         const CSRF_TOKEN = "<?= $_SESSION['csrf_token'] ?? '' ?>";
     </script>
+    <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/navbar.js" defer></script>
     <title>Document</title>
 </head>
 <body>

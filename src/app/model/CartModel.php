@@ -22,7 +22,7 @@ class CartModel {
         $quantity = $this->database->fetch();
 
         if (!$quantity) {
-            // if new product in cart, remove 
+            // if new product in cart, add new.
             $query = 
             '   INSERT INTO cart_details (cart_id, product_id, quantity)
                 VALUES (:cart_id, :product_id, :quantity);
@@ -67,6 +67,47 @@ class CartModel {
         }
     }
 
+    private function validateCart(&$cart) {
+        // check if all items in cart is not more than its stock
+        // if more -> reduce item in cart and give notification to user
+        
+        // cart format -> see in getActiveCart, except total_price
+        require_once __DIR__ . '/ProductModel.php';
+        $productModel = new ProductModel();
+
+        foreach ($cart['products'] as &$product) {
+            $stock = $productModel->getProductFromID($product['product_id'])['stock'];
+            if ($product['quantity'] > $stock) {
+                if ($stock == 0) {
+                    $query = 
+                    '   DELETE FROM cart_details
+                        WHERE cart_id = :cart_id AND product_id = :product_id;
+                    ';
+                    $this->database->query($query);
+                    $this->database->bind('cart_id', $cart['cart_id']);
+                    $this->database->bind('product_id', $product['product_id']);
+                    $this->database->execute();
+
+                }
+                else {
+                    $query = 
+                    '   UPDATE cart_details
+                        SET quantity = :stock
+                        WHERE cart_id = :cart_id AND product_id = :product_id;
+                    ';
+                    $this->database->query($query);
+                    $this->database->bind('cart_id', $cart['cart_id']);
+                    $this->database->bind('stock', $stock);
+                    $this->database->bind('product_id', $product['product_id']);
+                    $this->database->execute();
+
+                }
+                
+                $product['quantity'] = $stock; 
+            }
+        }
+    }
+
     public function getActiveCart($userID) {
         // if no active cart exists; create one
         // return that active cart
@@ -100,6 +141,9 @@ class CartModel {
         $this->database->query($query);
         $this->database->bind('cart_id', $cartID, PDO::PARAM_INT);
         $cart['products'] = $this->database->fetchAll();
+
+        // validate cart
+        $this->validateCart($cart);
 
         // add total price to cart
         require_once __DIR__ . '/ProductModel.php';

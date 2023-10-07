@@ -113,6 +113,10 @@
     transition: all 0.3s linear;
 }
 
+.profilePictureNavbar{
+    cursor: pointer;
+}
+
 .nav-search-input img {
     background: var(--white);
 }
@@ -125,6 +129,7 @@
     display: flex;
     align-items: center;
     gap: 2rem;
+    cursor: pointer;
 }
 
 .nav-username {
@@ -134,6 +139,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    cursor: pointer;
 }
 
 .nav-username img {
