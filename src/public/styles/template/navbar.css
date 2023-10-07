@@ -41,7 +41,7 @@
 
 .nav-container {
     background: var(--scrollbluegreen);
-    position: absolute;
+    position:fixed;
     width: 100%;
     display: flex;
     flex-direction: column;
