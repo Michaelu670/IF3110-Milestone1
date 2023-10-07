@@ -49,6 +49,9 @@
             <a href="/public/checkout" class="nav-link">
                 Checkout
             </a>
+            <a href="/public/order" class="nav-link">
+                Order
+            </a>
             <?php if ($this->data['username']) : ?>
                 <a href="/public/user/login" id="log-out" class="nav-link log-out">
                     Log out
