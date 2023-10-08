@@ -11,7 +11,7 @@ class UserModel
 
     public function getUserFromID($user_id)
     {
-        $query = 'SELECT username, access_type, picture_url FROM user WHERE user_id = :user_id LIMIT 1';
+        $query = 'SELECT username, fullname, access_type, picture_url FROM user WHERE user_id = :user_id LIMIT 1';
 
         $this->database->query($query);
         $this->database->bind('user_id', $user_id);

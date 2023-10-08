@@ -4,10 +4,14 @@ class ProductSearchView implements ViewInterface
 {
     public $data;
     public $page_count;
+    public $access_type;
     public function __construct($data = [])
     {
         $this->data = $data[0];
         $this->page_count = $data[1];
+        $this->access_type = $data[2];
+
+
     }
 
     public function render()

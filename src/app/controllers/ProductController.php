@@ -45,7 +45,16 @@ class ProductController extends Controller implements ControllerInterface {
                     } 
                     $product['product_id'] = $productID;
 
-                    $productView = $this->view('product', 'ProductDetailView', [$userData, $product]);
+                    require_once __DIR__ . '/../model/TagModel.php';
+                    $tagmModel = new TagModel();
+                    $allTags = $tagmModel->getAllTags();
+
+                    // echo '<pre>';
+                    // print_r($allTags);
+                    // echo '</pre>';
+                    // echo '<br>';
+
+                    $productView = $this->view('product', 'ProductDetailView', [$userData, $product, $allTags]);
                     $productView->render();
                     exit;
                 

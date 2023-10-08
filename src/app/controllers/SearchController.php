@@ -101,9 +101,23 @@ class SearchController extends Controller implements ControllerInterface
         
         // get required product in page
         require_once __DIR__ . '/../model/ProductModel.php';
+        require_once __DIR__ . '/../model/UserModel.php';
+
         $model = new ProductModel();
+        $userModel = new UserModel();
+        $user = $userModel->getUserFromID($_SESSION['user_id']);
+        $userArray = [$user->access_type];
+
+
         $products = $model->getProductsInPage($page, $q, $sortVar, $order, $tags, $minPrice, $maxPrice);
 
+        // for debug purpose
+        // echo '<pre>';
+        // print_r($products);
+        // echo '</pre>';
+        // echo '<br>';
+
+        $products = array_merge($products, $userArray);
         // for debug purpose
         // echo '<pre>';
         // print_r($products);

@@ -1,6 +1,10 @@
 <div class="flex-container">
     <?php require_once 'ProductCard.php' ?>
-    <?php foreach($this->data as $product) {echoProductCard($product);}?>
+    <?php foreach($this->data as $product) {
+        if($this->access_type == 0) {echoProductCard($product);}
+        else {echoAdminProductCard($product);}
+        
+    }?>
 </div>
 
 <div class="pagination">
