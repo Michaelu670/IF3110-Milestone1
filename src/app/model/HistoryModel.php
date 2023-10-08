@@ -1,6 +1,6 @@
 <?php
 
-class TransactionModel {
+class HistoryModel {
     private $database;
 
     public function __construct() {
@@ -12,7 +12,6 @@ class TransactionModel {
         $query = 
         '   SELECT cart_id, recipient_name, recipient_phone_number, delivery_address, payment_id, order_date, receive_date
             FROM order_details
-            WHERE receive_date IS NULL;
         ';
 
         $this->database->query($query);
@@ -41,33 +40,5 @@ class TransactionModel {
         } else {
             return $order; // Return the fetched data if rows exist
         }
-    }
-
-    private function updateOrder($orderID, $colName, $newValue) {
-
-        $query = 
-        '   UPDATE order_details
-            SET ' . $colName . ' = :newValue
-            WHERE cart_id = :orderID;';
-
-        $this->database->query($query);
-        $this->database->bind(':newValue', $newValue);
-        $this->database->bind(':orderID', $orderID);
-
-        $this->database->execute();
-    }
-
-    public function updateOrderReceiveDate($orderID, $newValue) {
-
-        $this->updateOrder($orderID, 'receive_date', $newValue);
-    }
-
-    public function deleteOrderReceiveDate($orderID){
-        $query = 'DELETE FROM order_details WHERE cart_id = :orderID';
-    
-        $this->database->query($query);
-        $this->database->bind(':orderID', $orderID);
-
-        return $this->database->execute();
     }
 } 

@@ -7,7 +7,7 @@ function echoSlideshowContent($url) {
 
     $html = <<<"EOT"
     <div class="mySlides fade">
-        <img src="$url" style="width:100%">
+        <img src="$url" style="width:100%" alt="product image">
     </div>
 
 EOT;

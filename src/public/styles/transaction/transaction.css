@@ -44,6 +44,15 @@ html {
     flex-direction: column;
 }
 
+.button-transaction{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: auto;
+    margin: auto;
+    padding-top: 1%;
+}
+
 .complete-button-toggle {
     margin-top: auto;
     align-self: center;
@@ -53,10 +62,29 @@ html {
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    margin-bottom: 1%;
+}
+
+.delete-button-toggle {
+    margin-top: auto;
+    align-self: center;
+    background-color: var(--lowred);
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 1%;
 }
 
 .complete-button-toggle:hover {
     background-color: var(--scrollbluegreen);
+    color: #fff;
+    scale: 1.02;
+}
+
+.delete-button-toggle:hover {
+    background-color: var(--red);
     color: #fff;
     scale: 1.02;
 }
@@ -66,8 +94,18 @@ html {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
+.delete-button-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
 .complete-button-toggle:active {
     background-color: var(--scrolldarkbluegreen);
+    color: #fff;
+}
+
+.delete-button-toggle:active {
+    background-color: var(--olderred);
     color: #fff;
 }
 
@@ -94,5 +132,21 @@ html {
     .complete-button{
         padding-top: 5px;
         padding-bottom: 20px;
+        margin-right: 2%;
+    }
+
+    .delete-button{
+        padding-top: 5px;
+        padding-bottom: 20px;
+        margin-left: 2%;
+    }
+
+    .button-transaction{
+        flex-direction: row;
+    }
+
+    .complete-button-toggle{
+        margin-bottom: 0;
+        margin-right: 5%;
     }
 }
