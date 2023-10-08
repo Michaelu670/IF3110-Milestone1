@@ -29,8 +29,8 @@
 
 | Nama                        | NIM      | E-Mail                      |
 | --------------------------- | -------- | --------------------------- |
-| Vieri Fajar Firdaus         | 13521137 | 13521137@std.stei.itb.ac.id |
-| Muhammad Zaki Amanullah     | 13521141 | 13521141@std.stei.itb.ac.id |
+| Michael Utama               | 13521137 | 13521137@std.stei.itb.ac.id |
+| Edia Zaki Naufal Ilman      | 13521141 | 13521141@std.stei.itb.ac.id |
 | Mohammad Rifqi Farhansyah   | 13521166 | 13521166@std.stei.itb.ac.id |
 
 <a name="features"></a>
