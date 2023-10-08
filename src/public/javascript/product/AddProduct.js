@@ -18,6 +18,11 @@ const thumbnailAlert = document.getElementById('thumbnail-alert')
 let nameValid = false
 let priceValid = false
 
+function addOption(){
+    if(dropbox.value && !tagArea.innerHTML.includes(dropbox.value)){
+        tagArea.innerHTML = tagArea.innerHTML + '<p id="'+dropbox.value+'" onclick="this.remove()" class="tag-cell">' +dropbox.value+ '</p>';
+    }
+}
 
 productName && productName.addEventListener('keyup',
     debounce(() => {
@@ -110,15 +115,3 @@ mainForm.addEventListener('submit', async (e) => {
         }
     };
 });
-
-async function removeFromOption(id){
-    tagArea.innerHTML = tagArea.innerHTML.replace('<p id="'+id+'" onclick="removeFromOption("'+id+'");" class="tag-cell">'+id+'</p>', '')
-    document.getElementById(id).remove();
-}
-
-async function addOption(tag){
-    if(!tagArea.innerHTML.includes(tag)){
-        tagArea.innerHTML = tagArea.innerHTML + '<p id="'+tag+'" onclick="removeFromOption("'+tag+'");" class="tag-cell">' + tag + '</p>';
-    }
-    
-}
