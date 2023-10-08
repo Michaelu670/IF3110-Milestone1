@@ -24,7 +24,6 @@ function echoAdminProductCard($data) {
             <h2>{$data['name']}</h2>
             <h3>Rp.{$data['price']}</h3>
         </a>
-        <button class="buy-button bluegreen-button bold-text">Edit</button>
         <button class="buy-button bluegreen-button bold-text">Delete</button>
     </div>
 

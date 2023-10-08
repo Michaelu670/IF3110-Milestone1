@@ -56,34 +56,35 @@ class TransactionModel {
 
         $this->database->execute();
     }
-
+    // $_POST['payment_method'], $cart['total_price'], $cart['cart_id'], $user->fullname, $_POST['recipient_phone_number'], $_POST['delivery_address']
     public function createOrder($payment_method, $amount, $cartID, $recipient_name, $recipient_phone_number, $delivery_address) {
         $query = 'SELECT payment_id FROM payment ORDER BY payment_date DESC LIMIT 1;';
 
         $this->database->query($query);
         $current_id = $this->database->fetch();
-        $payment_id = $current_id->payment_id + 1;
 
-        $query = 'INSERT INTO payment (payment_id, payment_date, payment_method, amount) VALUES (:payment_id, NOW(), :payment_method, :amount)';
+        $query = 'INSERT INTO payment (payment_date, payment_method, amount) VALUES (NOW(), :payment_method, :amount)';
         
         $this->database->query($query);
-        $this->database->bind('payment_id', $payment_id);
         $this->database->bind('payment_method', $payment_method);
         $this->database->bind('amount', $amount);
         $this->database->execute();
-        
-        $query = 'INSERT INTO order_details (cart_id, recipient_name, recipient_phone_number, delivery_address, payment_id, order_date, recieve_date) VALUES (:cart_id, :recipient_name, :recipient_phone_number, :delivery_address, :payment_id, :order_date, NULL);';
-        $currentDateTime = date('Y-m-d H:i:s');
+        $payment_id = $this->database->lastInsertId();
 
-        echo $cartID . ", ". $recipient_name . ", " . $recipient_phone_number . ", " . $delivery_address . ", " . $payment_id . ", " . $currentDateTime;
+        
+        $query = 'INSERT INTO order_details (cart_id, recipient_name, recipient_phone_number, delivery_address, payment_id, order_date, receive_date) VALUES (:cart_id, :recipient_name, :recipient_phone_number, :delivery_address, :payment_id, NOW(), NULL);';
+        // $currentDateTime = date('Y-m-d H:i:s');
+
 
         $this->database->query($query);
-        $this->database->bind('cart_id', $cartID, PDO::PARAM_INT);
-        $this->database->bind('recipient_name', $recipient_name, PDO::PARAM_STR);
-        $this->database->bind('recipient_phone_number', $recipient_phone_number. PDO::PARAM_STR);
-        $this->database->bind('delivery_address', $delivery_address, PDO::PARAM_STR);
-        $this->database->bind('payment_id', $payment_id-1, PDO::PARAM_INT);
-        $this->database->bind('order_date', $currentDateTime, PDO::PARAM_STR);
+        $this->database->bind('cart_id', $cartID);
+        $this->database->bind('recipient_name', $recipient_name);
+        $this->database->bind('recipient_phone_number', $recipient_phone_number);
+        $this->database->bind('delivery_address', $delivery_address);
+        $this->database->bind('payment_id', $payment_id);
+        // $this->database->bind('order_date', $currentDateTime, PDO::PARAM_STR);
+        // echo $cartID . ", ". $recipient_name . ", " . $recipient_phone_number . ", " . $delivery_address . ", " . $payment_id;
+
 
         $this->database->execute();
     }

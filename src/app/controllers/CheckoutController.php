@@ -43,11 +43,13 @@ class CheckoutController extends Controller implements ControllerInterface
                     $user = $userModel->getUserFromID($_SESSION['user_id']);
                     $cart = $cartModel->getActiveCart($_SESSION['user_id']);
                     // echo $_POST['delivery_address'];
+
                     $orderModel->createOrder($_POST['payment_method'], $cart['total_price'], $cart['cart_id'], $user->fullname, $_POST['recipient_phone_number'], $_POST['delivery_address']);
+                    // print_r("HERE");
 
                     header('Content-Type: application/json');
                     http_response_code(201);
-                    echo json_encode(["redirect_url" => BASE_URL . "/cart"]);
+                    echo json_encode(["redirect_url" => BASE_URL . "/home"]);
                     exit;
                 default:
                     throw new LoggedException('Method Not Allowed', 405);

@@ -177,7 +177,7 @@
                                     </div>
 
                                     <form class="button-wrapper" id="button-wrapper">
-                                        <button type="submit" form="button-wrapper "class="buy-button bluegreen-button bold-text" value="submit">Checkout</button>
+                                        <button type="submit" form="main-form"class="buy-button bluegreen-button bold-text">Checkout</button>
                                     </form>
                                 </div>
                             </div>

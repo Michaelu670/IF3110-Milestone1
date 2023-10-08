@@ -12,6 +12,7 @@ const ewalletInput = document.getElementById('ewallet-number');
 const cardNumberInput = document.getElementById('card-number');
 const cardExpInput = document.getElementById('card-exp');
 const cardCVVInput = document.getElementById('card-cvv');
+const mainForm = document.querySelector('#main-form')
 // ADDRESS INPUTS
 // const addressForm = document.getElementById('address-details');
 const phoneInput = document.getElementById('phone');
@@ -213,9 +214,9 @@ addressInput && addressInput.addEventListener('keyup',
     }, DEBOUNCE_TIMEOUT)
 );
 
-mainForm && mainForm.addEventListener('submit', async (e) => {
+mainForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log('first');
+    // console.log('first');
     const method = paymentChoice;
     const phone = phoneInput.value;
     const fulladdress = addressInput.value;
@@ -320,14 +321,19 @@ mainForm && mainForm.addEventListener('submit', async (e) => {
         {
             addressAlert.className = 'alert-hide';
         }
+    console.log(!(method=="ewallet" && ewalletValid));
+
+
     
-        if (!paymentMethodValid || (!(method=="ewallet" && ewalletValid) && !(method=="card" && cardNumberValid && cardExpValid && cardCVVValid)))
+        if (!paymentMethodValid || (!(method=="ewallet" && ewalletValid) && !(method=="card" && cardNumberValid && cardExpValid && cardCVVValid) && !(method=="cod")))
         {
             return;
         }else{
             allBillingValid = true;
         }
         // console.log(method);
+    // console.log('here');
+
     
         if (!phoneValid || !provinceValid || !cityValid || !postalValid || !addressValid)
         {
@@ -340,6 +346,9 @@ mainForm && mainForm.addEventListener('submit', async (e) => {
         if(!allAddressValid || !allBillingValid){
             return;
         }
+
+    console.log('send data');
+
     
         
         // popupWindow.style.display = "block";
