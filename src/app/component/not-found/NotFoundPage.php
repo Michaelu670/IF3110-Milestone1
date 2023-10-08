@@ -22,7 +22,7 @@
             <div class="notFound">
                 <img class="notFoundImage" src="<?= BASE_URL ?>/images/assets/logo-text-color.svg" alt="Ikomers Logo">
                 <p class="main-text">Sorry, we couldn't find the page that you were looking for!</p>
-                <p>Go back to the <a href="<?= BASE_URL ?>/home">home page</a>.</p>
+                <p>Go back to the <a href="<?= BASE_URL ?>/user/login">login page</a>.</p>
             </div>
         </div>
     </div>
