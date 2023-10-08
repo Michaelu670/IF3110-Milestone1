@@ -16,9 +16,7 @@
 7. [Video Capture](#videocapture)
 8. [Screenshots](#screenshots)
 9. [Structure](#structure)
-10. [Project Status](#project-status)
-11. [Room for Improvement](#room-for-improvement)
-12. [Job Description](#jobdesc)
+10. [Job Description](#jobdesc)
 
 <a name="general-information"></a>
 
@@ -417,18 +415,6 @@
                 .gitkeep
                 Ini adalah video.mp4
 ```
-
-<a name="project-status">
-
-## Project Status
-Project is: _complete_
-
-<a name="room-for-improvement">
-
-## Room for Improvement
-Room for Improvement:
-- Improve the effectiveness of the BFS and DFS algorithm implementation
-- Add more features
 
 <a name="job desc">
 
