@@ -14,6 +14,8 @@
     <!-- JavaScript Component -->
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/slideshow.js" defer></script>
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/navbar.js" defer></script>
+    <script type="text/javascript" src="<?= BASE_URL ?>/javascript/product/AdminProductDetail.js" defer></script>
+
     <!-- JavaScript Constant and Variables -->
     <script type="text/javascript" defer>
         const CSRF_TOKEN = "<?= $_SESSION['csrf_token'] ?? '' ?>";
@@ -43,7 +45,7 @@
                     <div class="description-column">
                         <div class="group-column">
                             <p class="bold-text">Product Name:</p>
-                            <input class="text-input" type="text" placeholder="<? echo $this->productData['name'] ?>" class="" id="name" name="name"/> <br><br>
+                            <input class="text-input" type="text" placeholder="<? echo $this->productData['name'] ?>" class="" id="name" name="name"/>
                         </div>
 
                         <div class="group-column">
@@ -56,15 +58,16 @@
 
                         <div class="group-column">
                             <p class="bold-text">Tags</p>
-                                <?php $temp_tags = $this->productData['tags']?>
-                                <div class="tag-area">
+                                <?php $temp_tags = $this->productData['tags']; $temp_taglist = $this->tagList?>
+                                <div class="tag-area" id="tag-area">
                                     <?php foreach($temp_tags as $tag){echo '<p onclick="" class="tag-cell">'.$tag.'</p>';} ?>
                                 </div>
                             <!-- <textarea disabled class="desc-input" placeholder="<?php foreach($this->productData['tags'] as $tag){echo $tag.' ';} ?>" id="tags" name="tags" wrap="soft"></textarea> <br><br> -->
                             <p>Add Tags</p>
-                            <select>
+                            <?php require_once __DIR__ . '/../product/TagOption.php';?>
+                            <select class='dropbox' id='dropbox' onchange="if (this.selectedIndex) addOption(this.value);">
                                 <option value="default">Tag</option>
-                                <?php foreach($this->tagList as $tag) {
+                                <?php foreach($temp_taglist as $tag) {
                                     echo '<option value="'.$tag['tag_name'].'">'.$tag['tag_name'].'</option>';
                                 }?>
                             </select>
@@ -72,13 +75,13 @@
 
                         <div class="group-column">
                             <p class="bold-text">Detail</p>
-                            <textarea class="desc-input" placeholder="<? echo $this->productData['description'] ?>" id="desc" name="desc" wrap="soft"></textarea> <br><br>
+                            <textarea class="desc-input" placeholder="<? echo $this->productData['description'] ?>" id="desc" name="desc" wrap="soft"></textarea>
                         </div>
 
                         <form method="POST">
                             <div class="group-column">
                                 <p class="bold-text">Stock: </p>
-                                <input class="number-input" type="number" placeholder="<? echo $this->productData['stock'] ?>" class="" id="quantity" name="quantity" min="0" /> <br><br>
+                                <input class="number-input" type="number" placeholder="<? echo $this->productData['stock'] ?>" class="" id="quantity" name="quantity" min="0" />
                             </div>
                             <button type="submit" class="green-button bold-text button">Add to cart</button>
                         </form>
