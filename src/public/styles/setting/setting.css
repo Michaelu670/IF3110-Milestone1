@@ -59,6 +59,12 @@
     align-items: flex-start;
 }
 
+.profilePicture{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
 .wrapper-column{
     background-color: #ffffff;
     display: flex;
@@ -83,13 +89,13 @@
     /* border-bottom: 1px solid; */
 }
 
-.profile img{
+/* .profile img{
     margin-left: 2rem;
     width: 80%;
     max-width: 100px;
     border: 0px;
     border-radius: 100%;
-}
+} */
 
 .form{
     /* margin-left: 1rem; */

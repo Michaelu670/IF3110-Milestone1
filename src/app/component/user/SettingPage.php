@@ -40,7 +40,7 @@
                 <div class="wrapper-main">
                     <div class="profile">
                         <?php if ($this->data['username']) : ?>
-                            <img src="<?= BASE_URL ?>/images/assets/user.svg" alt="profile icon" ?>
+                            <img class="profilePicture" src="<?= BASE_URL ?>/../storage/images/<?=$this->data['picture_url']?>" alt="profile icon" ?>
                             <p><?= $this->data['username'] ?></p>
                         <?php endif; ?>
                     </div>
