@@ -59,6 +59,15 @@ class ProductController extends Controller implements ControllerInterface {
                     exit;
                 
                 case 'POST':
+                    $authMiddleware = $this->middleware('AuthenticationMiddleware');
+                    try {
+                        $authMiddleware->isAuthenticated();
+                    }
+                    catch (Exception $e) {
+                        header('location: /public/user/login');
+                        exit;
+                    }
+                    
                     // add item to cart
                     $productID = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : 'a';
                     $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
