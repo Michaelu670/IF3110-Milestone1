@@ -5,6 +5,8 @@ class StorageAccess
     private $storageDir;
 
     public const IMAGE_PATH = 'images';
+    public const VIDEO_PATH = 'images';
+
 
     public function __construct($filename)
     {
@@ -14,6 +16,10 @@ class StorageAccess
     private function doesFileExist($filename)
     {
         return file_exists($this->storageDir . $filename);
+    }
+
+    public function getDir(){
+        return ($this->storageDir);
     }
 
     public function saveImage($tempname)
@@ -35,7 +41,10 @@ class StorageAccess
         {
             $filename = md5(uniqid(mt_rand(), true)) . ALLOWED_IMAGES[$mimetype];
             $valid = !$this->doesFileExist($filename);
+
         }
+        // print_r($this->storageDir . $filename);
+
 
         $success = move_uploaded_file($tempname, $this->storageDir . $filename);
         if (!$success)

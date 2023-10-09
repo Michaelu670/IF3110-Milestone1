@@ -132,10 +132,7 @@ mainForm.addEventListener('submit', async (e) => {
         formData.append('tag'+count, tags[count]);
         count++;
     }
-    // thumbnail.forEach(element => {
-    //     formData.append('thumbnail_url', productThumbnail.files[element]);
-    // });
-    // formData.append('thumbnail_url[]', productThumbnail.files);
+
     formData.append('csrf_token', CSRF_TOKEN);
     console.log("SENDING DATA")
 
@@ -145,7 +142,7 @@ mainForm.addEventListener('submit', async (e) => {
         {
             console.log('Response status:', this.status);
             console.log('Response text:', this.responseText);
-            if(this.status === 200)
+            if(this.status === 201)
             {
                 // document.querySelector('#register-alert').className = 'alert-hide';
                 const data = JSON.parse(this.responseText);

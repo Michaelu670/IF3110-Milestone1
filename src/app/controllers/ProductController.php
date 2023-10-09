@@ -140,7 +140,7 @@ class ProductController extends Controller implements ControllerInterface {
                     $productModel->createProduct($_POST['name'], $_POST['detail'], $_POST['price'], $_POST['stock'], $medias[0], $tagArray, $medias);
                     
                     header('Content-Type: application/json');
-                    http_response_code(200);
+                    http_response_code(201);
                     echo json_encode(["redirect_url" => BASE_URL . "/home"]);
                     exit;
                 default:

@@ -14,7 +14,7 @@ define('ROWS_PER_PAGE', 10);
 
 // File
 define('MAX_FILE_SIZE', 10 * 1024 * 1024);
-define('ALLOWED_IMAGES', ['image/jpeg' => '.jpeg', 'image/png' => '.png']);
+define('ALLOWED_IMAGES', ['image/jpeg' => '.jpeg', 'image/png' => '.png', 'video/mp4' => '.mp4', 'video/ogg' => '.ogg']);
 
 // Session
 define('COOKIES_LIFETIME', 60 * 60 * 24);

@@ -15,7 +15,7 @@ services:
   db:
     image: mysql:latest
     ports:
-      - 6767:3306
+      - 3306:3306
     healthcheck:
       test: mysqladmin ping -h localhost -u${MYSQL_USER} -p{MYSQL_PASSWORD}
       interval: 5s
