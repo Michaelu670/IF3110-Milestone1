@@ -68,7 +68,7 @@
                 
                             <p>Add Tags</p>
                             <?php require_once __DIR__ . '/../product/TagOption.php';?>
-                            <select class='dropbox' id='dropbox' onchange="if (this.selectedIndex) addOption(this.value);">
+                            <select class='dropbox' id='dropbox' onchange="addOption(this);">
                                 <option value="default">Tag</option>
                                 <?php foreach($this->tagList as $tag) {
                                     echo '<option value="'.$tag['tag_name'].'">'.$tag['tag_name'].'</option>';
