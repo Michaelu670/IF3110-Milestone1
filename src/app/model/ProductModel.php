@@ -202,7 +202,7 @@ class ProductModel {
         return $products;
     }
 
-    public function createProduct($name, $description, $price, $stock, $thumbnail_url) {
+    public function createProduct($name, $description, $price, $stock, $thumbnail_url, $tags, $medias) {
         $query = 
         '   INSERT INTO product (name, description, price, stock, sold, thumbnail_url)
             VALUES (:name, :description, :price, :stock, 0, :thumbnail_url);';
@@ -213,8 +213,33 @@ class ProductModel {
         $this->database->bind('price', $price);
         $this->database->bind('stock', $stock);
         $this->database->bind('thumbnail_url', $thumbnail_url);
-
         $this->database->execute();
+
+        $productID = $this->database->lastInsertId();
+
+        //SET TAGS
+        foreach($tags as $tag){
+
+            $query = 'SELECT tag_id FROM tag WHERE tag_name=:tag';
+            $this->database->query($query);
+            $this->database->bind('tag', $tag);
+            $tagID = $this->database->fetch()->tag_id;
+            
+            $query = 
+            '   INSERT INTO product_tag (product_id, tag_id)
+                VALUES (:product_id, :tag_id);
+            ';
+
+            $this->database->query($query);
+            $this->database->bind('product_id', $productID);
+            $this->database->bind('tag_id', $tagID);
+            $this->database->execute();
+        }
+        
+        // SET MEDIAS
+        foreach($medias as $media){
+            $this->addMediaURL($productID, $media);
+        }
     }
 
     /**
@@ -234,19 +259,73 @@ class ProductModel {
     }
 
     public function updateProductName($productID, $newValue) {
-        $this->updateProduct($productID, 'name', $newValue);
+        $query = 
+        '   UPDATE product
+            SET name = :newValue
+            WHERE product_id = :productID;';
+        
+        $this->database->query($query);
+        $this->database->bind('newValue', $newValue);
+        $this->database->bind('productID', $productID);
+
+        $this->database->execute();
+        // $this->updateProduct($productID, 'name', $newValue);
     }
 
     public function updateProductDescription($productID, $newValue) {
-        $this->updateProduct($productID, 'description', $newValue);
+        $query = 
+        '   UPDATE product
+            SET description = :newValue
+            WHERE product_id = :productID;';
+        
+        $this->database->query($query);
+        $this->database->bind('newValue', $newValue);
+        $this->database->bind('productID', $productID);
+
+        $this->database->execute();
+        // $this->updateProduct($productID, 'description', $newValue);
     }
 
     public function updateProductPrice($productID, $newValue) {
-        $this->updateProduct($productID, 'price', $newValue);
+        $query = 
+        '   UPDATE product
+            SET price = :newValue
+            WHERE product_id = :productID;';
+        
+        $this->database->query($query);
+        $this->database->bind('newValue', $newValue);
+        $this->database->bind('productID', $productID);
+
+        $this->database->execute();
+        // $this->updateProduct($productID, 'price', $newValue);
     }
 
     public function updateProductThumbnail($productID, $newValue) {
-        $this->updateProduct($productID, 'thumbnail', $newValue);
+        $query = 
+        '   UPDATE product
+            SET thumbnail = :newValue
+            WHERE product_id = :productID;';
+        
+        $this->database->query($query);
+        $this->database->bind('newValue', $newValue);
+        $this->database->bind('productID', $productID);
+
+        $this->database->execute();
+        // $this->updateProduct($productID, 'thumbnail', $newValue);
+    }
+
+    public function updateProductStock($productID, $newValue) {
+        $query = 
+        '   UPDATE product
+            SET stock = :newValue
+            WHERE product_id = :productID;';
+        
+        $this->database->query($query);
+        $this->database->bind('newValue', $newValue);
+        $this->database->bind('productID', $productID);
+
+        $this->database->execute();
+        // $this->updateProduct($productID, 'stock', $newValue);
     }
 
     public function deleteProduct($productID) {

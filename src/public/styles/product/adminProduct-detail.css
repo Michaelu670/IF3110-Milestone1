@@ -50,6 +50,14 @@ html {
     padding: 10px;
 }
 
+.product-id{
+    display: none;
+}
+
+.green-button{
+    margin-top: 2rem;
+}
+
 .tag-area{
     display: flex;
     flex-direction: row;
@@ -86,7 +94,7 @@ html {
 .form-group-file{
     display: flex;
     flex-direction: column;
-    padding-bottom: 6rem;
+    padding-bottom: 2rem;
 }
 
 .number-input{

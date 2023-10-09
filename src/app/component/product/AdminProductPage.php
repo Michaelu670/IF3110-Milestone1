@@ -28,7 +28,7 @@
         <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
         <div class="wrapper">
             <?php include(dirname(__DIR__) . '/template/Navbar.php') ?>
-            <form class="contents">
+            <form class="contents" id="contents">
                 <div class="column-flex">
                     <div class="media-column">
                         <div class="slideshow-container">
@@ -38,8 +38,12 @@
                             <a class="next" onclick="nextSlide()">&#10095;</a>
                         </div>
                         <div class="form-group-file">
-                            <label class="bold-text" for="picture_url">Change images:</label>
-                            <input type="file" name="picture_url" id="picture_url" accept="image/png, image/jpeg, image/jpg" multiple> <!-- Tambahkan input file untuk unggah foto profil -->
+                            <label class="bold-text" for="picture_url">Change thumbnail:</label>
+                            <input type="file" name="picture_url" id="picture_url" accept="image/png, image/jpeg, image/jpg"> <!-- Tambahkan input file untuk unggah foto profil -->
+                        </div>
+                        <div class="form-group-file">
+                            <label class="bold-text" for="media_url">Change slideshow medias:</label>
+                            <input type="file" name="media_url" id="media_url" accept="image/png, image/jpeg, image/jpg" multiple> <!-- Tambahkan input file untuk unggah foto profil -->
                         </div>
                     </div>
                     <div class="description-column">
@@ -54,20 +58,19 @@
                                 <p class="bold-text center-text">Rp.</p>
                                 <input class="number-input" type="number" placeholder="<? echo $this->productData['price'] ?>" id="price" name="price" min="0" /> <br><br>
                             </div>
-                        </div>
+                        </div>                        
 
                         <div class="group-column">
                             <p class="bold-text">Tags</p>
-                                <?php $temp_tags = $this->productData['tags']; $temp_taglist = $this->tagList?>
                                 <div class="tag-area" id="tag-area">
-                                    <?php foreach($temp_tags as $tag){echo '<p onclick="" class="tag-cell">'.$tag.'</p>';} ?>
+                                    <?php foreach($this->productData['tags'] as $tag){echo '<p id="'.$tag.'" onclick="removeFromOption("'.$tag.'");" class="tag-cell">'.$tag.'</p>';} ?>
                                 </div>
-                            <!-- <textarea disabled class="desc-input" placeholder="<?php foreach($this->productData['tags'] as $tag){echo $tag.' ';} ?>" id="tags" name="tags" wrap="soft"></textarea> <br><br> -->
+                
                             <p>Add Tags</p>
                             <?php require_once __DIR__ . '/../product/TagOption.php';?>
                             <select class='dropbox' id='dropbox' onchange="if (this.selectedIndex) addOption(this.value);">
                                 <option value="default">Tag</option>
-                                <?php foreach($temp_taglist as $tag) {
+                                <?php foreach($this->tagList as $tag) {
                                     echo '<option value="'.$tag['tag_name'].'">'.$tag['tag_name'].'</option>';
                                 }?>
                             </select>
@@ -81,12 +84,13 @@
                         <form method="POST">
                             <div class="group-column">
                                 <p class="bold-text">Stock: </p>
-                                <input class="number-input" type="number" placeholder="<? echo $this->productData['stock'] ?>" class="" id="quantity" name="quantity" min="0" />
+                                <input class="number-input" type="number" placeholder="<? echo $this->productData['stock'] ?>" class="" id="stock" name="stock" min="0" />
                             </div>
-                            <button type="submit" class="green-button bold-text button">Add to cart</button>
+                            <button form="contents" type="submit" class="green-button bold-text button">Save</button>
                         </form>
                     </div>
                 </div>
+                <p id="product_id"><?php echo $_GET['id']?></p>
                 <!-- <button type="submit" class="bluegreen-button bold-text button">Add to cart</button> -->
             </form>
         </div>
