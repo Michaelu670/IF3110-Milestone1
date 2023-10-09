@@ -42,7 +42,7 @@ class HistoryController extends Controller implements ControllerInterface {
         } catch (Exception $e)
         {
             http_response_code($e->getCode());
-            exit;
+            throw $e;
         }
     }
 }

@@ -9,8 +9,10 @@ class ProductSearchView implements ViewInterface
     {
         $this->data = $data[0];
         $this->page_count = $data[1];
-        $this->access_type = $data[2];
 
+        $this->data['username'] = $data['username'];
+        $this->data['picture_url'] = $data['picture_url'];
+        $this->data['access_type'] = $data['access_type'] ?? null;
 
     }
 

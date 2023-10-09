@@ -5,6 +5,9 @@ class Controller
     public function view($folder, $view, $data = [])
     {
         require_once __DIR__ . "/../view/" . $folder . "/" . $view . ".php";
+        require_once __DIR__ . "/../middleware/AuthenticationMiddleware.php";
+        $userData = $this->middleware('AuthenticationMiddleware')->getUserData();
+        $data = array_merge($data, $userData);
         return new $view($data);
     }
 

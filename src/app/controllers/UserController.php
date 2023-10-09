@@ -63,7 +63,7 @@ class UserController extends Controller implements ControllerInterface
         } catch (Exception $e)
         {
             http_response_code($e->getCode());
-            exit;
+            throw $e;
         }
     }
 
@@ -104,7 +104,7 @@ class UserController extends Controller implements ControllerInterface
         } catch (Exception $e)
         {
             http_response_code($e->getCode());
-            exit;
+            throw $e;
         }
     }
 
@@ -130,7 +130,7 @@ class UserController extends Controller implements ControllerInterface
         } catch (Exception $e)
         {
             http_response_code($e->getCode());
-            exit;
+            throw $e;
         }
     }
 
@@ -178,6 +178,7 @@ class UserController extends Controller implements ControllerInterface
         } catch (Exception $e)
         {
             http_response_code($e->getCode());
+            throw $e;
         }
     }
 
@@ -222,6 +223,7 @@ class UserController extends Controller implements ControllerInterface
         } catch (Exception $e)
         {
             http_response_code($e->getCode());
+            throw $e;
         }
     }
     
@@ -252,7 +254,7 @@ class UserController extends Controller implements ControllerInterface
         } catch(Exception $e)
         {
             http_response_code($e->getCode());
-            exit;
+            throw $e;
         }
     }
 }
