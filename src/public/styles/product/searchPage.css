@@ -220,3 +220,11 @@ select {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+.container-search > * {
+    visibility: hidden; 
+}
+
+.nav-top-search > * {
+    visibility: hidden;
+}
