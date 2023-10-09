@@ -4,7 +4,7 @@
 </h2>
 <hr>
 
-> Disusun untuk memenuhi Tugas Milestone 1 - Monolithic PHP & Vanilla Web Application IF3110 Pengembangan Aplikasi Berbasis Web tahun 2023 
+> Disusun untuk memenuhi Tugas Milestone 1 - Monolithic PHP & Vanilla Web Application IF3110 Pengembangan Aplikasi Berbasis Web tahun 2023/2024 
 
 ## Table of Contents
 1. [General Info](#general-information)
