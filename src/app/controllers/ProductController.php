@@ -210,7 +210,10 @@ class ProductController extends Controller implements ControllerInterface {
                         $productModel->updateMediaURL1($_POST['productID'], $medias);
                     }
 
-                    
+                    $productModel->updateProductTags($_POST['productID'], $tagArray);
+
+
+
                     
                     header('Content-Type: application/json');
                     http_response_code(201);
