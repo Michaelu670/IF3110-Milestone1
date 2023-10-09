@@ -38,12 +38,12 @@
                             <a class="next" onclick="nextSlide()">&#10095;</a>
                         </div>
                         <div class="form-group-file">
-                            <label class="bold-text" for="picture_url">Change thumbnail:</label>
-                            <input type="file" name="picture_url" id="picture_url" accept="image/png, image/jpeg, image/jpg"> <!-- Tambahkan input file untuk unggah foto profil -->
+                            <label class="bold-text" for="thumbnail_url">Change thumbnail:</label>
+                            <input type="file" name="thumbnail_url" id="thumbnail_url" accept="image/png, image/jpeg, image/jpg"> <!-- Tambahkan input file untuk unggah foto profil -->
                         </div>
                         <div class="form-group-file">
                             <label class="bold-text" for="media_url">Change slideshow medias:</label>
-                            <input type="file" name="media_url" id="media_url" accept="image/png, image/jpeg, image/jpg" multiple> <!-- Tambahkan input file untuk unggah foto profil -->
+                            <input type="file" name="media_url[]" id="media_url" accept="image/png, image/jpeg, image/jpg, video/mp4, video/ogg" multiple> <!-- Tambahkan input file untuk unggah foto profil -->
                         </div>
                     </div>
                     <div class="description-column">
@@ -63,12 +63,12 @@
                         <div class="group-column">
                             <p class="bold-text">Tags</p>
                                 <div class="tag-area" id="tag-area">
-                                    <?php foreach($this->productData['tags'] as $tag){echo '<p id="'.$tag.'" onclick="removeFromOption("'.$tag.'");" class="tag-cell">'.$tag.'</p>';} ?>
+                                    <?php foreach($this->productData['tags'] as $tag){echo '<p id="'.$tag.'" onclick="this.remove()" class="tag-cell">'.$tag.'</p>';} ?>
+                                    
                                 </div>
                 
                             <p>Add Tags</p>
-                            <?php require_once __DIR__ . '/../product/TagOption.php';?>
-                            <select class='dropbox' id='dropbox' onchange="addOption(this);">
+                            <select class='dropbox' id='dropbox' onchange="addOption()">
                                 <option value="default">Tag</option>
                                 <?php foreach($this->tagList as $tag) {
                                     echo '<option value="'.$tag['tag_name'].'">'.$tag['tag_name'].'</option>';

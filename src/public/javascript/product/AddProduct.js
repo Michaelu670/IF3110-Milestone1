@@ -48,25 +48,14 @@ mainForm.addEventListener('submit', async (e) => {
 
     const thumbnail = productThumbnail.files[0];
     const productMed = productMedias.files;
-    // console.log(productID.innerHTML)
+
     let emptyMedia=false
     let tags = [];
     let medias = [];
 
-    // console.log(tagCells);
-    // console.log(tagCells[0].id);
-
     for (let i = 0; i < tagCells.length; i++) {
         tags.push(tagCells[i].id);
       }
-// }
-
-//     for(var tag in tagCells){
-//         tags.push(tag.id)
-//     }
-
-    console.log("TAGS")
-    console.log(tags)
 
     if(productName.value==""){
         e.preventDefault();
@@ -103,7 +92,6 @@ mainForm.addEventListener('submit', async (e) => {
     if(!profilePictureValid){
         return
     }
-    console.log(productMed)
 
     if(productMedias.files.length==0){
         emptyMedia = true;

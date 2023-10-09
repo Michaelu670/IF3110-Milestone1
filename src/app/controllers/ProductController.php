@@ -143,6 +143,7 @@ class ProductController extends Controller implements ControllerInterface {
                     http_response_code(201);
                     echo json_encode(["redirect_url" => BASE_URL . "/home"]);
                     exit;
+
                 default:
                     throw new LoggedException('Method Not Allowed', 405);
             }
@@ -161,40 +162,46 @@ class ProductController extends Controller implements ControllerInterface {
                 case 'POST':
                     require_once __DIR__ . '/../model/ProductModel.php';
                     $productModel = new ProductModel();
-                    // $test = $productModel->getAllProducts();
 
-                    $productModel->updateProductName($_POST['productID'],$_POST['name']);
-                    $productModel->updateProductPrice($_POST['productID'],$_POST['price']);
-                    $productModel->updateProductDescription($_POST['productID'],$_POST['detail']);
-                    $productModel->updateProductStock($_POST['productID'],$_POST['stock']);
+                    $uploadedImage = ''; // Initialize as an empty string
+                    // Thumbnail & media doesn't change
+                    $productModel->updateProductName($_POST['productID'], $_POST['name']);
+                    $productModel->updateProductPrice($_POST['productID'], $_POST['price']);
+                    $productModel->updateProductStock($_POST['productID'], $_POST['stock']);
+                    $productModel->updateProductDescription($_POST['productID'], $_POST['detail']);
 
-                    // echo '<pre>';
+                    if(!$_POST['emptyThumbnail']){
+                        $storageAccess = new StorageAccess(StorageAccess::IMAGE_PATH);
+                        $uploadedImage = $storageAccess->saveImage($_FILES['thumbnail_url']['tmp_name']);
+                        $uploadedThumbnail = '/storage/images/'.$uploadedImage;
+                        $productModel->updateProductThumbnail($_POST['productID'], $_POST['name'], $uploadedThumbnail);
+                    }
+
+                    $tagArray = [];
+                    for($i=0; $i < $_POST['tagLength']; $i++){
+                        array_push($tagArray, $_POST['tag'.$i]);
+                    }
+
+                    $medias=[];
+                    foreach($_FILES as $file){
+                        $storageAccess = new StorageAccess(StorageAccess::IMAGE_PATH);
+                        $uploadedImage = $storageAccess->saveImage($file['tmp_name']);
+                        $uploadedThumbnail = '/storage/images/'.$uploadedImage;
+                        array_push($medias, $uploadedThumbnail);
+                    }
+
+                    if(!$_POST['emptyMedias'] && !$_POST['emptyThumbnail']){
+                        $productModel->updateMediaURL1($_POST['productID'], $medias);
+                    }elseif(!$_POST['emptyMedias']){
+                        unset($medias[0]);
+                        $productModel->updateMediaURL1($_POST['productID'], $medias);
+                    }
+
                     
-                    if($_POST['emptyThumbnail']!=null){
-                        $uploadedImage = ''; // Initialize as an empty string
-                        $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
-                        $uploadedImage = $storageAccessImage->saveImage($_FILES['thumbnail']['tmp_name']);
-                        $productModel->updateProductThumbnail($_POST['productID'], $uploadedImage); 
-                    }
-
-                    if($_POST['emptyMedias']!=null){
-                        $uploadedMedia = [];
-                        foreach($_FILES['medias'] as $file){
-                            $storageAccess = new StorageAccess(StorageAccess::IMAGE_PATH);
-                            $uploadedImage = $storageAccess->saveImage($file['tmp_name']);
-                            $productModel->addMediaURL($_POST['productID'], $uploadedImage);
-                        }
-                    }
-
-                    require_once __DIR__ . '/../model/TagModel.php';
-                    $tagModel = new TagModel();
-                    foreach($_POST['tags'] as $tag){
-                        $tagModel->assignTag($_POST['productID'], $tag);
-                    }
                     
-                    // header('Content-Type: application/json');
+                    header('Content-Type: application/json');
                     http_response_code(201);
-                    echo json_encode(["redirect_url" => BASE_URL . "/checkout"]);
+                    echo json_encode(["redirect_url" => BASE_URL . "/home"]);
                     exit;
 
                 default:

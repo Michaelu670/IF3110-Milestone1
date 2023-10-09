@@ -20,12 +20,11 @@
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/navbar.js" defer></script>
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/lib/debounce.js" defer></script>
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/product/AddProduct.js" defer></script>
-
     <!-- JavaScript Constant and Variables -->
     <script type="text/javascript" defer>
         const CSRF_TOKEN = "<?= $_SESSION['csrf_token'] ?? '' ?>";
     </script>
-    <title><?php echo $this->productData['name'] ?></title>
+    <title>Add Product</title>
 </head>
 <body>
     <div class="white-body">
@@ -43,12 +42,12 @@
                             <a class="next" onclick="nextSlide()">&#10095;</a>
                         </div>
                         <div class="form-group-file">
-                            <label class="bold-text" for="thumbnail_url">Change thumbnail:</label>
-                            <input type="file" name="thumbnail_url" id="thumbnail_url" accept="image/png, image/jpeg"> <!-- Tambahkan input file untuk unggah foto profil -->
+                            <label class="bold-text" for="thumbnail_url">Add thumbnail:</label>
+                            <input type="file" name="thumbnail_url" id="thumbnail_url" accept="image/png, image/jpeg, image/jpg"> <!-- Tambahkan input file untuk unggah foto profil -->
                             <p class="alert-hide" id="thumbnail-alert"></p>
                         </div>
                         <div class="form-group-file">
-                            <label class="bold-text" for="media_url">Change slideshow medias:</label>
+                            <label class="bold-text" for="media_url">Add slideshow medias:</label>
                             <input type="file" name="media_url[]" id="media_url" accept="image/png, image/jpeg, image/jpg, video/mp4, video/ogg" multiple> <!-- Tambahkan input file untuk unggah foto profil -->
                         </div>
                     </div>

@@ -6,30 +6,34 @@ const productTags = document.querySelector('#tag-area')
 const productDetail = document.querySelector('#desc')
 const productStock = document.querySelector('#stock')
 const productMedias = document.querySelector('#media_url')
-const productThumbnail = document.querySelector('#picture_url')
+const productThumbnail = document.querySelector('#thumbnail_url')
 const mainForm = document.getElementById('contents')
-const tagCells = document.querySelectorAll('#tag-cell')
+tagCells = document.querySelectorAll('p.tag-cell')
 const productID = document.querySelector('#product_id')
 
 function addOption(){
     if(dropbox.value && !tagArea.innerHTML.includes(dropbox.value)){
         tagArea.innerHTML = tagArea.innerHTML + '<p id="'+dropbox.value+'" onclick="this.remove()" class="tag-cell">' +dropbox.value+ '</p>';
+        tagCells = document.querySelectorAll('p.tag-cell')
+
     }
 }
 
 mainForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     // console.log(productID.innerHTML)
+    const thumbnail = productThumbnail.files[0];
+    const productMed = productMedias.files;
     let emptyMedia = false;
     let emptyThumbnail = false
     let nameChange = true
     let tags = [];
-    let medias = "";
-    let thumbnail = "";
+    let medias = [];
 
-    tagCells.forEach((tag)=>{
-        tags.push(tag.id);
-    })
+    for (let i = 0; i < tagCells.length; i++) {
+        tags.push(tagCells[i].id);
+    }
+
 
     if(productName.value==""){
         productName.value = productName.placeholder;
@@ -46,17 +50,13 @@ mainForm.addEventListener('submit', async (e) => {
     if(productThumbnail.files.length==0){
         emptyThumbnail = true;
         productThumbnail.files[0] = null;
-
     }
-
-    medias.push(productThumbnail.files[0])
-
     if(productMedias.files.length==0){
         emptyMedia = true;
     }else{
-        productMedias.forEach(element => {
-            medias.push(element);
-        });
+        for (let i = 0; i < productMed.length; i++) {
+            medias.push(productMed[i]);
+        }
     }
 
     const xhr = new XMLHttpRequest();
@@ -65,13 +65,24 @@ mainForm.addEventListener('submit', async (e) => {
     formData.append('productID', productID.innerHTML);
     formData.append('name', productName.value);
     formData.append('price', productPrice.value);
-    formData.append('tags', tags);
+    formData.append('tagLength', tags.length);
     formData.append('detail', productDetail.value);
     formData.append('stock', productStock.value);
     formData.append('emptyMedias', emptyMedia);
     formData.append('emptyThumbnail', emptyThumbnail);
-    formData.append('medias', productMedias.files);
-    formData.append('thumbnail', productThumbnail.files[0]);
+    formData.append('thumbnail_url', thumbnail);
+
+    let count = 0;
+    for(var file in medias) {
+        formData.append('media_url'+count, medias[count]);
+        count++;
+    }
+    count = 0;
+    for(var tag in tags) {
+        formData.append('tag'+count, tags[count]);
+        count++;
+    }
+    
     formData.append('csrf_token', CSRF_TOKEN);
     console.log("SENDING DATA")
 

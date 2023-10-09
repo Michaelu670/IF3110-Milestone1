@@ -108,6 +108,42 @@ class ProductModel {
         
     }
 
+    public function updateMediaURL1($productID, $url) {
+        // only add url to database; handle local storage using storage_access
+        // put media in last order
+        $query = 
+        '   DELETE FROM product_media
+            WHERE product_id = :product_id;
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('product_id', $productID);
+        $maxID = $this->database->execute();
+        
+        // SET MEDIAS
+        for($i=0; $i<count($url);$i++){
+            $this->addMediaURL($productID, $url[$i]);
+        }
+    }
+
+    public function updateMediaURL2($productID, $url) {
+        // only add url to database; handle local storage using storage_access
+        // put media in last order
+        $query = 
+        '   DELETE FROM product_media
+            WHERE product_id = :product_id AND ordering_id != 1;
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('product_id', $productID);
+        $maxID = $this->database->execute();
+        
+        // SET MEDIAS
+        for($i=0; $i<count($url);$i++){
+            $this->addMediaURL($productID, $url[$i]);
+        }
+    }
+
     public function getAllProducts() {
         $query = 
         '   SELECT name, description, price, stock, sold, thumbnail_url, create_date, last_modified_date 
@@ -326,6 +362,37 @@ class ProductModel {
 
         $this->database->execute();
         // $this->updateProduct($productID, 'price', $newValue);
+    }
+
+    public function updateProductTags($productID, $tags) {
+        $query = 
+        '   DELETE FROM product_tag 
+            WHERE product_id = :productID;
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('productID', $productID);
+        $this->database->query($query);
+        $this->database->execute();
+
+        //SET TAGS
+        foreach($tags as $tag){
+
+            $query = 'SELECT tag_id FROM tag WHERE tag_name=:tag';
+            $this->database->query($query);
+            $this->database->bind('tag', $tag);
+            $tagID = $this->database->fetch()->tag_id;
+            
+            $query = 
+            '   INSERT INTO product_tag (product_id, tag_id)
+                VALUES (:product_id, :tag_id);
+            ';
+
+            $this->database->query($query);
+            $this->database->bind('product_id', $productID);
+            $this->database->bind('tag_id', $tagID);
+            $this->database->execute();
+        }
     }
 
     public function updateProductThumbnail($productID, $newValue) {
