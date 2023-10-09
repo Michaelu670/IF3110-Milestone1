@@ -44,4 +44,30 @@ class AuthenticationMiddleware
             throw new LoggedException('Unauthorized', 401);
         }
     }
+
+    public function getUserData() 
+    {
+        $data = [];
+        $data['username'] = null;
+        $data['picture_url'] = 'user.svg';
+        if (!isset($_SESSION['user_id'])) {
+            return $data;
+        }
+
+        $query = 'SELECT username, fullname, picture_url, access_type FROM user WHERE user_id = :user_id';
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $_SESSION['user_id']);
+
+        $user = $this->database->fetch();
+        
+        if (!$user) {
+            return $data;
+        }
+
+        $data['username'] = $user->username;
+        $data['picture_url'] = $user->picture_url ?? $data['picture_url'];
+        $data['access_type'] = $user->access_type;
+        return $data;
+    }
 }
