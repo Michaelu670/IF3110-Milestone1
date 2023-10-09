@@ -1,5 +1,5 @@
 
-.wrapper{
+.wrapper2{
     max-width: 1160px;
     margin-top: 50px;
     display: flex;
@@ -213,7 +213,7 @@
     .wrapper{
         flex-direction: column;
         padding: 0;
-        padding-left: 5%;
+        /* padding-left: 5%; */
     }
 
     .leftbar-container{

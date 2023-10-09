@@ -12,6 +12,8 @@
     <!-- Global CSS -->
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/global.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/navbar.css">
+
     <!-- Page-specific CSS -->
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/setting/setting.css">
     <!-- JavaScript Constant and Variables -->
@@ -27,15 +29,20 @@
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/lib/debounce.js" defer></script>
     <!-- JavaScript DOM and AJAX -->
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/setting/setting.js" defer></script>
+    <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/navbar.js" defer></script>
+
     <title>Setting</title>
 </head>
 
 <body>
     <div class="white-body">
-        <!-- sidebar -->
-        <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
+    <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
+        <div class="wrapper">  
+        <?php include(dirname(__DIR__) . '/template/Navbar.php') ?>
 
+        <!-- sidebar -->
         <div class="wrapper-small">
+
             <main class="pad-40">
                 <div class="wrapper-main">
                     <div class="profile">
@@ -45,7 +52,7 @@
                         <?php endif; ?>
                     </div>
 
-                    <div class="wrapper">
+                    <div class="wrapper2">
                         <div class="leftbar-container">
                             <!-- Setting Tabs -->
                             <div class="nav-container">
@@ -113,6 +120,7 @@
                 </div>
                 <div class="f"></div>
             </main>
+        </div>
         </div>
     </div>
 </body>
