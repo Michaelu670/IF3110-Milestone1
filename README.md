@@ -86,13 +86,6 @@
 2. Lakukan proses _login_ apabila sudah memiliki akun serta _register_ apabila belum memiliki akun.
 3. Akses halaman dan fungsionalitas sesuai dengan _role user_ yang dimiliki.
 
-<a name="videocapture"></a>
-
-## Video Capture
-<nl>
-
-![Ikomers Gif]()
-
 <a name="screenshots"></a>
 
 ## Screenshots
