@@ -66,8 +66,12 @@ class ProductController extends Controller implements ControllerInterface {
                     $cartModel = new CartModel();
                     $cartModel->addToCart($_SESSION['user_id'], $productID, $quantity);
                     
-                    // redirect to page
-                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                    function alertAndMove($msg) {
+                        echo "<script type='text/javascript'>alert('$msg');</script>";
+                        echo "<script type='text/javascript'>window.location.href = \"" . $_SERVER['REQUEST_URI'] . "\"</script>";
+                    }
+
+                    alertAndMove("Barang berhasil ditambahkan!");
                     exit;
                 default:
                     throw new LoggedException('Method Not Allowed', 405);
