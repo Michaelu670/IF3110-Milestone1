@@ -20,7 +20,7 @@
     <script type="text/javascript" defer>
         const CSRF_TOKEN = "<?= $_SESSION['csrf_token'] ?? '' ?>";
     </script>
-    <title><?php echo $this->productData['name'] ?></title>
+    <title>Add Product</title>
 </head>
 <body>
     <div class="white-body">

@@ -13,7 +13,7 @@
 }
 
 .wrapper-small{
-    width: 50%;
+    width: 100%;
 }
 
 .detail{
@@ -212,14 +212,14 @@
 
 
 @media screen and (max-width: 1140px) {
-    .wrapper{
+    .wrapper2{
         flex-direction: column;
         padding: 0;
         padding-left: 5%;
     }
 
     .leftbar-container{
-        padding-bottom: 5%;
+        padding-bottom: 10%;
     }
 
     .wrapper-small{
