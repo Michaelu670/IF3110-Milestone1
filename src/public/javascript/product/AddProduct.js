@@ -17,6 +17,7 @@ const thumbnailAlert = document.getElementById('thumbnail-alert')
 
 let nameValid = false
 let priceValid = false
+let profilePictureValid = false
 
 function addOption(){
     if(dropbox.value && !tagArea.innerHTML.includes(dropbox.value)){
@@ -81,6 +82,10 @@ mainForm.addEventListener('submit', async (e) => {
         emptyMedia = true;
     }
 
+    if(!profilePictureValid){
+        return
+    }
+
     productMedias.files = productThumbnail.files;
     
     const xhr = new XMLHttpRequest();
@@ -92,7 +97,7 @@ mainForm.addEventListener('submit', async (e) => {
     formData.append('detail', productDetail.value);
     formData.append('stock', productStock.value);
     formData.append('emptyMedias', emptyMedia);
-    formData.append('medias', productMedias.files);
+    formData.append('media_url', productMedias.files);
     formData.append('thumbnail_url', thumbnail);
     formData.append('csrf_token', CSRF_TOKEN);
     console.log("SENDING DATA")

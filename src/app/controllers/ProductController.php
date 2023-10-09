@@ -78,4 +78,126 @@ class ProductController extends Controller implements ControllerInterface {
             exit;
         }
     }
+
+    function add() {
+        try
+        {
+            switch($_SERVER['REQUEST_METHOD'])
+            {   
+                case 'GET':
+                    $tokenMiddleware = $this->middleware('TokenMiddleware');
+                    $tokenMiddleware->putToken();
+
+                    // get user info
+                    $userData['username'] = null;
+                    $userData['picture_url'] = 'user.svg';
+                    
+                    if (isset($_SESSION['user_id'])) {
+                        require_once __DIR__ . '/../model/UserModel.php';
+                        $userModel = new UserModel();
+                        $user = $userModel->getUserFromID($_SESSION['user_id']);
+
+                        $userData['username'] = $user->username;
+                        $userData['access_type'] = $user->access_type;
+                        $userData['picture_url'] = $user->picture_url;
+                    }
+
+                    require_once __DIR__ . '/../model/ProductModel.php';
+                    $defaultImages = [ProductModel::DEFAULT_THUMBNAIL_URL];
+
+                    require_once __DIR__ . '/../model/TagModel.php';
+                    $tagmModel = new TagModel();
+                    $allTags = $tagmModel->getAllTags();
+
+                    $productView = $this->view('product', 'ProductEditView', [$userData, $defaultImages, $allTags]);
+                    $productView->render();
+                    exit;
+
+                case 'POST':
+                    require_once __DIR__ . '/../model/ProductModel.php';
+                    $productModel = new ProductModel();
+
+                    $uploadedImage = ''; // Initialize as an empty string
+                    $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
+                    $uploadedImage = $storageAccessImage->saveImage($_FILES['thumbnail_url']['tmp_name']);
+                    print_r($uploadedImage);
+
+                    $uploadedThumbnail = '/storage/images/'.$uploadedImage;
+
+                    $medias=[];
+                    foreach($_FILES['media_url'] as $file){
+                        $storageAccess = new StorageAccess(StorageAccess::IMAGE_PATH);
+                        $uploadedImage = $storageAccess->saveImage($file['tmp_name']);
+                        array_push($medias, $uploadedImage);
+                    }
+
+                    $productModel->createProduct($_POST['name'], $_POST['detail'], $_POST['price'], $_POST['stock'], $uploadedThumbnail, $_POST['tags'], $medias);
+                    
+                    header('Content-Type: application/json');
+                    http_response_code(200);
+                    echo json_encode(["redirect_url" => BASE_URL . "/home"]);
+                    exit;
+                default:
+                    throw new LoggedException('Method Not Allowed', 405);
+            }
+        } catch (Exception $e)
+        {
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
+
+    function update() {
+        try
+        {
+            switch($_SERVER['REQUEST_METHOD'])
+            {   
+                case 'POST':
+                    require_once __DIR__ . '/../model/ProductModel.php';
+                    $productModel = new ProductModel();
+                    // $test = $productModel->getAllProducts();
+
+                    $productModel->updateProductName($_POST['productID'],$_POST['name']);
+                    $productModel->updateProductPrice($_POST['productID'],$_POST['price']);
+                    $productModel->updateProductDescription($_POST['productID'],$_POST['detail']);
+                    $productModel->updateProductStock($_POST['productID'],$_POST['stock']);
+
+                    // echo '<pre>';
+                    
+                    if($_POST['emptyThumbnail']!=null){
+                        $uploadedImage = ''; // Initialize as an empty string
+                        $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
+                        $uploadedImage = $storageAccessImage->saveImage($_FILES['thumbnail']['tmp_name']);
+                        $productModel->updateProductThumbnail($_POST['productID'], $uploadedImage); 
+                    }
+
+                    if($_POST['emptyMedias']!=null){
+                        $uploadedMedia = [];
+                        foreach($_FILES['medias'] as $file){
+                            $storageAccess = new StorageAccess(StorageAccess::IMAGE_PATH);
+                            $uploadedImage = $storageAccess->saveImage($file['tmp_name']);
+                            $productModel->addMediaURL($_POST['productID'], $uploadedImage);
+                        }
+                    }
+
+                    require_once __DIR__ . '/../model/TagModel.php';
+                    $tagModel = new TagModel();
+                    foreach($_POST['tags'] as $tag){
+                        $tagModel->assignTag($_POST['productID'], $tag);
+                    }
+                    
+                    // header('Content-Type: application/json');
+                    http_response_code(201);
+                    echo json_encode(["redirect_url" => BASE_URL . "/checkout"]);
+                    exit;
+
+                default:
+                    throw new LoggedException('Method Not Allowed', 405);
+            }
+        } catch (Exception $e)
+        {
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
 }
