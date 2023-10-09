@@ -13,11 +13,10 @@
 4. [Technologies Used](#technologies-used)
 5. [Setup](#setup)
 6. [Usage](#usage)
-7. [Video Capture](#videocapture)
-8. [Screenshots](#screenshots)
-9. [Structure](#structure)
-10. [Job Description](#jobdesc)
-11. [Lighthouse Evidence](#lighthouse)
+7. [Screenshots](#screenshots)
+8. [Structure](#structure)
+9. [Job Description](#jobdesc)
+10. [Lighthouse Evidence](#lighthouse)
 
 <a name="general-information"></a>
 
@@ -87,19 +86,12 @@
 2. Lakukan proses _login_ apabila sudah memiliki akun serta _register_ apabila belum memiliki akun.
 3. Akses halaman dan fungsionalitas sesuai dengan _role user_ yang dimiliki.
 
-<a name="videocapture"></a>
-
-## Video Capture
-<nl>
-
-![Ikomers Gif]()
-
 <a name="screenshots"></a>
 
 ## Screenshots
 <p>
   <p>Gambar 1. Login Page</p>
-  <img src="/img/tampilan/ssLogin">
+  <img src="/img/tampilan/ssLogin.png/">
   <nl>
   <p>Gambar 2. Register Page</p>
   <img src="/img/tampilan/ssRegister.png/">
@@ -120,7 +112,7 @@
   <img src="/img/tampilan/ssNotFound.png/">
   <nl>
   <p>Gambar 8. Order Page</p>
-  <img src="/img/tampilan/ssOrder">
+  <img src="/img/tampilan/ssOrder.png/">
   <nl>
   <p>Gambar 9. ProductList Page</p>
   <img src="/img/tampilan/ssProductList.png/">
@@ -141,7 +133,7 @@
   <img src="/img/tampilan/ssTransaction.png/">
   <nl>
   <p>Gambar 15. Setting Page</p>
-  <img src="/img/tampilan/ssSetting.png/">
+  <img src="/img/tampilan/ssSettings.png/">
   <nl>
 </p>
 
@@ -156,6 +148,37 @@
 │   README.md
 │
 ├───img
+│   ├───lighthouse
+│   │       ssCart.png
+│   │       ssCheckout.png
+│   │       ssHistory.png
+│   │       ssHome.png
+│   │       ssLogin.png
+│   │       ssOrder.png
+│   │       ssProductAdd.png
+│   │       ssProductDetail.png
+│   │       ssProductList.png
+│   │       ssProductSearch.png
+│   │       ssRegister.png
+│   │       ssSettings.png
+│   │       ssTransaction.png
+│   │
+│   └───tampilan
+│           ssCart.png
+│           ssCheckout.png
+│           ssHistory.png
+│           ssHome.png
+│           ssLogin.png
+│           ssNotFound.png
+│           ssOrder.png
+│           ssProductAdd.png
+│           ssProductDetail.png
+│           ssProductList.png
+│           ssProductSearch.png
+│           ssRegister.png
+│           ssSettings.png
+│           ssTransaction.png
+│
 ├───migrations
 │       init.sql
 │
@@ -184,6 +207,7 @@
     │   │   │       HomePage.php
     │   │   │
     │   │   ├───not-found
+    │   │   │       ExceptionPage.php
     │   │   │       NotFoundPage.php
     │   │   │
     │   │   ├───order
@@ -191,13 +215,14 @@
     │   │   │       OrderPage.php
     │   │   │
     │   │   ├───product
-    │   │   │       AdminProductCard.php
+    │   │   │       AddProductPage.php
     │   │   │       AdminProductPage.php
     │   │   │       ProductCard.php
     │   │   │       ProductDetailPage.php
     │   │   │       ProductSearchPage.php
     │   │   │       ProductSearchResult.php
     │   │   │       TagCheckbox.php
+    │   │   │       TagOption.php
     │   │   │
     │   │   ├───template
     │   │   │       Navbar.php
@@ -269,6 +294,7 @@
     │       │       MainView.php
     │       │
     │       ├───not-found
+    │       │       ExceptionView.php
     │       │       NotFoundView.php
     │       │
     │       ├───order
@@ -276,6 +302,7 @@
     │       │
     │       ├───product
     │       │       ProductDetailView.php
+    │       │       ProductEditView.php
     │       │       ProductSearchTemplateView.php
     │       │       ProductSearchView.php
     │       │
@@ -331,6 +358,10 @@
     │   │   │       debounce.js
     │   │   │       xhr.js
     │   │   │
+    │   │   ├───product
+    │   │   │       AddProduct.js
+    │   │   │       AdminProductDetail.js
+    │   │   │
     │   │   ├───setting
     │   │   │       setting.js
     │   │   │
@@ -382,26 +413,7 @@
     └───storage
         ├───images
         │   │   .gitkeep
-        │   │   0f9bede48b90f0a48f92b2887381245e.jpeg
-        │   │   192bb41ba01e0502378208b7c10416d2.png
-        │   │   21347f4ae4d3b59abdba9b137bbf618f.jpeg
-        │   │   2c7d6a6bc2faf0334e37bdab349f9493.png
-        │   │   41e217a61e7fe943fd5bc4a031714a32.png
-        │   │   488e5a667d9c211c8073d530dc8b4828.png
-        │   │   5261386c78508c1e3ca09ae5d48827d0.jpeg
-        │   │   52ae187ebaff3ff86d36bd77a182322b.jpeg
-        │   │   5516690d146e19739edfaf71fd1427cf.png
-        │   │   6c9e8eb5b23a674c7c3760506368ee3a.jpeg
-        │   │   7750a71eb4d99c43c28054330838c23f.png
-        │   │   7b8c4fb547c471af8341c20aa104153f.png
-        │   │   7c34d9317c825f6fe4acf6b32a3add11.png
-        │   │   7cfd7f52ea138cb0cd1c3cff538cebbd.png
-        │   │   a0dca05693a13b6e12c0a8204480c83d.png
-        │   │   b747b2c7bf0b62c1fa251c37d9d6d131.png
-        │   │   b81260af755c0eb20fa7a416392ff618.png
-        │   │   c1f76ad983262800a160ebc6ab6a88f2.png
-        │   │   c91e438a32ca75dd13c86a696c636582.png
-        │   │   d280d1d7c60d937b0a3a6aa94822de43.png
+        │   │   02d5b23d0b7d78ec558e0aa682096a72.png
         │   │   user.svg
         │   │
         │   └───product
@@ -469,7 +481,7 @@
 
 <p>
   <p>Gambar 1. Login Page</p>
-  <img src="/img/lighthouse/ssLogin">
+  <img src="/img/lighthouse/ssLogin.png/">
   <nl>
   <p>Gambar 2. Register Page</p>
   <img src="/img/lighthouse/ssRegister.png/">
@@ -490,7 +502,7 @@
   <img src="/img/lighthouse/ssNotFound.png/">
   <nl>
   <p>Gambar 8. Order Page</p>
-  <img src="/img/lighthouse/ssOrder">
+  <img src="/img/lighthouse/ssOrder.png/">
   <nl>
   <p>Gambar 9. ProductList Page</p>
   <img src="/img/lighthouse/ssProductList.png/">
@@ -511,6 +523,6 @@
   <img src="/img/lighthouse/ssTransaction.png/">
   <nl>
   <p>Gambar 15. Setting Page</p>
-  <img src="/img/lighthouse/ssSetting.png/">
+  <img src="/img/lighthouse/ssSettings.png/">
   <nl>
 </p>

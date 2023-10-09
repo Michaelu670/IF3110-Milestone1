@@ -4,9 +4,12 @@ date_default_timezone_set('Asia/Jakarta');
 
 class TransactionController extends Controller implements ControllerInterface {
     private $transactionModel;
+    private $cartModel;
     function __construct() {
         require_once __DIR__ . '/../model/TransactionModel.php';
         $this->transactionModel = new TransactionModel();
+        require_once __DIR__ . '/../model/CartModel.php';
+        $this->cartModel = new CartModel();
     }
     function index() {
         if (!isset($_SESSION['user_id'])) {
@@ -54,6 +57,7 @@ class TransactionController extends Controller implements ControllerInterface {
                     if ($_POST['action'] === 'complete') {
                         $transactionModel->updateOrderReceiveDate($_POST['cart_id'], $currentDateTime);
                     } elseif ($_POST['action'] === 'delete') {
+                        $transactionModel->addItems($this->cartModel->getCartFromID($_POST['cart_id']));
                         $transactionModel->deleteOrderReceiveDate($_POST['cart_id']);
                     }
 
