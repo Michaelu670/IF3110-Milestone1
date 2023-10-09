@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Oct 09, 2023 at 05:24 AM
+-- Generation Time: Oct 09, 2023 at 07:00 AM
 -- Server version: 8.1.0
 -- PHP Version: 8.2.10
 
@@ -39,7 +39,7 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`cart_id`, `user_id`) VALUES
 (1, 1),
 (2, 2),
-(3, 2),
+(6, 2),
 (4, 3);
 
 -- --------------------------------------------------------
@@ -89,7 +89,7 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`cart_id`, `recipient_name`, `recipient_phone_number`, `delivery_address`, `payment_id`, `order_date`, `receive_date`) VALUES
-(2, 'budi', '12', '111P', 1, '2023-10-09 05:14:58', NULL);
+(2, 'budi', '12', '111P', 1, '2023-10-09 05:14:58', '2023-10-09 12:55:07');
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,11 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`payment_id`, `payment_date`, `payment_method`, `amount`) VALUES
-(1, '2023-10-09 05:14:58', 'ewallet', 3299000);
+(1, '2023-10-09 05:14:58', 'ewallet', 3299000),
+(2, '2023-10-09 06:51:04', 'cod', 1099000),
+(3, '2023-10-09 06:54:29', 'cod', 2198000),
+(4, '2023-10-09 06:58:40', 'cod', 1099000),
+(5, '2023-10-09 07:00:03', 'cod', 3297000);
 
 -- --------------------------------------------------------
 
@@ -134,7 +138,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `name`, `description`, `price`, `stock`, `sold`, `thumbnail_url`, `create_date`, `last_modified_date`) VALUES
-(1, 'yezi', 'sepatu zaman purba', 1099000, 3, 1, NULL, '2023-10-03 03:42:19', '2023-10-03 04:31:39'),
+(1, 'yezi', 'sepatu zaman purba', 1099000, 10, 1, NULL, '2023-10-03 03:42:19', '2023-10-09 07:00:23'),
 (2, 'vitajimin', 'vitamin buat orang sakit', 68000, 10, 0, NULL, '2023-10-03 05:28:43', '2023-10-03 05:28:43'),
 (3, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:42:33', '2023-10-03 11:26:42'),
 (4, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:42:41', '2023-10-03 11:26:42'),
@@ -324,13 +328,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `payment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -364,8 +368,8 @@ ALTER TABLE `cart`
 -- Constraints for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  ADD CONSTRAINT `cart_details_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `cart_details_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `cart_details_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `cart_details_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `order_details`
