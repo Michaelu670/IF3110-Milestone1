@@ -6,6 +6,10 @@ class TransactionController extends Controller implements ControllerInterface {
         $this->transactionModel = new TransactionModel();
     }
     function index() {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /public/user/login');
+            exit();
+        }
         try
         {
             switch($_SERVER['REQUEST_METHOD'])
