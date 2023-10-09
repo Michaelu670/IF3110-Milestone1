@@ -68,34 +68,44 @@ class ProductModel {
     public function addMediaURL($productID, $url) {
         // only add url to database; handle local storage using storage_access
         // put media in last order
+
         $query = 
-        '   SELECT MAX(ordering_id) last_id
+        '   SELECT MAX(ordering_id) as last_id
             FROM product_media
             WHERE product_id = :product_id;
         ';
+
         $this->database->query($query);
         $this->database->bind('product_id', $productID);
 
         $maxID = $this->database->fetch();
         $nextID = 0;
+        // print_r($url);
 
-        if (is_null($maxID['last_id'])){
+
+        if (is_null($maxID->last_id)){
             $nextID = 1;
         }
         else {
-            $nextID = $maxID['last_id'] + 1;
+            $nextID = $maxID->last_id + 1;
         }
+
+
 
         $query = 
         '   INSERT INTO product_media (product_id, ordering_id, media_url)
             VALUES(:product_id, :ordering_id, :url);
         ';
+        // print_r("BERMASALAH".$productID.$nextID.$url."END");
+
+
 
         $this->database->query($query);
         $this->database->bind('product_id', $productID);
         $this->database->bind('ordering_id', $nextID);
         $this->database->bind('url', $url);
         $this->database->execute();
+        
     }
 
     public function getAllProducts() {
@@ -203,6 +213,8 @@ class ProductModel {
     }
 
     public function createProduct($name, $description, $price, $stock, $thumbnail_url, $tags, $medias) {
+
+        
         $query = 
         '   INSERT INTO product (name, description, price, stock, sold, thumbnail_url)
             VALUES (:name, :description, :price, :stock, 0, :thumbnail_url);';
@@ -216,6 +228,7 @@ class ProductModel {
         $this->database->execute();
 
         $productID = $this->database->lastInsertId();
+
 
         //SET TAGS
         foreach($tags as $tag){
@@ -235,11 +248,26 @@ class ProductModel {
             $this->database->bind('tag_id', $tagID);
             $this->database->execute();
         }
+
         
+        $count = 0;
+
         // SET MEDIAS
-        foreach($medias as $media){
-            $this->addMediaURL($productID, $media);
+        for($i=0; $i<count($medias);$i++){
+            // print_r("BERMASALAH DI: ".$i." AKA ".$medias[$i]);
+
+            $this->addMediaURL($productID, $medias[$i]);
+            $count++;
+
         }
+        // print_r("FINISH:".$count);
+
+
+        // foreach($medias as $media){
+        //     $this->addMediaURL($productID, $media);
+        //     $count++;
+        // }
+
     }
 
     /**

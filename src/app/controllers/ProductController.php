@@ -114,24 +114,30 @@ class ProductController extends Controller implements ControllerInterface {
                     exit;
 
                 case 'POST':
+                    // print_r($_POST);
+
                     require_once __DIR__ . '/../model/ProductModel.php';
                     $productModel = new ProductModel();
+                    // print_r(count($_FILES));
 
                     $uploadedImage = ''; // Initialize as an empty string
-                    $storageAccessImage = new StorageAccess(StorageAccess::IMAGE_PATH);
-                    $uploadedImage = $storageAccessImage->saveImage($_FILES['thumbnail_url']['tmp_name']);
-                    print_r($uploadedImage);
-
-                    $uploadedThumbnail = '/storage/images/'.$uploadedImage;
-
-                    $medias=[];
-                    foreach($_FILES['media_url'] as $file){
-                        $storageAccess = new StorageAccess(StorageAccess::IMAGE_PATH);
-                        $uploadedImage = $storageAccess->saveImage($file['tmp_name']);
-                        array_push($medias, $uploadedImage);
+                    // // print_r($upload);
+                    $tagArray = [];
+                    for($i=0; $i < $_POST['tagLength']; $i++){
+                        array_push($tagArray, $_POST['tag'.$i]);
                     }
 
-                    $productModel->createProduct($_POST['name'], $_POST['detail'], $_POST['price'], $_POST['stock'], $uploadedThumbnail, $_POST['tags'], $medias);
+                    $medias=[];
+
+
+                    foreach($_FILES as $file){
+                        $storageAccess = new StorageAccess(StorageAccess::IMAGE_PATH);
+                        $uploadedImage = $storageAccess->saveImage($file['tmp_name']);
+                        $uploadedThumbnail = '/storage/images/'.$uploadedImage;
+                        array_push($medias, $uploadedThumbnail);
+                    }
+
+                    $productModel->createProduct($_POST['name'], $_POST['detail'], $_POST['price'], $_POST['stock'], $medias[0], $tagArray, $medias);
                     
                     header('Content-Type: application/json');
                     http_response_code(200);
