@@ -13,7 +13,6 @@
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/global.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/sidebar.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/template/navbar.css">
-
     <!-- Page-specific CSS -->
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/setting/setting.css">
     <!-- JavaScript Constant and Variables -->
@@ -36,13 +35,13 @@
 
 <body>
     <div class="white-body">
-    <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
-        <div class="wrapper">  
-        <?php include(dirname(__DIR__) . '/template/Navbar.php') ?>
+        <?php include(dirname(__DIR__) . '/template/sidebar.php') ?>
+
+        <div class="wrapper">
+            <?php include(dirname(__DIR__) . '/template/navbar.php') ?>
 
         <!-- sidebar -->
         <div class="wrapper-small">
-
             <main class="pad-40">
                 <div class="wrapper-main">
                     <div class="profile">
@@ -55,7 +54,7 @@
                     <div class="wrapper2">
                         <div class="leftbar-container">
                             <!-- Setting Tabs -->
-                            <div class="nav-container">
+                            <div class="nav-containers">
                                 <!-- <p>nav-container</p> -->
                                 <div class='box-container 1'>
                                     <button type="tab" class="button-tab" onclick="openTab('Profile');" id="defaultOpen">Profile</button>
@@ -120,7 +119,6 @@
                 </div>
                 <div class="f"></div>
             </main>
-        </div>
         </div>
     </div>
 </body>

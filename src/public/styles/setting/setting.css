@@ -35,7 +35,7 @@
     flex-direction: column;
 }
 
-.nav-container{
+.nav-containers{
     border: 1px solid;
     border-radius: 10px;
     margin-right: 30px;
@@ -81,6 +81,8 @@
 }
 
 .profile{
+    /* border: 1px solid;
+    border-radius: 10px; */
     border-radius: 10px;
     display: flex;
     flex-direction: row;
@@ -213,7 +215,7 @@
     .wrapper{
         flex-direction: column;
         padding: 0;
-        /* padding-left: 5%; */
+        padding-left: 5%;
     }
 
     .leftbar-container{
