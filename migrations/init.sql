@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Oct 09, 2023 at 07:00 AM
+-- Generation Time: Oct 09, 2023 at 07:38 AM
 -- Server version: 8.1.0
 -- PHP Version: 8.2.10
 
@@ -66,7 +66,8 @@ INSERT INTO `cart_details` (`cart_id`, `product_id`, `quantity`) VALUES
 (1, 27, 1),
 (2, 1, 3),
 (2, 5, 1),
-(2, 6, 1);
+(2, 6, 1),
+(6, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,10 @@ INSERT INTO `product` (`product_id`, `name`, `description`, `price`, `stock`, `s
 (26, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
 (27, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
 (28, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
-(29, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42');
+(29, 'item1', 'untuk menguji pagination', 1000, 1, 0, NULL, '2023-10-03 06:43:13', '2023-10-03 11:26:42'),
+(30, 'Kentang goreng', 'kentang digoreng', 1000, 100, 0, '/storage/images/4bb86b6ff9c3287058b8326f8bf9dafe.jpeg', '2023-10-09 07:35:58', '2023-10-09 07:35:58'),
+(31, 'ban mobil', 'ban buat mobil', 65000, 39, 0, '/storage/images/2f8969982d117857ead2a4e33a4398b2.jpeg', '2023-10-09 07:37:25', '2023-10-09 07:37:25'),
+(32, 'beras 1 kg no root', 'beras itu kalau dimasak jadi nasi', 9000, 30, 0, '/storage/images/23451378f91d41e707d2a596ee731e8d.jpeg', '2023-10-09 07:38:06', '2023-10-09 07:38:06');
 
 -- --------------------------------------------------------
 
@@ -187,7 +191,11 @@ CREATE TABLE `product_media` (
 INSERT INTO `product_media` (`product_id`, `ordering_id`, `media_url`) VALUES
 (1, 1, '/storage/images/product/media/Spongebob_sepatu_satu.png'),
 (1, 2, '/storage/images/product/media/Spongebob_sepatu_dua.png'),
-(1, 3, '/storage/videos/Ini adalah video.mp4');
+(1, 3, '/storage/videos/Ini adalah video.mp4'),
+(30, 1, '/storage/images/4bb86b6ff9c3287058b8326f8bf9dafe.jpeg'),
+(30, 2, '/storage/images/e3e34bf51e34e0b62024bbf11bedea9f.jpeg'),
+(31, 1, '/storage/images/2f8969982d117857ead2a4e33a4398b2.jpeg'),
+(32, 1, '/storage/images/23451378f91d41e707d2a596ee731e8d.jpeg');
 
 -- --------------------------------------------------------
 
@@ -208,7 +216,9 @@ INSERT INTO `product_tag` (`product_id`, `tag_id`) VALUES
 (1, 1),
 (2, 2),
 (1, 3),
-(1, 4);
+(1, 4),
+(30, 4),
+(31, 4);
 
 -- --------------------------------------------------------
 
@@ -340,7 +350,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tag`
