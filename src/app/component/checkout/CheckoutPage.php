@@ -25,7 +25,7 @@
     <!-- JavaScript DOM and AJAX -->
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/navbar.js" defer></script>
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/checkout/checkout.js" defer></script>
-    <title>Setting</title>
+    <title>Checkout</title>
 </head>
 
 <body>

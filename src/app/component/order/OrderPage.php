@@ -16,7 +16,7 @@
         const CSRF_TOKEN = "<?= $_SESSION['csrf_token'] ?? '' ?>";
     </script>
     <script type="text/javascript" src="<?= BASE_URL ?>/javascript/component/navbar.js" defer></script>
-    <title>History</title>
+    <title>Order</title>
 </head>
 <body>
     <div class="white-body">
