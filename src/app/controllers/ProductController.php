@@ -59,6 +59,15 @@ class ProductController extends Controller implements ControllerInterface {
                     exit;
                 
                 case 'POST':
+                    $authMiddleware = $this->middleware('AuthenticationMiddleware');
+                    try {
+                        $authMiddleware->isAuthenticated();
+                    }
+                    catch (Exception $e) {
+                        header('location: /public/user/login');
+                        exit;
+                    }
+                    
                     // add item to cart
                     $productID = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : 'a';
                     $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
@@ -66,8 +75,12 @@ class ProductController extends Controller implements ControllerInterface {
                     $cartModel = new CartModel();
                     $cartModel->addToCart($_SESSION['user_id'], $productID, $quantity);
                     
-                    // redirect to page
-                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                    function alertAndMove($msg) {
+                        echo "<script type='text/javascript'>alert('$msg');</script>";
+                        echo "<script type='text/javascript'>window.location.href = \"" . $_SERVER['REQUEST_URI'] . "\"</script>";
+                    }
+
+                    alertAndMove("Barang berhasil ditambahkan!");
                     exit;
                 default:
                     throw new LoggedException('Method Not Allowed', 405);
