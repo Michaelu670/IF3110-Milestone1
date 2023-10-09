@@ -3,7 +3,8 @@
 function echoSlideshowContent($url) {
     $ext = explode('.', $url);
     $ext = $ext[count($ext) - 1];
-    $videoExt = ['mp4', '.ogg'];
+
+    $videoExt = ['mp4', 'ogg'];
 
     $html = <<<"EOT"
     <div class="mySlides fade">

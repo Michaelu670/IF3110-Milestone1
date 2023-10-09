@@ -11,6 +11,12 @@ const mainForm = document.getElementById('contents')
 const tagCells = document.querySelectorAll('#tag-cell')
 const productID = document.querySelector('#product_id')
 
+function addOption(){
+    if(dropbox.value && !tagArea.innerHTML.includes(dropbox.value)){
+        tagArea.innerHTML = tagArea.innerHTML + '<p id="'+dropbox.value+'" onclick="this.remove()" class="tag-cell">' +dropbox.value+ '</p>';
+    }
+}
+
 mainForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     // console.log(productID.innerHTML)
@@ -37,15 +43,22 @@ mainForm.addEventListener('submit', async (e) => {
     if(productStock.value==""){
         productStock.value = productStock.placeholder;
     }
-    if(productMedias.files.length==0){
-        emptyMedia = true;
-        productMedias.files[0] = null;
-    }
     if(productThumbnail.files.length==0){
         emptyThumbnail = true;
         productThumbnail.files[0] = null;
 
     }
+
+    medias.push(productThumbnail.files[0])
+
+    if(productMedias.files.length==0){
+        emptyMedia = true;
+    }else{
+        productMedias.forEach(element => {
+            medias.push(element);
+        });
+    }
+
     const xhr = new XMLHttpRequest();
     xhr.open('POST','/public/product/update');
     const formData = new FormData();
@@ -81,14 +94,3 @@ mainForm.addEventListener('submit', async (e) => {
     };
 });
 
-async function removeFromOption(id){
-    tagArea.innerHTML = tagArea.innerHTML.replace('<p id="'+id+'" onclick="removeFromOption("'+id+'");" class="tag-cell">'+id+'</p>', '')
-    document.getElementById(id).remove();
-}
-
-async function addOption(tag){
-    if(!tagArea.innerHTML.includes(tag)){
-        tagArea.innerHTML = tagArea.innerHTML + '<p id="'+tag+'" onclick="removeFromOption("'+tag+'");" class="tag-cell">' + tag + '</p>';
-    }
-    
-}

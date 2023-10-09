@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group-file">
                             <label class="bold-text" for="media_url">Change slideshow medias:</label>
-                            <input type="file" name="media_url[]" id="media_url" accept="image/png, image/jpeg, image/jpg" multiple> <!-- Tambahkan input file untuk unggah foto profil -->
+                            <input type="file" name="media_url[]" id="media_url" accept="image/png, image/jpeg, image/jpg, video/mp4, video/ogg" multiple> <!-- Tambahkan input file untuk unggah foto profil -->
                         </div>
                     </div>
                     <div class="description-column">
