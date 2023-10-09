@@ -160,6 +160,43 @@ class CartModel {
         return $cart;
     }
 
+    public function getCartFromID($cartID) {
+        // return cart from its ID
+        // HIGHLY NOT RECOMMENDED
+
+        // return format:
+        //  'cart_id' => cart id
+        //  'products' => array with keys ([cart_id], [products_id] => [])
+        //  'total_price' => total price
+
+        // add product id and quantity to cart
+        // format: ["product_id" => xx, "quantity" => xx]
+        $query = 
+        '   SELECT product_id, quantity
+            FROM cart_details
+            WHERE cart_id = :cart_id;
+        ';
+
+        $cart['cart_id'] = $cartID;
+        $this->database->query($query);
+        $this->database->bind('cart_id', $cartID, PDO::PARAM_INT);
+        $cart['products'] = $this->database->fetchAll();
+
+        // validate cart
+        $this->validateCart($cart);
+
+        // add total price to cart
+        require_once __DIR__ . '/ProductModel.php';
+        $productModel = new ProductModel();
+        $total_price = 0;
+        foreach ($cart['products'] as $product) {
+            $total_price += $productModel->getProductFromID($product['product_id'])['price'] * $product['quantity'];
+        }
+        $cart['total_price'] = $total_price;
+
+        return $cart;
+    }
+
     public function createCart($userID) {
         $query = 
         '   INSERT INTO cart (user_id)
