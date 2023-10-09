@@ -16,7 +16,7 @@
                     </form>
                 </div>
             </div>
-            <form action="<?= BASE_URL ?>/user/setting" method="GET" class="nav-right-portion">
+            <div class="nav-right-portion">
                 <?php if ($this->data['username']) : ?>
                     <form id="setting-form" action="<?= BASE_URL ?>/user/setting" method="GET">
                         <div class="nav-username" style="cursor: pointer;" onclick="document.getElementById('setting-form').submit();">
@@ -28,7 +28,7 @@
                 <button class="toggle" id="toggle">
                     <img src="<?= BASE_URL ?>/images/assets/bars.svg" alt="Bars">
                 </button>
-            </form>
+            </div>
         </div>
     </div>
     <?php
