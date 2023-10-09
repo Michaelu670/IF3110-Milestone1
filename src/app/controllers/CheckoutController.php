@@ -60,6 +60,7 @@ class CheckoutController extends Controller implements ControllerInterface
             }
         } catch (Exception $e) {
             http_response_code($e->getCode());
+            throw $e;
         }
         // $settingView = $this->view('setting', 'SettingView');
         // $settingView->render();

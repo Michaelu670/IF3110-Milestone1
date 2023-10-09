@@ -65,7 +65,7 @@
                             <p>Stock: <? echo $this->productData['stock'] ?></p> <br>
                             <div class="form-group">
                                 <label for="quantity">Quantity:</label>
-                                <input type="number" class="" id="quantity" name="quantity" min="1" max="<? echo $this->productData['stock'] ?>" /> <br><br>
+                                <input type="number" class="" id="quantity" name="quantity" value="1" min="1" max="<? echo $this->productData['stock'] ?>" /> <br><br>
                             </div>
                             <button type="submit" class="green-button bold-text button">Add to cart</button>
                         </form>

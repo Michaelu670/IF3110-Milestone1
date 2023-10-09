@@ -8,6 +8,10 @@ class ProductDetailView implements ViewInterface {
         $this->data = $allData[0];
         $this->productData = $allData[1];
         $this->tagList = $allData[2];
+
+        $this->data['username'] = $allData['username'];
+        $this->data['picture_url'] = $allData['picture_url'];
+        $this->data['access_type'] = $allData['access_type'] ?? null;
     }
 
     function render() {

@@ -34,7 +34,14 @@ class App
             $this->params = [];
         }
 
-        call_user_func_array([$this->controller, $this->method], $this->params);
+        try {
+            call_user_func_array([$this->controller, $this->method], $this->params);
+        }
+        catch (Exception $e) {
+            require_once __DIR__ . '/../view/not-found/ExceptionView.php';
+            $view = new ExceptionView(['message' => $e->getMessage(), 'code' => $e->getCode()]);
+            $view->render();
+        }
     }
 
     private function parseURL()
