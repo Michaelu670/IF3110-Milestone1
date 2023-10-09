@@ -1,4 +1,7 @@
 <?php
+
+date_default_timezone_set('Asia/Jakarta');
+
 class TransactionController extends Controller implements ControllerInterface {
     private $transactionModel;
     function __construct() {
