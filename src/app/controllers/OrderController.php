@@ -6,6 +6,10 @@ class OrderController extends Controller implements ControllerInterface {
         $this->orderModel = new OrderModel();
     }
     function index() {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /public/user/login');
+            exit();
+        }
         try
         {
             switch($_SERVER['REQUEST_METHOD'])
