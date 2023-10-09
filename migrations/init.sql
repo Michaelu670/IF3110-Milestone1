@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Oct 04, 2023 at 10:18 AM
+-- Generation Time: Oct 09, 2023 at 05:24 AM
 -- Server version: 8.1.0
 -- PHP Version: 8.2.10
 
@@ -32,6 +32,16 @@ CREATE TABLE `cart` (
   `user_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`) VALUES
+(1, 1),
+(2, 2),
+(3, 2),
+(4, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -43,6 +53,20 @@ CREATE TABLE `cart_details` (
   `product_id` int NOT NULL,
   `quantity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `cart_details`
+--
+
+INSERT INTO `cart_details` (`cart_id`, `product_id`, `quantity`) VALUES
+(1, 1, -1),
+(1, 13, 1),
+(1, 17, 3),
+(1, 22, 21),
+(1, 27, 1),
+(2, 1, 3),
+(2, 5, 1),
+(2, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -60,6 +84,13 @@ CREATE TABLE `order_details` (
   `receive_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`cart_id`, `recipient_name`, `recipient_phone_number`, `delivery_address`, `payment_id`, `order_date`, `receive_date`) VALUES
+(2, 'budi', '12', '111P', 1, '2023-10-09 05:14:58', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -72,6 +103,13 @@ CREATE TABLE `payment` (
   `payment_method` varchar(50) NOT NULL,
   `amount` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`payment_id`, `payment_date`, `payment_method`, `amount`) VALUES
+(1, '2023-10-09 05:14:58', 'ewallet', 3299000);
 
 -- --------------------------------------------------------
 
@@ -144,7 +182,8 @@ CREATE TABLE `product_media` (
 
 INSERT INTO `product_media` (`product_id`, `ordering_id`, `media_url`) VALUES
 (1, 1, '/storage/images/product/media/Spongebob_sepatu_satu.png'),
-(1, 2, '/storage/images/product/media/Spongebob_sepatu_dua.png');
+(1, 2, '/storage/images/product/media/Spongebob_sepatu_dua.png'),
+(1, 3, '/storage/videos/Ini adalah video.mp4');
 
 -- --------------------------------------------------------
 
@@ -162,7 +201,10 @@ CREATE TABLE `product_tag` (
 --
 
 INSERT INTO `product_tag` (`product_id`, `tag_id`) VALUES
-(1, 1);
+(1, 1),
+(2, 2),
+(1, 3),
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -181,7 +223,10 @@ CREATE TABLE `tag` (
 --
 
 INSERT INTO `tag` (`tag_id`, `tag_name`, `tag_description`) VALUES
-(1, 'sepatu', 'Alas kaki yang umumnya menutupi seluruh bagian mulai dari jari, punggung kaki hingga tumit.');
+(1, 'sepatu', 'Alas kaki yang umumnya menutupi seluruh bagian mulai dari jari, punggung kaki hingga tumit.'),
+(2, 'vitamin', 'Pelengkap kebutuhan vitamin tubuh'),
+(3, 'pakaian', 'barang yang dikenakan pada tubuh'),
+(4, 'item', 'just item');
 
 -- --------------------------------------------------------
 
@@ -203,7 +248,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `fullname`, `picture_url`, `access_type`) VALUES
-(1, 'yugtah', 'ini passwordnya belum di hash, tolong jangan ditiru', 'yug tah', '', 0);
+(1, 'yugtah', 'ini passwordnya belum di hash, tolong jangan ditiru', 'yug tah', '', 0),
+(2, 'budi', '$2y$10$zfmUiPcrFq6dVnan04aWCeUU8C5s4BfNQ872uyaiAQEOVjaeij7SG', 'budi', '488e5a667d9c211c8073d530dc8b4828.png', 0),
+(3, 'admin', '$2y$10$Nj8InqeaUKeF4lpu8Xm4XOeFF3PrOCd68ECzqO3v.JvoeIg1yk/lO', 'admin', 'cff630681f7d47348704a68332f1077d.png', 1);
 
 --
 -- Indexes for dumped tables
@@ -266,7 +313,8 @@ ALTER TABLE `tag`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -276,13 +324,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `cart_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `payment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -294,13 +342,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `tag_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tag_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
