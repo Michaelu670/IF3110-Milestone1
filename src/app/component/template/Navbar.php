@@ -16,17 +16,17 @@
                     </form>
                 </div>
             </div>
-            <div class="nav-right-portion">
+            <form action="<?= BASE_URL ?>/user/setting" method="GET" class="nav-right-portion">
                 <?php if ($this->data['username']) : ?>
-                    <div class="nav-username">
+                    <button type="submit" class="nav-username">
                         <img class="profilePictureNavbar" src="<?= BASE_URL ?>/../storage/images/<?=$this->data['picture_url']?>" alt="profile icon" ?>
                         <p class="usernameNavbar"><?= $this->data['username'] ?></p>
-                    </div>
+                    </button>
                 <?php endif; ?>
                 <button class="toggle" id="toggle">
                     <img src="<?= BASE_URL ?>/images/assets/bars.svg" alt="Bars">
                 </button>
-            </div>
+            </form>
         </div>
     </div>
     <?php
