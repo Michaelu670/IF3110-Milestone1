@@ -96,44 +96,32 @@
   <p>Gambar 2. Register Page</p>
   <img src="/img/tampilan/ssRegister.png/">
   <nl>
-  <p>Gambar 3. Home Page</p>
-  <img src="/img/tampilan/ssHome.png/">
-  <nl>
-  <p>Gambar 4. Cart Page</p>
+  <p>Gambar 3. Cart Page</p>
   <img src="/img/tampilan/ssCart.png/">
   <nl>
-  <p>Gambar 5. Checkout Page</p>
+  <p>Gambar 4. Checkout Page</p>
   <img src="/img/tampilan/ssCheckout.png/">
   <nl>
-  <p>Gambar 6. History Page</p>
+  <p>Gambar 5. History Page</p>
   <img src="/img/tampilan/ssHistory.png/">
   <nl>
-  <p>Gambar 7. Not Found Page</p>
+  <p>Gambar 6. Not Found Page</p>
   <img src="/img/tampilan/ssNotFound.png/">
   <nl>
-  <p>Gambar 8. Order Page</p>
+  <p>Gambar 7. Order Page</p>
   <img src="/img/tampilan/ssOrder.png/">
   <nl>
-  <p>Gambar 9. ProductList Page</p>
+  <p>Gambar 8. ProductList Page</p>
   <img src="/img/tampilan/ssProductList.png/">
   <nl>
-  <p>Gambar 10. ProductDetail Page</p>
+  <p>Gambar 9. ProductDetail Page</p>
   <img src="/img/tampilan/ssProductDetail.png/">
   <nl>
-  <p>Gambar 11. ProductSearch Page</p>
+  <p>Gambar 10. ProductSearch Page</p>
   <img src="/img/tampilan/ssProductSearch.png/">
-  <nl>
-  <p>Gambar 12. ProductAdd Page</p>
-  <img src="/img/tampilan/ssProductAdd.png/">
-  <nl>
-  <p>Gambar 13. ProductEdit Page</p>
-  <img src="/img/tampilan/ssProductEdit.png/">
   <nl>
   <p>Gambar 14. Transaction Page</p>
   <img src="/img/tampilan/ssTransaction.png/">
-  <nl>
-  <p>Gambar 15. Setting Page</p>
-  <img src="/img/tampilan/ssSettings.png/">
   <nl>
 </p>
 
@@ -498,31 +486,16 @@
   <p>Gambar 6. History Page</p>
   <img src="/img/lighthouse/ssHistory.png/">
   <nl>
-  <p>Gambar 7. Not Found Page</p>
-  <img src="/img/lighthouse/ssNotFound.png/">
-  <nl>
-  <p>Gambar 8. Order Page</p>
+  <p>Gambar 7. Order Page</p>
   <img src="/img/lighthouse/ssOrder.png/">
   <nl>
-  <p>Gambar 9. ProductList Page</p>
+  <p>Gambar 8. ProductList Page</p>
   <img src="/img/lighthouse/ssProductList.png/">
   <nl>
-  <p>Gambar 10. ProductDetail Page</p>
-  <img src="/img/lighthouse/ssProductDetail.png/">
-  <nl>
-  <p>Gambar 11. ProductSearch Page</p>
+  <p>Gambar 9. ProductSearch Page</p>
   <img src="/img/lighthouse/ssProductSearch.png/">
   <nl>
-  <p>Gambar 12. ProductAdd Page</p>
-  <img src="/img/lighthouse/ssProductAdd.png/">
-  <nl>
-  <p>Gambar 13. ProductEdit Page</p>
-  <img src="/img/lighthouse/ssProductEdit.png/">
-  <nl>
-  <p>Gambar 14. Transaction Page</p>
+  <p>Gambar 10. Transaction Page</p>
   <img src="/img/lighthouse/ssTransaction.png/">
-  <nl>
-  <p>Gambar 15. Setting Page</p>
-  <img src="/img/lighthouse/ssSettings.png/">
   <nl>
 </p>
