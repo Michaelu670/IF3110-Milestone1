@@ -119,14 +119,6 @@ html {
     grid-row-end: 2;
 }
 
-.container-search > * {
-    visibility: hidden; 
-}
-
-.nav-top-search > * {
-    visibility: hidden;
-}
-
 .buy-button {
     display: block;
     width: 95%;

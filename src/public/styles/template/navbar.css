@@ -142,6 +142,10 @@
     cursor: pointer;
 }
 
+.usernameNavbar{
+    font-weight: bold;
+}
+
 .nav-username img {
     background: var(--white) !important;
     width: 2rem;
