@@ -17,6 +17,7 @@
 8. [Screenshots](#screenshots)
 9. [Structure](#structure)
 10. [Job Description](#jobdesc)
+11. [Lighthouse Evidence](#lighthouse)
 
 <a name="general-information"></a>
 
@@ -98,49 +99,49 @@
 ## Screenshots
 <p>
   <p>Gambar 1. Login Page</p>
-  <img src="/img/ssLogin">
+  <img src="/img/tampilan/ssLogin">
   <nl>
   <p>Gambar 2. Register Page</p>
-  <img src="/img/ssRegister.png/">
+  <img src="/img/tampilan/ssRegister.png/">
   <nl>
   <p>Gambar 3. Home Page</p>
-  <img src="/img/ssHome.png/">
+  <img src="/img/tampilan/ssHome.png/">
   <nl>
   <p>Gambar 4. Cart Page</p>
-  <img src="/img/ssCart.png/">
+  <img src="/img/tampilan/ssCart.png/">
   <nl>
   <p>Gambar 5. Checkout Page</p>
-  <img src="/img/ssCheckout.png/">
+  <img src="/img/tampilan/ssCheckout.png/">
   <nl>
   <p>Gambar 6. History Page</p>
-  <img src="/img/ssHistory.png/">
+  <img src="/img/tampilan/ssHistory.png/">
   <nl>
   <p>Gambar 7. Not Found Page</p>
-  <img src="/img/ssNotFound.png/">
+  <img src="/img/tampilan/ssNotFound.png/">
   <nl>
   <p>Gambar 8. Order Page</p>
-  <img src="/img/ssOrder">
+  <img src="/img/tampilan/ssOrder">
   <nl>
   <p>Gambar 9. ProductList Page</p>
-  <img src="/img/ssProductList.png/">
+  <img src="/img/tampilan/ssProductList.png/">
   <nl>
   <p>Gambar 10. ProductDetail Page</p>
-  <img src="/img/ssProductDetail.png/">
+  <img src="/img/tampilan/ssProductDetail.png/">
   <nl>
   <p>Gambar 11. ProductSearch Page</p>
-  <img src="/img/ssProductSearch.png/">
+  <img src="/img/tampilan/ssProductSearch.png/">
   <nl>
   <p>Gambar 12. ProductAdd Page</p>
-  <img src="/img/ssProductAdd.png/">
+  <img src="/img/tampilan/ssProductAdd.png/">
   <nl>
   <p>Gambar 13. ProductEdit Page</p>
-  <img src="/img/ssProductEdit.png/">
+  <img src="/img/tampilan/ssProductEdit.png/">
   <nl>
   <p>Gambar 14. Transaction Page</p>
-  <img src="/img/ssTransaction.png/">
+  <img src="/img/tampilan/ssTransaction.png/">
   <nl>
   <p>Gambar 15. Setting Page</p>
-  <img src="/img/ssSetting.png/">
+  <img src="/img/tampilan/ssSetting.png/">
   <nl>
 </p>
 
@@ -416,7 +417,7 @@
                 Ini adalah video.mp4
 ```
 
-<a name="job desc">
+<a name="jobdesc">
 
 ## Job Description
 
@@ -461,3 +462,55 @@
 | Transaction              | 13521166 |
 | Setting                  | 13521141 |
 | Navbar & Sidebar         | 13521166 |
+
+<a name="lighthouse">
+
+## Lighthouse Evidence
+
+<p>
+  <p>Gambar 1. Login Page</p>
+  <img src="/img/lighthouse/ssLogin">
+  <nl>
+  <p>Gambar 2. Register Page</p>
+  <img src="/img/lighthouse/ssRegister.png/">
+  <nl>
+  <p>Gambar 3. Home Page</p>
+  <img src="/img/lighthouse/ssHome.png/">
+  <nl>
+  <p>Gambar 4. Cart Page</p>
+  <img src="/img/lighthouse/ssCart.png/">
+  <nl>
+  <p>Gambar 5. Checkout Page</p>
+  <img src="/img/lighthouse/ssCheckout.png/">
+  <nl>
+  <p>Gambar 6. History Page</p>
+  <img src="/img/lighthouse/ssHistory.png/">
+  <nl>
+  <p>Gambar 7. Not Found Page</p>
+  <img src="/img/lighthouse/ssNotFound.png/">
+  <nl>
+  <p>Gambar 8. Order Page</p>
+  <img src="/img/lighthouse/ssOrder">
+  <nl>
+  <p>Gambar 9. ProductList Page</p>
+  <img src="/img/lighthouse/ssProductList.png/">
+  <nl>
+  <p>Gambar 10. ProductDetail Page</p>
+  <img src="/img/lighthouse/ssProductDetail.png/">
+  <nl>
+  <p>Gambar 11. ProductSearch Page</p>
+  <img src="/img/lighthouse/ssProductSearch.png/">
+  <nl>
+  <p>Gambar 12. ProductAdd Page</p>
+  <img src="/img/lighthouse/ssProductAdd.png/">
+  <nl>
+  <p>Gambar 13. ProductEdit Page</p>
+  <img src="/img/lighthouse/ssProductEdit.png/">
+  <nl>
+  <p>Gambar 14. Transaction Page</p>
+  <img src="/img/lighthouse/ssTransaction.png/">
+  <nl>
+  <p>Gambar 15. Setting Page</p>
+  <img src="/img/lighthouse/ssSetting.png/">
+  <nl>
+</p>
