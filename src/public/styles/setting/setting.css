@@ -60,6 +60,7 @@
 }
 
 .profilePicture{
+    border: solid 5px var(--scrolldarkbluegreen);
     border-radius: 50%;
     width: 100px;
     height: 100px;
@@ -80,8 +81,7 @@
 }
 
 .profile{
-    /* border: 1px solid;
-    border-radius: 10px; */
+    border-radius: 10px;
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -189,6 +189,25 @@
 .alert-hide{
     display: none;
 }
+
+.button-tab {
+    background-color: #007a6a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.button-tab.active {
+    background-color: #005956;
+}
+
+.button-tab:hover {
+    background-color: #005956;
+}
+
 
 @media screen and (max-width: 1140px) {
     .wrapper{
