@@ -8,7 +8,7 @@ const productStock = document.querySelector('#stock')
 const productMedias = document.querySelector('#media_url')
 const productThumbnail = document.querySelector('#thumbnail_url')
 const mainForm = document.getElementById('contents')
-const tagCells = document.querySelectorAll('#tag-cell')
+tagCells = document.querySelectorAll('p.tag-cell')
 const productID = document.querySelector('#product_id')
 
 const nameAlert = document.getElementById('name-alert')
@@ -22,6 +22,8 @@ let profilePictureValid = false
 function addOption(){
     if(dropbox.value && !tagArea.innerHTML.includes(dropbox.value)){
         tagArea.innerHTML = tagArea.innerHTML + '<p id="'+dropbox.value+'" onclick="this.remove()" class="tag-cell">' +dropbox.value+ '</p>';
+        tagCells = document.querySelectorAll('p.tag-cell')
+
     }
 }
 
@@ -45,12 +47,26 @@ mainForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const thumbnail = productThumbnail.files[0];
+    const productMed = productMedias.files;
     // console.log(productID.innerHTML)
     let emptyMedia=false
     let tags = [];
-    tagCells.forEach((tag)=>{
-        tags.push(tag.id);
-    })
+    let medias = [];
+
+    // console.log(tagCells);
+    // console.log(tagCells[0].id);
+
+    for (let i = 0; i < tagCells.length; i++) {
+        tags.push(tagCells[i].id);
+      }
+// }
+
+//     for(var tag in tagCells){
+//         tags.push(tag.id)
+//     }
+
+    console.log("TAGS")
+    console.log(tags)
 
     if(productName.value==""){
         e.preventDefault();
@@ -73,6 +89,8 @@ mainForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         document.querySelector("#thumbnail-alert").className = "alert-show";
         profilePictureValid = false;
+        console.log("INVALID IMAGES")
+
     }else
     {
         document.querySelector("#thumbnail-alert").className= "alert-hide";
@@ -85,20 +103,39 @@ mainForm.addEventListener('submit', async (e) => {
     if(!profilePictureValid){
         return
     }
+    console.log(productMed)
 
-    productMedias.files = productThumbnail.files;
+    if(productMedias.files.length==0){
+        emptyMedia = true;
+    }else{
+        for (let i = 0; i < productMed.length; i++) {
+            medias.push(productMed[i]);
+          }
+    }
     
     const xhr = new XMLHttpRequest();
     xhr.open('POST','/public/product/add');
     const formData = new FormData();
     formData.append('name', productName.value);
     formData.append('price', productPrice.value);
-    formData.append('tags', tags);
+    formData.append('tagLength', tags.length);
     formData.append('detail', productDetail.value);
     formData.append('stock', productStock.value);
-    formData.append('emptyMedias', emptyMedia);
-    formData.append('media_url', productMedias.files);
     formData.append('thumbnail_url', thumbnail);
+    let count = 0;
+    for(var file in medias) {
+        formData.append('media_url'+count, medias[count]);
+        count++;
+    }
+    count = 0;
+    for(var tag in tags) {
+        formData.append('tag'+count, tags[count]);
+        count++;
+    }
+    // thumbnail.forEach(element => {
+    //     formData.append('thumbnail_url', productThumbnail.files[element]);
+    // });
+    // formData.append('thumbnail_url[]', productThumbnail.files);
     formData.append('csrf_token', CSRF_TOKEN);
     console.log("SENDING DATA")
 
